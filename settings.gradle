@@ -1,0 +1,50 @@
+pluginManagement {
+    /* this resolution strategy is a temporary solution to an issue with
+    * gradle looking for a jar at the location of the plugin marker pom
+    * that has the dependency back to the plugin. May not be required once
+    * the plugin is in the gradle plugin portal */
+    /*
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == 'net.codebuilders') {
+                useModule("net.codebuilders:skeletal-gradle:${lazybonesGradlePluginVersion}")
+            }
+        }
+    }
+    */
+
+    repositories {
+        // testing gradle plugin snapshots from local only
+        // mavenLocal()
+
+        // testing releases from our artifactory repo not yet in plugins.gradle.org
+        /*
+        maven {
+            url 'https://codebuilders.jfrog.io/artifactory/cb-gradle-release'
+        }
+         */
+
+        gradlePluginPortal()
+    }
+}
+
+// The plugin is build separately because these 2 other projects depend on it as a 'plugin'
+include "lazybones-templates", "skeletal-app"
+
+rootProject.name = "skeletal"
+
+// Change names of build files in sub-projects for easier navigation in IDEs
+// and text editors.
+renameChildBuildFiles(rootProject)
+
+void renameChildBuildFiles(parentProject) {
+    for (p in parentProject.children) {
+        // p.buildFileName = (p.name - "lazybones-") + ".gradle"
+        if (p.name == 'lazybones-templates') {
+            p.buildFileName = (p.name - "lazybones-") + ".gradle"
+        }
+        if (p.name == 'skeletal-app') {
+            p.buildFileName = (p.name - "skeletal-") + ".gradle"
+        }
+    }
+}

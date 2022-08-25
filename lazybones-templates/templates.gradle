@@ -1,0 +1,39 @@
+plugins {
+    id "net.codebuilders.lazybones-templates" version "${lazybonesGradlePluginVersion}"
+}
+
+import uk.co.cacoethes.gradle.tasks.SimpleManifestEntry
+
+
+// template specific properties use this format
+// lazybones {
+//     template("simple-java") {     // Template (directory) name
+//         packageExclude "**/*.swp", ".settings"
+//     }
+// }
+
+lazybones {
+    packageExclude "**/*.swp", "**/*.swo", "**/.gradle"
+    templateOwner = "Carl Marcum"
+}
+
+// Lazy initialisation of Bintray upload tasks so that not all build users need
+// to set the repo.* project properties. The properties are only required when
+// executing the publish tasks.
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { it.name.startsWith("publish") }) {
+        // verifyProperty(project, 'repo.username')
+        // verifyProperty(project, 'repo.apiKey')
+
+        graph.allTasks.findAll { it instanceof SimpleManifestEntry }.each { task ->
+            // task.username = project.'repo.username'
+            // task.apiKey = project.'repo.apiKey'
+        }
+    }
+}
+
+void verifyProperty(Project proj, String name) {
+    if (!project.hasProperty(name)) {
+        throw new GradleException("You must define the project property '$name'")
+    }
+}
