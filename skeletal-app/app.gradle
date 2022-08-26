@@ -16,7 +16,7 @@ archivesBaseName = 'skeletal-app'
 
 applicationName = "skeletal"
 mainClassName = "uk.co.cacoethes.lazybones.LazybonesMain"
-version = "0.11.0"
+version = "0.12.0"
 
 // These settings mimic the old client VM behavior. Should result in faster startup.
 applicationDefaultJvmArgs = ["-XX:+TieredCompilation", "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=3"]
