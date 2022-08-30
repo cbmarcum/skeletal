@@ -1,34 +1,17 @@
-buildscript {
-    repositories {
-        maven {
-            url "http://dl.bintray.com/pledbrook/plugins"
-        }
-    }
-
-    dependencies {
-        classpath "uk.co.cacoethes:lazybones-gradle:${lazybonesGradlePluginVersion}"
-    }
+plugins {
+    id "net.codebuilders.lazybones-templates" version "1.6.1"
 }
 
-apply plugin: "uk.co.cacoethes.lazybones-templates"
+import uk.co.cacoethes.gradle.tasks.SimpleManifestEntry
+
+// template specific properties use this format
+// lazybones {
+//     template("simple-java") {     // Template (directory) name
+//         packageExclude "**/*.swp", ".settings"
+//     }
+// }
 
 lazybones {
-    repositoryName = "<account>/<templates-repo>"
-
-    // It's best to pull this information from a gradle.properties file in the
-    // root directory. For example, gradle.properties could contain:
-    //
-    //     bintrayUsername=dilbert
-    //     bintrayApiKey=kdshfiu2htr082hg0h2ghkhsdafkh
-    //
-    // You could then set the following properties to `project.bintrayUsername`
-    // and `project.bintrayApiKey` respectively.
-    repositoryUsername = "your_bintray_username"
-    repositoryApiKey = "your_bintray_api_key"
-
-    // These properties are required for Bintray open source hosting. Uncomment
-    // and substitute in your project's license and vcsUrl:
-
-    // licenses = ["Apache-2.0"]
-    // vcsUrl = "https://github.com/yourRepoName"
+    packageExclude "**/*.swp", "**/*.swo", "**/.gradle"
+    templateOwner = "<owner of templates in this project>"
 }

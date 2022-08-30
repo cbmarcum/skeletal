@@ -17,7 +17,7 @@ case yet, We'll document the manual installation process as well.
 
 The big changes from Lazybones are: 
 1. The new project name and the application command are both now 'skeletal'.
-2. The user profile directory for configurations and template cache is now $USER_HOME/.skeletal
+2. The user profile directory for configurations and template cache is now $HOME/.skeletal
 3. Bintray repositories are no longer available. Eventually this configuration will be removed.
 4. A new URL based simple repository has been implemented that supports listing and creating projects from it.
 Publishing to the simple repository is not yet implemented but only require copying the created 
