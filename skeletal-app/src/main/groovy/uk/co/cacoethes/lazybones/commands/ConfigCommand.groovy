@@ -52,7 +52,7 @@ USAGE: config set <option> <value> [<value> ...]
 
     @Override
     String getDescription() {
-        return "Displays general help, or help for a specific command."
+        return "Allows users to interact with the configuration settings."
     }
 
     @Override
