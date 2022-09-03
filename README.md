@@ -33,6 +33,11 @@ does for web applications. Skeletal also includes a subtemplates feature that
 resembles the behavior of Yeoman's sub-generators, allowing you to generate optional
 extras (controllers, scaffolding etc.) inside a project.
 
+## Skeletal Gradle Plugin
+The Gradle plugin that was a subproject in Lazybones has been moved into 
+its own [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin) 
+project.
+
 ## Skeletal Developer
 
 * [Carl Marcum](https://github.com/cbmarcum)

@@ -1,8 +1,6 @@
 plugins {
-    id "net.codebuilders.lazybones-templates" version "1.6.1"
+    id "net.codebuilders.lazybones-templates" version "1.6.2"
 }
-
-import uk.co.cacoethes.gradle.tasks.SimpleManifestEntry
 
 // template specific properties use this format
 // lazybones {
@@ -13,5 +11,5 @@ import uk.co.cacoethes.gradle.tasks.SimpleManifestEntry
 
 lazybones {
     packageExclude "**/*.swp", "**/*.swo", "**/.gradle"
-    templateOwner = "<owner of templates in this project>"
+    templateOwner = "Skeletal Project"
 }
