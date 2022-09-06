@@ -64,6 +64,8 @@ project.
 
 ## Running Skeletal
 
+### Installation
+
 Grab the distribution [from our JFrog repo](https://codebuilders.jfrog.io/artifactory/generic/skeletal-app) or use curl:
 
     curl -o skeletal-<version>.zip -L https://codebuilders.jfrog.io/artifactory/generic/skeletal-app/<version>/skeletal-<version>.zip
@@ -191,7 +193,7 @@ The last option to mention is `--with-git` which will automatically create a
 new git repository in the project directory. The only requirement is that you
 have the `git` command on your path.
 
-### Sub-Templates
+### Subtemplates
 
 Project templates can incorporate subtemplates.
 Imagine that you have just created a new web application project from a template
@@ -459,8 +461,8 @@ or `config` command is ran.
 
 ### Skeletal Gradle Plugin
 
-The Skeletal Gradle plugin has its own README.md in 
-[lazybones-gradle-plugin](https://github.com/cbmarcum/skeletal/tree/master/lazybones-gradle-plugin)
+The [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
+has been separated into its own project.
 
 ### Lazybones Project Templates
 
@@ -489,7 +491,7 @@ contains the templates which are the sub-directories.
     ./gradlew publishTemplate<TemplateName>
 
 For core templates in this project, run from the Skeletal project root 
-directory and include the `l`azybones-templates` sub-project:
+directory and include the `lazybones-templates` sub-project:
 
     ./gradlew :lazybones-templates:publishTemplate<TemplateName>
 
@@ -550,7 +552,7 @@ you specify a version of 1.2.8 for the my-template template by adding the file
 
     1.2.8
 
-### Template Description
+#### Template Description
 
 Skeletal requires a `DESCRIPTION` file that contains a description for the 
 template.
@@ -559,10 +561,3 @@ template.
 
 That's it! The `VERSION` and `DESCRIPTION` files will automatically be excluded from the project
 template archive.
-
-Contributing Templates
-----------------------
-Read the [Template Developers Guide][1]
-for information on how to create and publish project templates.
-
-[1]:https://github.com/cbmarcum/skeletal/wiki/Template-Developers-Guide
