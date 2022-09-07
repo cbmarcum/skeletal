@@ -33,35 +33,36 @@ does for web applications. Skeletal also includes a subtemplates feature that
 resembles the behavior of Yeoman's sub-generators, allowing you to generate optional
 extras (controllers, scaffolding etc.) inside a project.
 
-## Skeletal Gradle Plugin
-The Gradle plugin that was a subproject in Lazybones has been moved into 
-its own [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin) 
-project.
+## Documentation
 
-## Skeletal Developer
+Skeletal application usage and template development guides are located on our [wiki](https://github.com/cbmarcum/skeletal/wiki).
+
+Information on building the application can be found below.
+
+## Credits
+
+### Skeletal Developer
 
 * [Carl Marcum](https://github.com/cbmarcum)
 
-## Skeletal Contributors
+### Skeletal Contributors
 
 * [Osian Hughes](https://github.com/osh-onstructive)
 * [Dónal Murtagh](https://github.com/donalmurtagh)
 
-## Lazybones Developers
+### Lazybones Developers
 
 * [Peter Ledbrook](https://github.com/pledbrook)
 * [Kyle Boon](https://github.com/kyleboon)
 * [Tommy Barker](https://github.com/tbarker9)
 
-## Lazybones Contributors
+### Lazybones Contributors
 
 * [Luke Daley](https://github.com/alkemist)
 * [Tomas Lin](https://github.com/tomaslin)
 * [Russell Hart](https://github.com/rhart)
 * [Dave Syer](https://github.com/dsyer)
 * [Andy Duncan](https://github.com/andyjduncan)
-
-
 
 
 ## Building
@@ -96,9 +97,9 @@ The `$HOME/.skeletal` profile directory will be created after the first `create`
 or `config` command is ran.
 
 ### Skeletal Gradle Plugin
-
-The [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
-has been separated into its own project.
+The Gradle plugin that was a subproject in Lazybones has been moved into
+its own [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
+project.
 
 ### Lazybones Project Templates
 
@@ -197,3 +198,16 @@ template.
 
 That's it! The `VERSION` and `DESCRIPTION` files will automatically be excluded from the project
 template archive.
+
+## Contributing
+
+Skeletal is written in [Apache Groovy](https://groovy.apache.org/), builds 
+with [Gradle](https://gradle.org/), and we use [Spock](https://spockframework.org/) 
+for testing. 
+
+While I've done my best to get Lazybones forked and up and running there is 
+always more to do.
+
+Contributors are welcome and contributions are appreciated. If you have questions 
+about contributing you can drop a question in the [issues](https://github.com/cbmarcum/skeletal/issues) 
+or email me at carl dot marcum at codebuilders dot net.
