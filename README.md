@@ -203,10 +203,7 @@ template archive.
 
 Skeletal is written in [Apache Groovy](https://groovy.apache.org/), builds 
 with [Gradle](https://gradle.org/), and we use [Spock](https://spockframework.org/) 
-for testing. 
-
-While I've done my best to get Lazybones forked and up and running there is 
-always more to do.
+for testing.
 
 Contributors are welcome and contributions are appreciated. If you have questions 
 about contributing you can drop a question in the [issues](https://github.com/cbmarcum/skeletal/issues) 
