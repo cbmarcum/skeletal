@@ -207,4 +207,4 @@ for testing.
 
 Contributors are welcome and contributions are appreciated. If you have questions 
 about contributing you can drop a question in the [issues](https://github.com/cbmarcum/skeletal/issues) 
-or email me at carl dot marcum at codebuilders dot net.
+or email carl dot marcum at codebuilders dot net.
