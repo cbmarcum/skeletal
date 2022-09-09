@@ -1,0 +1,11 @@
+= Template Testing Companion
+:author: Carl Marcum
+:email: carl.marcum@codebuilders.net
+:toc: left
+
+== Introduction
+
+Welcome to the Skeletal Project Docs!
+
+These are expanded documentation beyond the contents of the README.
+
