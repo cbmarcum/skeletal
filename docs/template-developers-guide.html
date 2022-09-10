@@ -1494,21 +1494,21 @@ template zip.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s say you want to add a subtemplate for generating <code>@Entity</code> classes in a
+<p>Let&#8217;s say you want to add a subtemplate for generating Spock test classes in a
 project created from the <code>simple-java-spock-gradle</code> template we introduced
 earlier. Your starting point is to create a new directory for the subtemplate:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>templates/subtmpl-entity</pre>
+<pre>templates/subtmpl-simple-spock-test</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Note that although the subtemplate will be going inside the <code>simple-java-spock-gradle</code>
 template, its directory is at the same level as <code>templates/simple-java-spock-gradle</code>.
 The key is to give the directory name as 'subtmpl-' prefix, as this is what
-tells the build that it&#8217;s a subtemplate, resulting in subtmpl-entity being
-excluded from the <code>*AllTemplates</code> tasks.</p>
+tells the build that it&#8217;s a subtemplate, resulting in
+<code>subtmpl-simple-spock-test</code> being excluded from the <code>*AllTemplates</code> tasks.</p>
 </div>
 <div class="paragraph">
 <p>The contents of a subtemplate source directory look a little like a normal
@@ -1524,30 +1524,34 @@ README is unnecessary. In this case, we want:</p>
 <p><strong>lazybones.groovy</strong> - the post-install script</p>
 </li>
 <li>
-<p><strong>Entity.groovy.gtpl</strong> - the template source file for entity classes</p>
+<p><strong>Spec.groovy.gtpl</strong> - the template source file for test classes</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>Each of these files behaves in the same way as in a project template, but there
-are a few slight differences. Consider the template source file for entities:</p>
+are a few slight differences. Consider the template source file for tests:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">Spec.groovy.gtpl</div>
 <div class="content">
-<pre>package ${pkg}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>import grails.persistence.Entity</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>@Entity(group="${parentGroup}", version="${parentVersion}")
-class ${cls} {
-    String name
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">package</span> <span style="color:#F00;background-color:#FAA">$</span>{pkg}
+
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">spock.lang.Specification</span>
+
+<span style="color:#339;font-weight:bold">class</span> <span style="color:#F00;background-color:#FAA">$</span>{cls} <span style="color:#088;font-weight:bold">extends</span> Specification {
+
+    <span style="color:#080;font-weight:bold">def</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">application has a greeting</span><span style="color:#710">&quot;</span></span>() {
+        <span style="color:#606">given</span>: <span style="color:#777">// setup</span>
+        <span style="color:#080;font-weight:bold">def</span> app = <span style="color:#080;font-weight:bold">new</span> <span style="color:#F00;background-color:#FAA">$</span>{parentClassName}()
+
+        <span style="color:#606">when</span>: <span style="color:#777">// stimulus</span>
+        <span style="color:#080;font-weight:bold">def</span> result = app.greeting
+
+        <span style="color:#606">then</span>: <span style="color:#777">// response</span>
+        result != <span style="color:#069">null</span>
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1555,83 +1559,81 @@ class ${cls} {
 <code>parentVersion</code>. Where do these parameters come from? We need to look into the
 post-install script <code>lazybones.groovy</code>, to find out:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">lazybones.groovy</div>
 <div class="content">
-<pre>import org.apache.commons.io.FileUtils
-import org.apache.commons.io.FilenameUtils</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>import static org.apache.commons.io.FilenameUtils.concat</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def params = [:]
-params.pkg = ask("Define value for the package: ", null, "package")
-params.cls = ask("Define value for class name: ", null, "class").capitalize()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>// Pass in parameters from the project template
-params.parentGroup = parentParams.group
-params.parentVersion = parentParams.version</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>processTemplates("Entity.groovy", params)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def pkgPath = params.pkg.replace('.' as char, '/' as char)
-def filename = params.cls + ".groovy"
-def destFile = new File(projectDir, concat(concat("src/main/groovy", pkgPath), filename))
-destFile.parentFile.mkdirs()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>FileUtils.moveFile(new File(templateDir, "Entity.groovy"), destFile)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>println "Created new persistence entity ${FilenameUtils.normalize(destFile.path)}"</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FileUtils</span>
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FilenameUtils</span>
+
+<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">static</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FilenameUtils.concat</span>
+
+<span style="color:#0a8;font-weight:bold">Map</span> props = [:]
+<span style="color:#777">// Pass in parameters from the project template</span>
+<span style="color:#0a8;font-weight:bold">String</span> parentPackage = parentParams.package
+props.parentClassName = parentParams.className
+
+props.pkg = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value 'package' [</span><span style="color:#710">&quot;</span></span> + parentPackage + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">]: </span><span style="color:#710">&quot;</span></span>, parentPackage, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">package</span><span style="color:#710">&quot;</span></span>)
+props.cls = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'class' name: [SimpleSpec]</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">SimpleSpec</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">class</span><span style="color:#710">&quot;</span></span>).capitalize()
+
+processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Spec.groovy</span><span style="color:#710">&quot;</span></span>, props)
+
+<span style="color:#0a8;font-weight:bold">String</span> pkgPath = props.pkg.replace(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.</span><span style="color:#710">'</span></span> as <span style="color:#339;font-weight:bold">char</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">as</span> <span style="color:#339;font-weight:bold">char</span>)
+<span style="color:#0a8;font-weight:bold">String</span> filename = props.cls.capitalize() + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.groovy</span><span style="color:#710">&quot;</span></span>
+<span style="color:#0a8;font-weight:bold">File</span> destFile = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(projectDir, concat(concat(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">app/src/test/groovy</span><span style="color:#710">&quot;</span></span>, pkgPath), filename))
+destFile.parentFile.mkdirs()
+
+FileUtils.moveFile(<span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(templateDir, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Spec.groovy</span><span style="color:#710">&quot;</span></span>), destFile)
+
+println <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Created new Spock Test </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>FilenameUtils.normalize(destFile.path)<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, the <code>pkg</code> and <code>cls</code> parameters are mapped from the return values of two <code>ask()</code> calls. This is standard post-install script behaviour. The interesting parameters, <code>parentGroup</code> and <code>parentVersion</code>, are mapped from something new: the <code>parentParams</code> map. This contains any named parameters used by the <strong>parent project template</strong>, i.e. simple-java in this case. Because of this, <code>parentParams</code> only exists for subtemplates.</p>
+<p>As you can see, the <code>pkg</code> and <code>cls</code> parameters are mapped from the return
+values of two <code>ask()</code> calls. This is standard post-install script behavior.
+The interesting parameters, <code>parentGroup</code> and <code>parentVersion</code>, are mapped from
+something new: the <code>parentParams</code> map. This contains any named parameters used
+by the <strong>parent project template</strong>, i.e. simple-java-spock-gradle in this case.
+Because of this, <code>parentParams</code> only exists for subtemplates.</p>
 </div>
 <div class="paragraph">
-<p>Another novel aspect of the post-install script is the reference to a <code>templateDir</code> property in addition to <code>projectDir</code>. This is because subtemplates are not unpacked directly in the project directory. Instead, Lazybones unpacks them into the project&#8217;s .lazybones directory. <code>templateDir</code> points to the location of the unpacked subtemplate, whereas <code>projectDir</code> still points to the root directory of the project created from simple-java. So your subtemplate post-install script will typically want to copy or move files from <code>templateDir</code> to <code>projectDir</code>. The Commons IO classes that all post-install scripts have access to are ideal for this.</p>
+<p>Another novel aspect of the post-install script is the reference to a
+<code>templateDir</code> property in addition to <code>projectDir</code>. This is because
+subtemplates are not unpacked directly in the project directory. Instead,
+Lazybones unpacks them into the project&#8217;s .lazybones directory. <code>templateDir</code>
+points to the location of the unpacked subtemplate, whereas <code>projectDir</code> still
+points to the root directory of the project created from
+<code>simple-java-spock-gradle</code>. So your subtemplate post-install script will
+typically want to copy or move files from <code>templateDir</code> to <code>projectDir</code>. The
+Commons IO classes that all post-install scripts have access to are ideal for
+this.</p>
 </div>
 <div class="paragraph">
-<p>With all the subtemplates files in place, all you need to do is tell the build that the simple-java project template should include the entity subtemplate. So open up the build file and add this line to the <code>lazybones</code> block:</p>
+<p>With all the subtemplates files in place, all you need to do is tell the build
+that the simple-java project template should include the entity subtemplate.
+So open up the build file and add this line to the <code>lazybones</code> block:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>lazybones {
+<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template "simple-java" includes "entity"
-}</pre>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note how the name of the subtemplate excludes the 'subtmpl-' prefix. Now when you package the simple-java project template, the entity subtemplate will be included in it, ready for use with Lazybones' <code>generate</code> command.</p>
+<p>Note how the name of the subtemplate excludes the 'subtmpl-' prefix. Now when
+you package the simple-java project template, the entity subtemplate will be
+included in it, ready for use with Lazybones' <code>generate</code> command.</p>
 </div>
 <div class="paragraph">
 <p>If you want to include multiple subtemplates, just pass extra arguments to <code>includes()</code>:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>lazybones {
+<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template "simple-java" includes "entity", "controller", "view"
-}</pre>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1755,7 +1757,7 @@ i.e. code inside <code>&lt;% %&gt;</code> delimiters, allow for more complex log
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-10 18:09:18 -0400
+Last updated 2022-09-10 18:39:47 -0400
 </div>
 </div>
 </body>

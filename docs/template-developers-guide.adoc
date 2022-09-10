@@ -724,17 +724,18 @@ template zip.
 - A subtemplate can be included in multiple project templates.
 - Subtemplates _only_ take effect when the user runs the `skeletal generate` command.
 
-Let's say you want to add a subtemplate for generating `@Entity` classes in a 
+Let's say you want to add a subtemplate for generating Spock test classes in a
 project created from the `simple-java-spock-gradle` template we introduced 
 earlier. Your starting point is to create a new directory for the subtemplate:
+----
+templates/subtmpl-simple-spock-test
+----
 
-    templates/subtmpl-entity
-
-Note that although the subtemplate will be going inside the `simple-java-spock-gradle` 
+Note that although the subtemplate will be going inside the `simple-java-spock-gradle`
 template, its directory is at the same level as `templates/simple-java-spock-gradle`. 
 The key is to give the directory name as 'subtmpl-' prefix, as this is what 
-tells the build that it's a subtemplate, resulting in subtmpl-entity being 
-excluded from the `*AllTemplates` tasks.
+tells the build that it's a subtemplate, resulting in
+`subtmpl-simple-spock-test` being excluded from the `*AllTemplates` tasks.
 
 The contents of a subtemplate source directory look a little like a normal 
 project template, except you are unlikely to include as many files and the 
@@ -742,67 +743,108 @@ README is unnecessary. In this case, we want:
 
 - *VERSION* - the file containing the current version of the subtemplate
 - *lazybones.groovy* - the post-install script
-- *Entity.groovy.gtpl* - the template source file for entity classes
+- *Spec.groovy.gtpl* - the template source file for test classes
 
 Each of these files behaves in the same way as in a project template, but there 
-are a few slight differences. Consider the template source file for entities:
+are a few slight differences. Consider the template source file for tests:
 
-    package ${pkg}
+.Spec.groovy.gtpl
+[source,groovy]
+----
+package ${pkg}
 
-    import grails.persistence.Entity
+import spock.lang.Specification
 
-    @Entity(group="${parentGroup}", version="${parentVersion}")
-    class ${cls} {
-        String name
+class ${cls} extends Specification {
+
+    def "application has a greeting"() {
+        given: // setup
+        def app = new ${parentClassName}()
+
+        when: // stimulus
+        def result = app.greeting
+
+        then: // response
+        result != null
     }
+}
+----
 
 This references several parameters: `pkg`, `cls`, `parentGroup` and 
 `parentVersion`. Where do these parameters come from? We need to look into the 
 post-install script `lazybones.groovy`, to find out:
 
-    import org.apache.commons.io.FileUtils
-    import org.apache.commons.io.FilenameUtils
+.lazybones.groovy
+[source,groovy]
+----
+import org.apache.commons.io.FileUtils
+import org.apache.commons.io.FilenameUtils
 
-    import static org.apache.commons.io.FilenameUtils.concat
+import static org.apache.commons.io.FilenameUtils.concat
 
-    def params = [:]
-    params.pkg = ask("Define value for the package: ", null, "package")
-    params.cls = ask("Define value for class name: ", null, "class").capitalize()
+Map props = [:]
+// Pass in parameters from the project template
+String parentPackage = parentParams.package
+props.parentClassName = parentParams.className
 
-    // Pass in parameters from the project template
-    params.parentGroup = parentParams.group
-    params.parentVersion = parentParams.version
+props.pkg = ask("Define value 'package' [" + parentPackage + "]: ", parentPackage, "package")
+props.cls = ask("Define value for 'class' name: [SimpleSpec]", "SimpleSpec", "class").capitalize()
 
-    processTemplates("Entity.groovy", params)
+processTemplates("Spec.groovy", props)
 
-    def pkgPath = params.pkg.replace('.' as char, '/' as char)
-    def filename = params.cls + ".groovy"
-    def destFile = new File(projectDir, concat(concat("src/main/groovy", pkgPath), filename))
-    destFile.parentFile.mkdirs()
+String pkgPath = props.pkg.replace('.' as char, '/' as char)
+String filename = props.cls.capitalize() + ".groovy"
+File destFile = new File(projectDir, concat(concat("app/src/test/groovy", pkgPath), filename))
+destFile.parentFile.mkdirs()
 
-    FileUtils.moveFile(new File(templateDir, "Entity.groovy"), destFile)
+FileUtils.moveFile(new File(templateDir, "Spec.groovy"), destFile)
 
-    println "Created new persistence entity ${FilenameUtils.normalize(destFile.path)}"
+println "Created new Spock Test ${FilenameUtils.normalize(destFile.path)}"
+----
 
-As you can see, the `pkg` and `cls` parameters are mapped from the return values of two `ask()` calls. This is standard post-install script behaviour. The interesting parameters, `parentGroup` and `parentVersion`, are mapped from something new: the `parentParams` map. This contains any named parameters used by the *parent project template*, i.e. simple-java in this case. Because of this, `parentParams` only exists for subtemplates.
+As you can see, the `pkg` and `cls` parameters are mapped from the return
+values of two `ask()` calls. This is standard post-install script behavior.
+The interesting parameters, `parentGroup` and `parentVersion`, are mapped from
+something new: the `parentParams` map. This contains any named parameters used
+by the *parent project template*, i.e. simple-java-spock-gradle in this case.
+Because of this, `parentParams` only exists for subtemplates.
 
-Another novel aspect of the post-install script is the reference to a `templateDir` property in addition to `projectDir`. This is because subtemplates are not unpacked directly in the project directory. Instead, Lazybones unpacks them into the project's .lazybones directory. `templateDir` points to the location of the unpacked subtemplate, whereas `projectDir` still points to the root directory of the project created from simple-java. So your subtemplate post-install script will typically want to copy or move files from `templateDir` to `projectDir`. The Commons IO classes that all post-install scripts have access to are ideal for this.
+Another novel aspect of the post-install script is the reference to a
+`templateDir` property in addition to `projectDir`. This is because
+subtemplates are not unpacked directly in the project directory. Instead,
+Lazybones unpacks them into the project's .lazybones directory. `templateDir`
+points to the location of the unpacked subtemplate, whereas `projectDir` still
+points to the root directory of the project created from
+`simple-java-spock-gradle`. So your subtemplate post-install script will
+typically want to copy or move files from `templateDir` to `projectDir`. The
+Commons IO classes that all post-install scripts have access to are ideal for
+this.
 
-With all the subtemplates files in place, all you need to do is tell the build that the simple-java project template should include the entity subtemplate. So open up the build file and add this line to the `lazybones` block:
+With all the subtemplates files in place, all you need to do is tell the build
+that the simple-java project template should include the entity subtemplate.
+So open up the build file and add this line to the `lazybones` block:
 
-    lazybones {
-        ...
-        template "simple-java" includes "entity"
-    }
+[source,groovy]
+----
+lazybones {
+    ...
+    template "simple-java-spock-gradle" includes "simple-spock-test"
+}
+----
 
-Note how the name of the subtemplate excludes the 'subtmpl-' prefix. Now when you package the simple-java project template, the entity subtemplate will be included in it, ready for use with Lazybones' `generate` command.
+Note how the name of the subtemplate excludes the 'subtmpl-' prefix. Now when
+you package the simple-java project template, the entity subtemplate will be
+included in it, ready for use with Lazybones' `generate` command.
 
 If you want to include multiple subtemplates, just pass extra arguments to `includes()`:
 
-    lazybones {
-        ...
-        template "simple-java" includes "entity", "controller", "view"
-    }
+[source,groovy]
+----
+lazybones {
+    ...
+    template "simple-java-spock-gradle" includes "simple-spock-test", "controller", "repository"
+}
+----
 
 There is one final option available to template authors. What if you want to 
 package the entity, controller, and view template files into a single 
