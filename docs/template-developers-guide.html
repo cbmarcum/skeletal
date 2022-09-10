@@ -447,8 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#truecredits">Credits</a></li>
-<li><a href="#trueintroduction">Introduction</a></li>
+<li><a href="#truepreface">Preface</a></li>
 <li><a href="#truegetting-started">Getting Started</a>
 <ul class="sectlevel2">
 <li><a href="#truecreating-a-template">Creating a Template</a></li>
@@ -467,33 +466,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="truecredits"><a class="anchor" href="#truecredits"></a>Credits</h2>
+<h2 id="truepreface"><a class="anchor" href="#truepreface"></a>Preface</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This guide was copied from the original Lazybones [Template Developers Guide](<a href="https://github.com/pledbrook/lazybones/wiki/Template-developers-guide" class="bare">https://github.com/pledbrook/lazybones/wiki/Template-developers-guide</a>) by Peter Ledbrook and updated for this Skeletal fork of that project.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="trueintroduction"><a class="anchor" href="#trueintroduction"></a>Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Skeletal alone is just a tool that doesn&#8217;t do much. It needs a solid selection
-of template packages to make it a compelling solution for developers'
-day-to-day needs. That&#8217;s why we try to make it as easy as possible to develop
-and publish templates. This guide explains how to go about both steps.</p>
-</div>
-<div class="paragraph">
-<p>Many software frameworks today have online configurators or command line applications
-to create skeleton projects. What many do not have is a subtemplate feature for
-adding more specific class types like controllers, services, etc. that you end up
-creating manually or copying from another project. Skeletal allows you to easily
-start with one of these framework skeletons and add more of your common code and
-create a more useful project template that can also contain subtemplates as well.</p>
-</div>
-<div class="paragraph">
-<p>Instructions in this guide also refer to the [[Template Testing Companion]]
-for testing templates.</p>
+<p>Instructions in this guide also refer to the <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html">Template Testing Companion</a>
+for testing templates during development.</p>
 </div>
 </div>
 </div>
@@ -528,7 +505,7 @@ for testing templates.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and you&#8217;ll get top-level <code>my-lzb-templates</code> directory which contains a simple [Gradle](<a href="http://www.gradle.org" class="bare">http://www.gradle.org</a>) build file, gradle wrapper, a README.md, and a <code>templates</code> directory into which you put your templates.</p>
+<p>and you&#8217;ll get top-level <code>my-lzb-templates</code> directory which contains a simple <a href="http://www.gradle.org">Gradle</a> build file, gradle wrapper, a README.md, and a <code>templates</code> directory into which you put your templates.</p>
 </div>
 <div class="listingblock">
 <div class="title">Directory Layout</div>
@@ -559,7 +536,7 @@ for testing templates.</p>
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">plugins {
+<pre class="highlightjs highlight"><code data-lang="gradle" class="language-gradle hljs">plugins {
     id "net.codebuilders.lazybones-templates" version "1.6.2" <i class="conum" data-value="1"></i><b>(1)</b>
 }
 
@@ -740,7 +717,7 @@ directory structure. Since the <code>.retain</code> files can be empty, a simple
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">plugins {
+<pre class="highlightjs highlight"><code data-lang="gradle" class="language-gradle hljs">plugins {
     id 'groovy'
     id 'application'
 }
@@ -811,11 +788,11 @@ There is a standard project structure for source code and tests.
 Simply add your source files to `app/src/main/java`, your test cases
 to `app/src/test/groovy` and see below for running your application.
 
-## Using the project:
+== Using the project:
 1. Add any dependencies to build.gradle.
 2. Add logic to App.java
 
-## Building the Extension
+== Building the Extension
 - Build archives for distribution:
 ```
 ./gradlew assemble
@@ -828,7 +805,7 @@ to `app/src/test/groovy` and see below for running your application.
 </div>
 <div class="paragraph">
 <p>Although the README is not required, you really should include one. It doesn&#8217;t
-have to be [Markdown](<a href="https://www.markdownguide.org/" class="bare">https://www.markdownguide.org/</a>) either or have a file extension. We just happen to like the
+have to be <a href="https://www.markdownguide.org/">Markdown</a> either or have a file extension. We just happen to like the
 Markdown syntax and the way that GitHub handles files with an <code>md</code> extension.</p>
 </div>
 <div class="paragraph">
@@ -858,7 +835,7 @@ problem: we can add a post-install script.</p>
 <p>Post-install scripts are executed immediately after a template is unpacked into
 the new project directory and just before the README is displayed. They are
 straight Groovy scripts with access to just the core Groovy classes, plus
-Groovy&#8217;s <code>SimpleTemplateEngine</code> and [Apache Commons IO](<a href="http://commons.apache.org/proper/commons-io/" class="bare">http://commons.apache.org/proper/commons-io/</a>)
+Groovy&#8217;s <code>SimpleTemplateEngine</code> and <a href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 (for making file manipulation easier).</p>
 </div>
 <div class="paragraph">
@@ -889,7 +866,7 @@ Lazybones templates but now refer to the corresponding Skeletal versions.</p>
 </div>
 <div class="paragraph">
 <p>The script also has access to all the public and protected methods and properties
-defined in the [LazybonesScript](<a href="https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy" class="bare">https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy</a>)
+defined in the <a href="https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy">LazybonesScript</a>
 class. Of particular interest are the <code>ask()</code> and <code>processTemplates()</code> methods.</p>
 </div>
 <div class="paragraph">
@@ -904,49 +881,36 @@ Groovy&#8217;s <code>SimpleTemplateEngine</code> to produce the resulting file. 
 to allow the user to specify the project&#8217;s group ID and version at install
 time, we modify <code>build.gradle</code> slightly:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">build.gradle</div>
 <div class="content">
-<pre>plugins {
+<pre class="highlightjs highlight"><code data-lang="gradle" class="language-gradle hljs">plugins {
     id 'groovy'
     id 'application'
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>group = "${project_group}"
-version = "${project_version}"</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>repositories {
+}
+
+group = "${project_group}"
+version = "${project_version}"
+
+repositories {
     mavenCentral()
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>...</pre>
+}
+
+...</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>and then add a post-install script, <code>lazybones.groovy</code>, in the root of the template:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
+<div class="title">lazybones.groovy</div>
 <div class="content">
-<pre>Map props = [:]</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
-props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version")</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>processTemplates('app/build.gradle', props)</pre>
+<pre class="highlightjs highlight"><code data-lang="groovy" class="language-groovy hljs">Map props = [:]
+
+props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
+props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version")
+
+processTemplates('app/build.gradle', props)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -956,7 +920,7 @@ property name in the script binding that if provided on the command line will
 be used instead of prompting the user for one.</p>
 </div>
 <div class="paragraph">
-<p>To try the template, [install the template to cache](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache</a>)</p>
+<p>To try the template, <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache">install the template to cache</a></p>
 </div>
 <div class="paragraph">
 <p>Passing parameters to the script binding looks like <code>-P&lt;param&gt;=&lt;value&gt;</code></p>
@@ -964,9 +928,9 @@ be used instead of prompting the user for one.</p>
 <div class="paragraph">
 <p>From a directory to create the test project in, create the test project:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -985,7 +949,7 @@ version = "1.0-SNAPSHOT"
 </div>
 </div>
 <div class="paragraph">
-<p>Before continuing [cleanup the cache and test project](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up</a>).</p>
+<p>Before continuing <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#cleaning-up">cleanup the cache and test project</a>.</p>
 </div>
 <div class="paragraph">
 <p>Another useful method available to post-install scripts is <code>transformText()</code>.
@@ -1224,11 +1188,11 @@ then rename the application class and test class.</p>
 <div class="sect2">
 <h3 id="trueinstall-into-cache-and-test"><a class="anchor" href="#trueinstall-into-cache-and-test"></a>Install into Cache and Test</h3>
 <div class="paragraph">
-<p>This is now covered in the [[Template Testing Companion]] document.
-To test, [install the template](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache</a>)
-again, [create the test project](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#creating-a-test-project" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#creating-a-test-project</a>)
-per the instructions, [build and run the distribution](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#building-and-running-the-distribution" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#building-and-running-the-distribution</a>)
-and then [cleanup](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up</a>)
+<p>This is now covered in the <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html">Template Testing Companion</a> document.
+To test, <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache">install the template</a>
+again, <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#creating-a-test-project">create the test project</a>
+per the instructions, <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#building-and-running-the-distribution">build and run the distribution</a>
+and then <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#cleaning-up">cleanup</a>
 the cache and test project.</p>
 </div>
 <div class="paragraph">
@@ -1239,7 +1203,7 @@ the cache and test project.</p>
 <h3 id="truepackaging-installing-and-publishing"><a class="anchor" href="#truepackaging-installing-and-publishing"></a>Packaging, Installing and Publishing</h3>
 <div class="paragraph">
 <p>There are three steps to publishing a template, each of which can be accomplished
-with a simple task provided by the [Skeletal Gradle Plugin](<a href="https://github.com/cbmarcum/skeletal-gradle-plugin" class="bare">https://github.com/cbmarcum/skeletal-gradle-plugin</a>):</p>
+with a simple task provided by the <a href="https://github.com/cbmarcum/skeletal-gradle-plugin">Skeletal Gradle Plugin</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1296,7 +1260,7 @@ To use this name in the Gradle tasks, we simply camel-case it:
 hyphenated notation rather than camel-case.</p>
 </div>
 <div class="paragraph">
-<p>See [installing a template in cache](<a href="https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache" class="bare">https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache</a>).</p>
+<p>See <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache">installing a template in cache</a>.</p>
 </div>
 <div class="paragraph">
 <p>If the rules for converting between camel-case and hyphenated forms don&#8217;t suit
@@ -1352,7 +1316,7 @@ directories in the target template directory except for a few hard-coded
 exceptions (the DESCRIPTION, VERSION, and .retain files for example). That
 leaves a lot of scope for accidentally including temporary files in the
 package! To help you avoid that, the plugin allows you to specify a set of
-extra exclusions using [Apache Ant-style patterns](<a href="https://ant.apache.org/manual/dirtasks.html#patterns" class="bare">https://ant.apache.org/manual/dirtasks.html#patterns</a>).</p>
+extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patterns">Apache Ant-style patterns</a>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1419,7 +1383,7 @@ extra exclusions using [Apache Ant-style patterns](<a href="https://ant.apache.o
 repositories, Skeletal uses what we call a Simple URL Repository which can be
 any <code>file:</code> or <code>http(s):</code> URL location that contains templates and a
 <code>skelatal-manifest.txt</code> file that your computer has read-access to. You can find
-More information about setting up repositories in the [Skeletal README](<a href="https://github.com/cbmarcum/skeletal/blob/main/README.md" class="bare">https://github.com/cbmarcum/skeletal/blob/main/README.md</a>).</p>
+More information about setting up repositories in the <a href="https://github.com/cbmarcum/skeletal/blob/main/README.md">Skeletal README</a>.</p>
 </div>
 </div>
 </div>
@@ -1430,20 +1394,20 @@ More information about setting up repositories in the [Skeletal README](<a href=
 <p>The <code>processTemplates()</code> method available to post-install scripts allows you to
 generate files based on templates. By default, any files that match the pattern
 passed to <code>processTemplates()</code> are treated as Groovy templates that can be
-processed by [SimpleTemplateEngine](<a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine" class="bare">http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine</a>)
+processed by <a href="http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine">SimpleTemplateEngine</a>
 and those source files are replaced by the processed versions. That&#8217;s not the
 end of the story though.</p>
 </div>
 <div class="paragraph">
 <p>Skeletal allows you to use any template engine that implements Groovy&#8217;s
-[TemplateEngine](<a href="https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html" class="bare">https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html</a>),
+<a href="https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html">TemplateEngine</a>,
 meaning that your source templates could be Moustache, Velocity, or anything
 else. Of course, not every template engine has a Groovy implementation but it&#8217;s
 often trivial to create an adapter <code>TemplateEngine</code> implementation.</p>
 </div>
 <div class="paragraph">
 <p>The original Lazybones version of this guide contained examples of using their
-[Handlebars Template Engine](<a href="https://github.com/pledbrook/groovy-handlebars-engine" class="bare">https://github.com/pledbrook/groovy-handlebars-engine</a>)
+<a href="https://github.com/pledbrook/groovy-handlebars-engine">Handlebars Template Engine</a>
 but the JAR is no longer available so the remainder of this section is TBD until it can be replaced.</p>
 </div>
 </div>
@@ -1687,7 +1651,7 @@ contents in place using Groovy&#8217;s <code>SimpleTemplateEngine</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>You can get a complete list of the available methods from the [<code>LazybonesScript</code> class](/pledbrook/lazybones/blob/master/lazybones-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy).</p>
+<p>You can get a complete list of the available methods from the /cbmarcum/skeketal/blob/master/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript class].</p>
 </div>
 <div class="paragraph">
 <p>Here is a very simple example <code>lazybones.groovy</code> script that asks the user for
@@ -1731,7 +1695,7 @@ i.e. code inside <code>&lt;% %&gt;</code> delimiters, allow for more complex log
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-08 21:28:09 -0400
+Last updated 2022-09-10 13:47:36 -0400
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

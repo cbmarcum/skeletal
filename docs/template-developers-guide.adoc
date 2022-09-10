@@ -4,25 +4,10 @@
 :toc: left
 
 
-== Credits
-This guide was copied from the original Lazybones [Template Developers Guide](https://github.com/pledbrook/lazybones/wiki/Template-developers-guide) by Peter Ledbrook and updated for this Skeletal fork of that project.
+== Preface
 
-== Introduction
-
-Skeletal alone is just a tool that doesn't do much. It needs a solid selection 
-of template packages to make it a compelling solution for developers' 
-day-to-day needs. That's why we try to make it as easy as possible to develop 
-and publish templates. This guide explains how to go about both steps.
-
-Many software frameworks today have online configurators or command line applications 
-to create skeleton projects. What many do not have is a subtemplate feature for 
-adding more specific class types like controllers, services, etc. that you end up 
-creating manually or copying from another project. Skeletal allows you to easily 
-start with one of these framework skeletons and add more of your common code and 
-create a more useful project template that can also contain subtemplates as well.
-
-Instructions in this guide also refer to the [[Template Testing Companion]] 
-for testing templates.
+Instructions in this guide also refer to the https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
+for testing templates during development.
 
 == Getting Started
 
@@ -39,7 +24,7 @@ Fortunately this is very easy because you can use Skeletal to set a project up f
 skeletal create lazybones-project my-lzb-templates
 ----
 
-and you'll get top-level `my-lzb-templates` directory which contains a simple [Gradle](http://www.gradle.org) build file, gradle wrapper, a README.md, and a `templates` directory into which you put your templates. 
+and you'll get top-level `my-lzb-templates` directory which contains a simple http://www.gradle.org[Gradle] build file, gradle wrapper, a README.md, and a `templates` directory into which you put your templates. 
 
 .Directory Layout
 ----
@@ -59,7 +44,7 @@ my-lzb-templates
 The `build.gradle` file applies the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin] which provides the packaging and publishing commands and some properties needed for publishing.
 
 .build.gradle
-[source,java]
+[source,gradle]
 ----
 plugins {
     id "net.codebuilders.lazybones-templates" version "1.6.2" // <1>
@@ -165,7 +150,7 @@ Add empty `.retain` files as shown here:
 The `app/build.gradle` file is part of this template project and contains:
 
 .build.gradle
-[source,java]
+[source,gradle]
 ----
 plugins {
     id 'groovy'
@@ -230,11 +215,11 @@ There is a standard project structure for source code and tests.
 Simply add your source files to `app/src/main/java`, your test cases
 to `app/src/test/groovy` and see below for running your application.
 
-## Using the project:
+== Using the project:
 1. Add any dependencies to build.gradle.
 2. Add logic to App.java
 
-## Building the Extension
+== Building the Extension
 - Build archives for distribution:
 ```
 ./gradlew assemble
@@ -246,7 +231,7 @@ to `app/src/test/groovy` and see below for running your application.
 ----
 
 Although the README is not required, you really should include one. It doesn't 
-have to be [Markdown](https://www.markdownguide.org/) either or have a file extension. We just happen to like the 
+have to be https://www.markdownguide.org/[Markdown] either or have a file extension. We just happen to like the 
 Markdown syntax and the way that GitHub handles files with an `md` extension.
 
 We didn't include it here, but we often include a graphical view of the 
@@ -265,12 +250,12 @@ user could set the group ID and version for the project at creation time? That
 would mean parameterizing the group and version in the build file. Not a 
 problem: we can add a post-install script.
 
-### Creating a Post-install Script
+=== Creating a Post-install Script
 
 Post-install scripts are executed immediately after a template is unpacked into 
 the new project directory and just before the README is displayed. They are 
 straight Groovy scripts with access to just the core Groovy classes, plus 
-Groovy's `SimpleTemplateEngine` and [Apache Commons IO](http://commons.apache.org/proper/commons-io/) 
+Groovy's `SimpleTemplateEngine` and http://commons.apache.org/proper/commons-io/[Apache Commons IO] 
 (for making file manipulation easier).
 
 Every script has access to the following properties:
@@ -285,7 +270,7 @@ The `lazybones*` properties have been retained for compatability with existing
 Lazybones templates but now refer to the corresponding Skeletal versions.
 
 The script also has access to all the public and protected methods and properties 
-defined in the [LazybonesScript](https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy) 
+defined in the https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript] 
 class. Of particular interest are the `ask()` and `processTemplates()` methods.
 
 `ask()` allows the script to request input from a user, such as 'y' or 'n' for 
@@ -298,41 +283,52 @@ Groovy's `SimpleTemplateEngine` to produce the resulting file. So if we want
 to allow the user to specify the project's group ID and version at install 
 time, we modify `build.gradle` slightly:
 
-    plugins {
-        id 'groovy'
-        id 'application'
-    }
+.build.gradle
+[source,gradle]
+----
+plugins {
+    id 'groovy'
+    id 'application'
+}
 
-    group = "${project_group}"
-    version = "${project_version}"
+group = "${project_group}"
+version = "${project_version}"
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
+}
 
-    ...
+...
+----
 
 and then add a post-install script, `lazybones.groovy`, in the root of the template:
 
-    Map props = [:]
+.lazybones.groovy
+[source,groovy]
+----
+Map props = [:]
 
-    props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
-    props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version")
+props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
+props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version")
 
-    processTemplates('app/build.gradle', props)
+processTemplates('app/build.gradle', props)
+----
 
 The first parameter to ask() is the user prompt message. The second is a default 
 value to use if the user hits enter without providing a value.  The third is a 
 property name in the script binding that if provided on the command line will 
 be used instead of prompting the user for one.
 
-To try the template, [install the template to cache](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache)
+To try the template, https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache[install the template to cache]
 
 Passing parameters to the script binding looks like `-P<param>=<value>`
 
 From a directory to create the test project in, create the test project:
 
-    skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT
+[source,bash]
+----
+skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT
+----
 
 If you provide them all, you get non-interactive creation of projects from templates.
 
@@ -344,7 +340,7 @@ new `my-java-app/app/build.gradle` you should see group and version updated:
     version = "1.0-SNAPSHOT"
     ...
 
-Before continuing [cleanup the cache and test project](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up).
+Before continuing https://cbmarcum.github.io/skeletal/template-testing-companion.html#cleaning-up[cleanup the cache and test project].
 
 Another useful method available to post-install scripts is `transformText()`. 
 It's common for scripts to convert strings between camel case (for class names 
@@ -497,20 +493,20 @@ on all the files that have variables to replace.
 Finally, we rename our sources to move them into the package directory structure and 
 then rename the application class and test class.
 
-### Install into Cache and Test
-This is now covered in the [[Template Testing Companion]] document.
-To test, [install the template](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache) 
-again, [create the test project](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#creating-a-test-project) 
-per the instructions, [build and run the distribution](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#building-and-running-the-distribution)
-and then [cleanup](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#cleaning-up)
+=== Install into Cache and Test
+This is now covered in the https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion] document.
+To test, https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache[install the template] 
+again, https://cbmarcum.github.io/skeletal/template-testing-companion.html#creating-a-test-project[create the test project] 
+per the instructions, https://cbmarcum.github.io/skeletal/template-testing-companion.html#building-and-running-the-distribution[build and run the distribution]
+and then https://cbmarcum.github.io/skeletal/template-testing-companion.html#cleaning-up[cleanup]
 the cache and test project.
 
 Once the template is ready, it's time to publish it.
 
-### Packaging, Installing and Publishing
+=== Packaging, Installing and Publishing
 
 There are three steps to publishing a template, each of which can be accomplished 
-with a simple task provided by the [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin):
+with a simple task provided by the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin]:
 
 * packaging - zipping up the template directory
 * installing - putting the template package into the local Skeletal template cache
@@ -539,7 +535,7 @@ To use this name in the Gradle tasks, we simply camel-case it:
 `SimpleJavaSpockGradle`. Of course, this means your directories should use 
 hyphenated notation rather than camel-case.
 
-See [installing a template in cache](https://github.com/cbmarcum/skeletal/wiki/Template-Testing-Companion#installing-a-template-in-cache).
+See https://cbmarcum.github.io/skeletal/template-testing-companion.html#installing-a-template-in-cache[installing a template in cache].
 
 If the rules for converting between camel-case and hyphenated forms don't suit 
 your template name, for example if you separate numbers with hyphens ('javaee-7'), 
@@ -570,14 +566,14 @@ is a simple CSV formatted text file with an entry for each template published.
     simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template
 
 
-### Fine-tuning the Packaging
+=== Fine-tuning the Packaging
 
 The packaging process is by default rather dumb. It will include all files and 
 directories in the target template directory except for a few hard-coded 
 exceptions (the DESCRIPTION, VERSION, and .retain files for example). That 
 leaves a lot of scope for accidentally including temporary files in the 
 package! To help you avoid that, the plugin allows you to specify a set of 
-extra exclusions using [Apache Ant-style patterns](https://ant.apache.org/manual/dirtasks.html#patterns).
+extra exclusions using https://ant.apache.org/manual/dirtasks.html#patterns[Apache Ant-style patterns].
 
     lazybones {
         packageExclude "**/*.swp", ".gradle", "build"
@@ -614,34 +610,34 @@ Again, the template-specific settings replace the global ones for that particula
 
 That's it for the getting started guide. You've created a template, tested it, and finally published it to Bintray. For the rest of the guide we'll look at the template creation in more detail.
 
-## Simple URL Repositories
+== Simple URL Repositories
 
 In a break from the original Lazybones project and their use of Bintray for 
 repositories, Skeletal uses what we call a Simple URL Repository which can be 
 any `file:` or `http(s):` URL location that contains templates and a 
 `skelatal-manifest.txt` file that your computer has read-access to. You can find 
-More information about setting up repositories in the [Skeletal README](https://github.com/cbmarcum/skeletal/blob/main/README.md).
+More information about setting up repositories in the https://github.com/cbmarcum/skeletal/blob/main/README.md[Skeletal README].
 
-## Template engines
+== Template engines
 
 The `processTemplates()` method available to post-install scripts allows you to 
 generate files based on templates. By default, any files that match the pattern 
 passed to `processTemplates()` are treated as Groovy templates that can be 
-processed by [SimpleTemplateEngine](http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine) 
+processed by http://docs.groovy-lang.org/latest/html/documentation/template-engines.html#_simpletemplateengine[SimpleTemplateEngine] 
 and those source files are replaced by the processed versions. That's not the 
 end of the story though.
 
 Skeletal allows you to use any template engine that implements Groovy's 
-[TemplateEngine](https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html), 
+https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html[TemplateEngine], 
 meaning that your source templates could be Moustache, Velocity, or anything 
 else. Of course, not every template engine has a Groovy implementation but it's 
 often trivial to create an adapter `TemplateEngine` implementation. 
 
 The original Lazybones version of this guide contained examples of using their 
-[Handlebars Template Engine](https://github.com/pledbrook/groovy-handlebars-engine)
+https://github.com/pledbrook/groovy-handlebars-engine[Handlebars Template Engine]
 but the JAR is no longer available so the remainder of this section is TBD until it can be replaced.
 
-## Subtemplates 
+== Subtemplates 
 
 It's very easy to add subtemplate support to your project templates. The key 
 points to understand are:
@@ -760,7 +756,7 @@ This is why `tmplQualifiers` is a list. It retains the order that the qualifiers
 
 *Note* qualifiers should not be used for general parameterization such as packages and class names. Think carefully before supporting more than a single qualifier.
 
-## Post install script in-depth
+== Post install script in-depth
 
 The lazybones.groovy post install script is a generic groovy script with a few extra
 helper methods:
@@ -777,7 +773,7 @@ contents in place using Groovy's `SimpleTemplateEngine`.
 * `hasFeature(String featureName)` - checks if the script has access to a feature, `hasFeature("ask")` or
 `hasFeature("processTemplates")` would both return true
 
-You can get a complete list of the available methods from the [`LazybonesScript` class](/pledbrook/lazybones/blob/master/lazybones-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy).
+You can get a complete list of the available methods from the /cbmarcum/skeketal/blob/master/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript class].
 
 Here is a very simple example `lazybones.groovy` script that asks the user for
 a couple of values and uses those to populate parameters in the template's build
