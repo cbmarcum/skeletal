@@ -3,6 +3,12 @@
 :email: carl.marcum@codebuilders.net
 :toc: left
 
+== Quick Links
+
+- https://github.com/cbmarcum/skeletal[Skeletal Project]
+- https://cbmarcum.github.io/skeletal/index.html[Guide Home]
+- https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide]
+
 == Introduction
 
 This is a companion document to the https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developer's Guide] to help describe a template developer's workflow 

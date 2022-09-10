@@ -3,8 +3,10 @@
 :email: carl.marcum@codebuilders.net
 :toc: left
 
-== Guide Links
+== Quick Links
 
+- https://github.com/cbmarcum/skeletal[Skeletal Project]
+- https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide]
 - https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide]
 - https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
