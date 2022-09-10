@@ -5,7 +5,97 @@
 
 == Introduction
 
-Welcome to the Skeletal Project Docs!
+This is a companion document to the https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developer's Guide] to help describe a template developer's workflow 
+when creating templates as there will be many iterations of changes and testing.
 
-These are expanded documentation beyond the contents of the README.
+The main purpose is to keep these instructions out of the guide as they would be 
+used multiple times throughout.
+
+The examples will follow the projects used in the guide.
+
+== Basic Steps
+
+. Install the template to the Skeletal template cache.
+. Create a test project from the template.
+. Review the project files.
+. Run tests.
+. Build a distribution.
+. Run the application.
+
+== Installing a Template in Cache
+When templates are first used from a repository they are copied to the Skeletal 
+cache `$HOME/./skeletal/templates` but you can install them directly with the 
+`installTemplate<template name>` task from `my-lzb-templates`
+
+.gradle installTemplate* task
+[source,bash]
+----
+./gradlew installTemplateSimpleJavaSpockGradle
+----
+
+== Creating a Test Project
+Use the installed `simple-java-spock-gradle` version `0.1.0` template to create 
+a `my-java-app` project with group `net.codebuilders`, archiveId `java-app`, and 
+version `1.0-SNAPSHOT`. We used the script binding variable `artifactId` for 
+the project name in `lazybones.groovy` and used that for the archive name and 
+application command in the template. From a directory to create a test project in:
+
+.create command
+[source,bash]
+----
+skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT
+----
+
+Note that you have to specify the version of the template to install, otherwise
+Skeletal will look up the latest version online and either say the template
+doesn't exist, or use whatever the latest version is (__not your development version__).
+
+== Running Tests
+The Gradle `check` task is a lifecycle task used to compile and run your unit and integration 
+tests as well as any code style, vulnerability scans and other validation tasks you might have. 
+If you only hava unit tests this is the same as running `gradlew test`
+
+Change to application directory and run tests:
+
+.gradle check task
+[source,bash]
+----
+cd my-java-app/
+
+./gradlew check
+----
+
+You can see the test report in `app/build/reports/tests/test/index.html`
+
+== Building and Running the Distribution
+A distribution is your application and launch scripts packed in a `zip` or `tar` 
+archive ready for distribution to users to unpack and use.
+
+The `installDist` task will create an "installed" unpacked distribution within the 
+build directory layout.
+
+.gradle installDist task
+[source,bash]
+----
+./gradlew installDist
+----
+
+Change directory into the distribution:
+
+[source,bash]
+----
+cd app/build/install/java-app
+----
+
+Run the application using the `java-app` script.
+
+.run application
+[source,bash]
+----
+bin/java-app
+Hello World!
+----
+== Cleaning Up
+To prepare for more development and testing you can delete the test application 
+and the template from the Skeletal cache.
 
