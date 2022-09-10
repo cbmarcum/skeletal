@@ -3,9 +3,29 @@
 :email: carl.marcum@codebuilders.net
 :toc: left
 
+
 == Introduction
 
-Welcome to the Skeletal Project Docs!
+https://github.com/cbmarcum/skeletal[Skeletal] alone is just a tool that doesn't 
+do much. It needs a solid selection of template packages to make it a compelling 
+solution for developers' day-to-day needs. That's why we try to make it as easy 
+as possible to develop and publish templates. This guide explains how to go 
+about both steps.
 
-These are expanded documentation beyond the contents of the README.
+Many software frameworks today have online configurators or command line applications 
+to create skeleton projects. What many do not have is a subtemplate feature for 
+adding more specific class types like controllers, services, etc. that you end up 
+creating manually or copying from another project. Skeletal allows you to easily 
+start with one of these framework skeletons and add more of your common code and 
+create a more useful project template that can also contain subtemplates as well.
 
+== Credits
+Much of these guides were copied from the original https://github.com/pledbrook/lazybones[Lazybones] project README's and guides by Peter Ledbrook and updated for this https://github.com/cbmarcum/skeletal[Skeletal] fork of that project.
+
+== Application Users Guide
+
+Command line application users should refer to the https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide].
+
+== Template Developers Guide
+
+Template developers should refer to the https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide] and the https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion].
