@@ -3,6 +3,10 @@
 :email: carl.marcum@codebuilders.net
 :toc: left
 
+== Guide Links
+
+- https://cbmarcum.github.io/skeletal/index.html[Home]
+- https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
 == Preface
 
