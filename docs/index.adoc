@@ -5,7 +5,7 @@
 
 == Guide Links
 
-- https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide
+- https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide]
 - https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
 == Introduction
