@@ -10,7 +10,7 @@ In this project you get:
 
 * A Gradle build file
 * A standard project structure:
-
+```
    <proj>
       |
       |-- app
@@ -41,6 +41,7 @@ In this project you get:
       |-- gradlew
       |-- gradlew.bat
       `-- settings.gradle
+```
 
 ## Using the project: 
 1. Add any dependencies to build.gradle.
