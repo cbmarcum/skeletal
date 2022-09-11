@@ -27,7 +27,6 @@ The first thing you want to do is set up a build for your templates, because cre
 Fortunately this is very easy because you can use Skeletal to set a project up for you! Simply run
 
 .create command
-[source,bash]
 ----
 skeletal create lazybones-project my-lzb-templates
 ----
@@ -52,7 +51,6 @@ my-lzb-templates
 The `build.gradle` file applies the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin] which provides the packaging and publishing commands and some properties needed for publishing.
 
 .build.gradle
-[source,gradle]
 ----
 plugins {
     id "net.codebuilders.lazybones-templates" version "1.6.2" // <1>
@@ -87,7 +85,6 @@ Create a new directory `templates/simple-java-spock-gradle`.
 from a shell in this directory:
 
 .gradle init command
-[source,bash]
 ----
 gradle init
 ----
@@ -161,7 +158,6 @@ Add empty `.retain` files as shown here:
 The `app/build.gradle` file is part of this template project and contains:
 
 .build.gradle
-[source,gradle]
 ----
 plugins { // <1>
     id 'groovy'
@@ -300,7 +296,6 @@ to allow the user to specify the project's group ID and version at install
 time, we modify `build.gradle` slightly:
 
 .build.gradle
-[source,gradle]
 ----
 plugins {
     id 'groovy'
@@ -321,7 +316,6 @@ repositories {
 and then add a post-install script, `lazybones.groovy`, in the root of the template:
 
 .lazybones.groovy
-[source,groovy]
 ----
 Map props = [:] // <1>
 
@@ -347,7 +341,6 @@ Passing parameters to the script binding looks like `-P<param>=<value>`
 From a directory to create the test project in, create the test project:
 
 .create command using parameters
-[source,bash]
 ----
 skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT
 ----
@@ -357,7 +350,7 @@ If you provide them all, you get non-interactive creation of projects from templ
 Since we ran the build file through `processTemplates`, If you look in your 
 new `my-java-app/app/build.gradle` you should see group and version updated:
 
-[source,java]
+.processed build.gradle
 ----
 ...
 group = "net.codebuilders"
@@ -373,7 +366,6 @@ perhaps), lower-case hyphenated (for directory names), and other forms. The
 `transformText()` method allows you to do just that:
 
 .transformText() example
-[source,groovy]
 ----
 import uk.co.cacoethes.util.NameType
 
@@ -401,7 +393,6 @@ the `org/example` directories.
 Edit `App.java` and change the package and class name like shown:
 
 .App.java
-[source,java]
 ----
 package ${project_package}; // <1>
 
@@ -423,7 +414,6 @@ We like to use the Spock naming convention of *Spec instead of *Test, so we will
 rename `AppTest.groovy` to `AppSpec.groovy` and then edit as shown:
 
 .AppSpec.groovy
-[source,groovy]
 ----
 package ${project_package}
 
@@ -450,7 +440,6 @@ command that gets ran. These would have both defaulted to `app` since that
 is the subproject we are working in.
 
 .build.gradle changes
-[source,groovy]
 ----
 ...
 jar {
@@ -468,7 +457,6 @@ application {
 
 The same for `settings.gradle`:
 
-[source,groovy]
 ----
 rootProject.name = '${project_name}' // <1>
 ----
@@ -476,7 +464,7 @@ rootProject.name = '${project_name}' // <1>
 
 Now edit the `lazybones.groovy` like this:
 
-[source,groovy]
+.lazybones.groovy
 ----
 import uk.co.cacoethes.util.NameType
 import org.apache.commons.io.FileUtils
@@ -634,7 +622,7 @@ leaves a lot of scope for accidentally including temporary files in the
 package! To help you avoid that, the plugin allows you to specify a set of 
 extra exclusions using https://ant.apache.org/manual/dirtasks.html#patterns[Apache Ant-style patterns].
 
-[source,groovy]
+.global excludes
 ----
 lazybones {
     packageExclude "**/*.swp", ".gradle", "build"
@@ -644,7 +632,7 @@ lazybones {
 
 These exclusions apply to all templates. If you want template-specific exclusions, then use the following syntax:
 
-[source,groovy]
+.template specific excludes
 ----
 lazybones {
     template("simple-java-spock-gradle") {     // Template (directory) name
@@ -657,7 +645,7 @@ Note that the template-specific settings completely override the global ones, so
 
 Another potential issue when packaging templates is with file and directory permissions. Lazybones attempts to retain the permissions it finds in the template directory, but these may not be correct on Windows. To compensate for that, the plugin allows you to specify file permissions in the template configuration:
 
-[source,groovy]
+.file permissions
 ----
 lazybones {
     fileMode "755", "gradlew", "**/*.sh"
@@ -668,7 +656,7 @@ The first argument is the Unix-style permission as a string (such as `"600"`, `"
 
 As with package exclusions, you can also specify file modes on a per-template basis:
 
-[source,groovy]
+.template specific file permissions
 ----
 lazybones {
     template("simple-java") {
@@ -727,6 +715,7 @@ template zip.
 Let's say you want to add a subtemplate for generating Spock test classes in a
 project created from the `simple-java-spock-gradle` template we introduced 
 earlier. Your starting point is to create a new directory for the subtemplate:
+
 ----
 templates/subtmpl-simple-spock-test
 ----
@@ -749,7 +738,6 @@ Each of these files behaves in the same way as in a project template, but there
 are a few slight differences. Consider the template source file for tests:
 
 .Spec.groovy.gtpl
-[source,groovy]
 ----
 package ${pkg}
 
@@ -770,12 +758,11 @@ class ${cls} extends Specification {
 }
 ----
 
-This references several parameters: `pkg`, `cls`, `parentGroup` and 
-`parentVersion`. Where do these parameters come from? We need to look into the 
-post-install script `lazybones.groovy`, to find out:
+This references several properties: `pkg`, `cls`, and `parentClassName`. Where
+do these parameters come from? We need to look into the post-install script
+`lazybones.groovy`, to find out:
 
 .lazybones.groovy
-[source,groovy]
 ----
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
@@ -802,12 +789,14 @@ FileUtils.moveFile(new File(templateDir, "Spec.groovy"), destFile)
 println "Created new Spock Test ${FilenameUtils.normalize(destFile.path)}"
 ----
 
-As you can see, the `pkg` and `cls` parameters are mapped from the return
+As you can see, the `pkg` and `cls` properties are mapped from the return
 values of two `ask()` calls. This is standard post-install script behavior.
-The interesting parameters, `parentGroup` and `parentVersion`, are mapped from
+The interesting properties, `parentPackage` and `parentClassName`, are mapped from
 something new: the `parentParams` map. This contains any named parameters used
 by the *parent project template*, i.e. simple-java-spock-gradle in this case.
-Because of this, `parentParams` only exists for subtemplates.
+Because of this, `parentParams` only exists for subtemplates. Only
+`parentClassName` is used in the template so it is in the `prop` map where
+`parentPackage` is a property only used within the script.
 
 Another novel aspect of the post-install script is the reference to a
 `templateDir` property in addition to `projectDir`. This is because
@@ -824,7 +813,7 @@ With all the subtemplates files in place, all you need to do is tell the build
 that the simple-java project template should include the entity subtemplate.
 So open up the build file and add this line to the `lazybones` block:
 
-[source,groovy]
+.include subtemplates
 ----
 lazybones {
     ...
@@ -838,7 +827,7 @@ included in it, ready for use with Lazybones' `generate` command.
 
 If you want to include multiple subtemplates, just pass extra arguments to `includes()`:
 
-[source,groovy]
+.include multiple subtemplates
 ----
 lazybones {
     ...
@@ -847,34 +836,35 @@ lazybones {
 ----
 
 There is one final option available to template authors. What if you want to 
-package the entity, controller, and view template files into a single 
+package the simple-spock-test, controller, and repository template files into a single 
 subtemplate package? How would the user be able to specify which type of class 
 they want to generate? The answer is through template qualifiers.
 
-Let's say you have an 'artifact' subtemplate that includes Entity.groovy.gtpl, Controller.groovy.gtpl, etc. The user can run the `generate` command like this to determine which artifact type to use:
+Let's say you have an 'artifact' subtemplate that includes Spec.groovy.gtpl, Controller.groovy.gtpl, etc. The user can run the `generate` command like this to determine which artifact type to use:
 
-[source,groovy]
+.generate controller
 ----
 skeletal generate artifact::controller
 ----
 
-The `::` separates the subtemplate name, 'artifact', from the qualifier, 'controller'. In your post-install script, you can access the qualifiers through a `tmplQualifiers` property:
+The `::` separates the subtemplate name, 'artifact', from the qualifier, 
+'controller'. In your post-install script, you can access the qualifiers through 
+a `tmplQualifiers` property:
 
-[source,groovy]
 ----
-    def artifactTemplate
-    if (tmplQualifiers) {
-        artifactTemplate = tmplQualifiers[0].capitalize() + ".groovy.gtpl"
-    }
-    else {
-        artifactTemplate = ask("Which type of artifact do you want to generate? ", null, "type")
-    }
+def artifactTemplate
+if (tmplQualifiers) {
+    artifactTemplate = tmplQualifiers[0].capitalize() + ".groovy.gtpl"
+}
+else {
+    artifactTemplate = ask("Which type of artifact do you want to generate? ", null, "type")
+}
 
-    // ... process the corresponding template file.
+// ... process the corresponding template file.
 ----
 
 The user can even pass extra qualifiers simply by separating them with `::`:
-[source,groovy]
+
 ----
 skeletal generate artifact::controller::org.example::Book
 ----
@@ -905,7 +895,7 @@ Here is a very simple example `lazybones.groovy` script that asks the user for
 a couple of values and uses those to populate properties in the template's build
 file:
 
-[source,groovy]
+.lazybones.groovy example
 ----
 def props = [:]
 props["groupId"] = ask("What is the group ID for this project?")
@@ -917,14 +907,20 @@ processTemplates("pom.xml", props)
 
 The main Gradle build file might then look like this:
 
-[source,groovy]
+.build.gradle example
 ----
-apply plugin: "groovy"
+plugins {
+    id 'groovy'
+    id 'application'
+}
 
-<% if (group) { %>group = "${group}"<% } %>
-version = "${version}"
+<% if (group) { %> // <2>
+group = "${project_group}"
+<% } %> // <2>
+version = "${project_version}" // <1>
 ----
+<1> The `${}` expressions are executed as Groovy expressions, and they have access
+to any variables in the property map passed to `processTemplates()`. 
 
-The `${}` expressions are executed as Groovy expressions, and they have access
-to any variables in the parameter map passed to `processTemplates()`. Scriptlets,
-i.e. code inside `<% %>` delimiters, allow for more complex logic.
+<2> Scriptlets, i.e. code inside `<% %>` delimiters, allow for more complex logic.
+
