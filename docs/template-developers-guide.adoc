@@ -2,6 +2,7 @@
 :author: Carl Marcum
 :email: carl.marcum@codebuilders.net
 :toc: left
+:source-highlighter: highlight.js
 
 == Quick Links
 
