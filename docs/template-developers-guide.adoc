@@ -853,10 +853,15 @@ they want to generate? The answer is through template qualifiers.
 
 Let's say you have an 'artifact' subtemplate that includes Entity.groovy.gtpl, Controller.groovy.gtpl, etc. The user can run the `generate` command like this to determine which artifact type to use:
 
-    lazybones generate artifact::controller
+[source,groovy]
+----
+skeletal generate artifact::controller
+----
 
 The `::` separates the subtemplate name, 'artifact', from the qualifier, 'controller'. In your post-install script, you can access the qualifiers through a `tmplQualifiers` property:
 
+[source,groovy]
+----
     def artifactTemplate
     if (tmplQualifiers) {
         artifactTemplate = tmplQualifiers[0].capitalize() + ".groovy.gtpl"
@@ -866,51 +871,59 @@ The `::` separates the subtemplate name, 'artifact', from the qualifier, 'contro
     }
 
     // ... process the corresponding template file.
+----
 
 The user can even pass extra qualifiers simply by separating them with `::`:
-
-    lazybones generate artifact::controller::org.example::Book
-
+[source,groovy]
+----
+skeletal generate artifact::controller::org.example::Book
+----
 This is why `tmplQualifiers` is a list. It retains the order that the qualifiers are specified on the command line.
 
 *Note* qualifiers should not be used for general parameterization such as packages and class names. Think carefully before supporting more than a single qualifier.
 
-== Post install script in-depth
+== Post Install Script In-depth
 
-The lazybones.groovy post install script is a generic groovy script with a few extra
+The `lazybones.groovy` post install script is a generic groovy script with a few extra
 helper methods:
 
-* `ask(String message, defaultValue = null)` - asks the user a question and returns their answer, or `defaultValue` if no
+- `ask(String message, defaultValue = null)` - asks the user a question and returns their answer, or `defaultValue` if no
 answer is provided
 
-* `ask(String message, defaultValue, String propertyName)` - works similarly to the `ask()` above, but allows
+- `ask(String message, defaultValue, String propertyName)` - works similarly to the `ask()` above, but allows
 grabbing variables from the command line as well based on the `propertyName`.
 
-* `processTemplates(String filePattern, Map substitutionVariables)` - use ant pattern matching to find files and filter their
+- `processTemplates(String filePattern, Map substitutionVariables)` - use ant pattern matching to find files and filter their
 contents in place using Groovy's `SimpleTemplateEngine`.
 
-* `hasFeature(String featureName)` - checks if the script has access to a feature, `hasFeature("ask")` or
+- `hasFeature(String featureName)` - checks if the script has access to a feature, `hasFeature("ask")` or
 `hasFeature("processTemplates")` would both return true
 
-You can get a complete list of the available methods from the /cbmarcum/skeketal/blob/master/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript class].
+You can get a complete list of the available methods from the https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript class].
 
 Here is a very simple example `lazybones.groovy` script that asks the user for
-a couple of values and uses those to populate parameters in the template's build
+a couple of values and uses those to populate properties in the template's build
 file:
 
-    def params = [:]
-    params["groupId"] = ask("What is the group ID for this project?")
-    params["version"] = ask("What is the project's initial version?", "0.1", "version")
+[source,groovy]
+----
+def props = [:]
+props["groupId"] = ask("What is the group ID for this project?")
+props["version"] = ask("What is the project's initial version?", "0.1", "version")
 
-    processTemplates("*.gradle", params)
-    processTemplates("pom.xml", params)
+processTemplates("*.gradle", props)
+processTemplates("pom.xml", props)
+----
 
 The main Gradle build file might then look like this:
 
-    apply plugin: "groovy"
+[source,groovy]
+----
+apply plugin: "groovy"
 
-    <% if (group) { %>group = "${group}"<% } %>
-    version = "${version}"
+<% if (group) { %>group = "${group}"<% } %>
+version = "${version}"
+----
 
 The `${}` expressions are executed as Groovy expressions, and they have access
 to any variables in the parameter map passed to `processTemplates()`. Scriptlets,

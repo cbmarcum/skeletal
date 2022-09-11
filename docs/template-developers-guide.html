@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_simple_url_repositories">Simple URL Repositories</a></li>
 <li><a href="#_template_engines">Template engines</a></li>
 <li><a href="#_subtemplates">Subtemplates</a></li>
-<li><a href="#_post_install_script_in_depth">Post install script in-depth</a></li>
+<li><a href="#_post_install_script_in_depth">Post Install Script In-depth</a></li>
 </ul>
 </div>
 </div>
@@ -1645,36 +1645,33 @@ they want to generate? The answer is through template qualifiers.</p>
 <div class="paragraph">
 <p>Let&#8217;s say you have an 'artifact' subtemplate that includes Entity.groovy.gtpl, Controller.groovy.gtpl, etc. The user can run the <code>generate</code> command like this to determine which artifact type to use:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>lazybones generate artifact::controller</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">skeletal generate <span style="color:#606">artifact</span>::controller</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The <code>::</code> separates the subtemplate name, 'artifact', from the qualifier, 'controller'. In your post-install script, you can access the qualifiers through a <code>tmplQualifiers</code> property:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>def artifactTemplate
-if (tmplQualifiers) {
-    artifactTemplate = tmplQualifiers[0].capitalize() + ".groovy.gtpl"
-}
-else {
-    artifactTemplate = ask("Which type of artifact do you want to generate? ", null, "type")
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>// ... process the corresponding template file.</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">    <span style="color:#080;font-weight:bold">def</span> artifactTemplate
+    <span style="color:#080;font-weight:bold">if</span> (tmplQualifiers) {
+        artifactTemplate = tmplQualifiers[<span style="color:#00D">0</span>].capitalize() + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.groovy.gtpl</span><span style="color:#710">&quot;</span></span>
+    }
+    <span style="color:#080;font-weight:bold">else</span> {
+        artifactTemplate = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Which type of artifact do you want to generate? </span><span style="color:#710">&quot;</span></span>, <span style="color:#069">null</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">type</span><span style="color:#710">&quot;</span></span>)
+    }
+
+    <span style="color:#777">// ... process the corresponding template file.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The user can even pass extra qualifiers simply by separating them with <code>::</code>:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>lazybones generate artifact::controller::org.example::Book</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">skeletal generate <span style="color:#606">artifact</span>::<span style="color:#606">controller</span>::org.example::<span style="color:#0a8;font-weight:bold">Book</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1686,10 +1683,10 @@ else {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_post_install_script_in_depth">Post install script in-depth</h2>
+<h2 id="_post_install_script_in_depth">Post Install Script In-depth</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The lazybones.groovy post install script is a generic groovy script with a few extra
+<p>The <code>lazybones.groovy</code> post install script is a generic groovy script with a few extra
 helper methods:</p>
 </div>
 <div class="ulist">
@@ -1713,38 +1710,32 @@ contents in place using Groovy&#8217;s <code>SimpleTemplateEngine</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>You can get a complete list of the available methods from the /cbmarcum/skeketal/blob/master/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy[LazybonesScript class].</p>
+<p>You can get a complete list of the available methods from the <a href="https://github.com/cbmarcum/skeletal/blob/main/skeletal-app/src/main/groovy/uk/co/cacoethes/lazybones/LazybonesScript.groovy">LazybonesScript class</a>.</p>
 </div>
 <div class="paragraph">
 <p>Here is a very simple example <code>lazybones.groovy</code> script that asks the user for
-a couple of values and uses those to populate parameters in the template&#8217;s build
+a couple of values and uses those to populate properties in the template&#8217;s build
 file:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>def params = [:]
-params["groupId"] = ask("What is the group ID for this project?")
-params["version"] = ask("What is the project's initial version?", "0.1", "version")</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>processTemplates("*.gradle", params)
-processTemplates("pom.xml", params)</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">def</span> props = [:]
+props[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">groupId</span><span style="color:#710">&quot;</span></span>] = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">What is the group ID for this project?</span><span style="color:#710">&quot;</span></span>)
+props[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>] = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">What is the project's initial version?</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.1</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>)
+
+processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">*.gradle</span><span style="color:#710">&quot;</span></span>, props)
+processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">pom.xml</span><span style="color:#710">&quot;</span></span>, props)</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The main Gradle build file might then look like this:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>apply plugin: "groovy"</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>&lt;% if (group) { %&gt;group = "${group}"&lt;% } %&gt;
-version = "${version}"</pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">apply <span style="color:#606">plugin</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">groovy</span><span style="color:#710">&quot;</span></span>
+
+&lt;% <span style="color:#080;font-weight:bold">if</span> (group) { %&gt;group = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>group<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>&lt;% } %&gt;
+version = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>version<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1757,7 +1748,7 @@ i.e. code inside <code>&lt;% %&gt;</code> delimiters, allow for more complex log
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-10 18:39:47 -0400
+Last updated 2022-09-10 20:30:45 -0400
 </div>
 </div>
 </body>
