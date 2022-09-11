@@ -7,8 +7,8 @@
 == Quick Links
 
 - https://github.com/cbmarcum/skeletal[Skeletal Project]
-- https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide]
 - https://cbmarcum.github.io/skeletal/index.html[Guide Home]
+- https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide]
 - https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
 == Preface
