@@ -437,6 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -448,26 +449,787 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_quick_links">Quick Links</a></li>
 <li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_installation">Installation</a></li>
+<li><a href="#_commands">Commands</a>
+<ul class="sectlevel2">
+<li><a href="#_general_help">General Help</a></li>
+<li><a href="#_command_help">Command Help</a></li>
+<li><a href="#_listing_available_templates">Listing Available Templates</a></li>
+<li><a href="#_template_information">Template Information</a></li>
+<li><a href="#_creating_projects">Creating Projects</a></li>
+<li><a href="#_subtemplates">Subtemplates</a></li>
+</ul>
+</li>
+<li><a href="#_configuration">Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#_command_line_configuration">Command Line Configuration</a></li>
+<li><a href="#_custom_repositories">Custom Repositories</a></li>
+<li><a href="#_repository_manifest">Repository Manifest</a></li>
+<li><a href="#_package_aliases">Package Aliases</a></li>
+<li><a href="#_setting_a_proxy_and_other_system_properties">Setting a Proxy (and other system properties)</a></li>
+<li><a href="#_general_options">General Options</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
+<h2 id="_quick_links">Quick Links</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/cbmarcum/skeletal">Skeletal Project</a></p>
+</li>
+<li>
+<p><a href="https://cbmarcum.github.io/skeletal/index.html">Guide Home</a></p>
+</li>
+<li>
+<p><a href="https://cbmarcum.github.io/skeletal/template-developers-guide.html">Template Developers Guide</a></p>
+</li>
+<li>
+<p><a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html">Template Testing Companion</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the Skeletal Project Docs!</p>
+<p>The <a href="https://github.com/cbmarcum/skeletal">Skeletal</a> application is a command
+line tool to create software project skeletons from available templates stored
+in Simple URL repositories. The application allows listing available templates, getting for information about individual templates, modify the application configuration including additional repositories, template aliases, and logging level. You can also configure a proxy by editing a configuration file.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Grab the distribution <a href="https://codebuilders.jfrog.io/artifactory/generic/skeletal-app">from our JFrog repo</a> or use <code>curl</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>curl -o skeletal-&lt;version&gt;.zip -L https://codebuilders.jfrog.io/artifactory/generic/skeletal-app/&lt;version&gt;/skeletal-&lt;version&gt;.zip</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>These are expanded documentation beyond the contents of the README.</p>
+<p>Unpack it to a local directory, and then add its 'bin' directory to your <code>PATH</code>
+environment variable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commands">Commands</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These are the general usage commands that are used in the form of:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal &lt;command&gt;</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_general_help">General Help</h3>
+<div class="paragraph">
+<p>You can get an application description and a list of available commands</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Skeletal is a command-line based tool for creating basic software projects from templates.
+
+Available commands:
+
+    create         Creates a new project from a template.
+    config         Allows users to interact with the configuration settings.
+    generate       Generates new files in the current project based on a subtemplate.
+    list           Lists the templates that are available for you to install.
+    info           Displays information about a template, such as latest version, description, etc.
+    help           Displays general help, or help for a specific command.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_command_help">Command Help</h3>
+<div class="paragraph">
+<p>Commands generally have specific help available using the <code>--help</code> argument
+after the command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal &lt;command&gt; --help</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each command described below will begin with the help text and be followed by
+the examples.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_listing_available_templates">Listing Available Templates</h3>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal list --help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Lists the templates that are available for you to install.
+
+USAGE: list
+
+Option      Description
+------      -----------
+--cached    Lists the cached templates instead of the remote ones.
+-h, --help  Displays usage.
+--subs      Lists any subtemplates in the current project.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To see what templates you can use from the default and configured repositories
+as well as configured aliases:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal list</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Any remote templates used to create projects from repositories or aliases are
+copied into the local Skeletal cache <code>$HOME/.skeletal/templates</code>. If you want
+to see what templates you have cached locally, run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal list --cached</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In fact, <code>--cached</code> is implied if Skeletal can&#8217;t connect to the internet.</p>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal list</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Available templates in https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates
+
+    lazybones-project
+    simple-java-spock-gradle</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_template_information">Template Information</h3>
+<div class="paragraph">
+<p>You can also find out more about a template through the <code>info</code> command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal info --help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Displays information about a template, such as latest version, description, etc.
+
+USAGE: info &lt;template&gt;
+
+where  template = The name of the project template you want information about
+
+Option      Description
+------      -----------
+-h, --help  Displays usage.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">info example</div>
+<div class="content">
+<pre>skeletal info simple-java-spock-gradle</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Fetching package information for 'simple-java-spock-gradle' from repo
+Name:        simple-java-spock-gradle
+Latest:      1.1
+Description: A simple Java Spock Gradle project template
+Owner:       Skeletal Project
+Versions:    1.1
+
+More information at https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates/simple-java-spock-gradle-template-1.1.zip</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>info</code> only works if you&#8217;re online and can reach the repository the template
+resides in since the manifest contains the template information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_projects">Creating Projects</h3>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal create --help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Creates a new project from a template.
+
+USAGE: create &lt;template&gt; &lt;version&gt;? &lt;dir&gt;
+
+where  template = The name of the project template to use.
+version  = (optional) The version of the project template to use. Uses the latest version of the template by default.
+dir      = The name of the directory in which to create the project structure. This can be '.' to mean 'in the current directory.'
+
+Option      Description
+------      -----------
+-P          Add a substitution variable for file filtering.
+-h, --help  Displays usage.
+--spaces    Sets the number of spaces to use for indent in files.
+--with-git  Creates a git repository in the new project.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To create a new project, run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal create &lt;template name&gt; &lt;template version&gt; &lt;target directory&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So if you wanted to create a skeleton Java project in a new 'my-java-app'
+directory you would run</p>
+</div>
+<div class="listingblock">
+<div class="title">create example</div>
+<div class="content">
+<pre>skeletal create simple-java-spock-gradle 1.1 my-java-app</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The version is optional and if you leave it out, Skeletal will install the
+latest version of the template it can find.</p>
+</div>
+<div class="paragraph">
+<p>The default templates are listed from <code>Code Builders, LLC</code> 's Artifactory account
+hosted by JFrog at <code><a href="https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates" class="bare">https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates</a></code>.
+Skeletal searches for templates at this URL by default, but you can use other
+URL repositories by adding some configuration. See the Custom Repositories
+section under Configuration later in this document.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;re not limited to only the default repository as you can install templates directly from a URL also:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Of course, it can be pretty laborious copying and pasting URLs around, so
+Skeletal allows you to configure aliases for URLs that you use frequently.
+By adding the following configuration to your Skeletal settings file,
+<code>~/.skeletal/config.groovy</code> (see below for more details on this), you can
+install the template by name:</p>
+</div>
+<div class="listingblock">
+<div class="title">config.groovy</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">templates {
+    mappings {
+        myTmpl = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip</span><span style="color:#710">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In other words, you could now run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal create myTmpl my-aoo-client-app</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that when using the URL option, there is no need to specify a version. You
+should also be aware that mappings take precedence, i.e. if a mapping has the
+same name as an existing template, the mapping is used. This essentially creates
+a simple override mechanism.</p>
+</div>
+<div class="paragraph">
+<p>There is just one more thing to say about the <code>create</code> command: by default it
+creates the specified directory and puts the initial project in there. If you
+want to unpack a template in the current directory instead, for example if you
+have already created the project directory, then just pass '.' as the directory:</p>
+</div>
+<div class="listingblock">
+<div class="title">create in current directory</div>
+<div class="content">
+<pre>skeletal create myTmpl .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have created a new project from a template, you may notice that the
+project directory contains a .lazybones sub-directory. You may delete this, but
+then you won&#8217;t be able to use the <code>generate</code> command (see next section) if the
+project template has support for it.</p>
+</div>
+<div class="paragraph">
+<p>Many project templates request information from you, such as a project name, a
+group ID, a default package, etc. If this is the umpteenth time you have created
+a project from a given template, then answering the questions can become tedious.
+There is also the problem of scripting and automation when you want to create
+a project without user intervention. The solution to both these issues is to
+pass the values on the command line:</p>
+</div>
+<div class="listingblock">
+<div class="title">create with parameters</div>
+<div class="content">
+<pre>skeletal create simple-java-spock-gradle 1.1 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Ppackage=net.codebuilders.app -Pversion=1.0-SNAPSHOT -PclassName=MyJavaApp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>-P</code> option allows you to pass parameter values into the project templates
+without user intervention. The key is to know what the property names are, and
+that comes down to the project template. At the moment, the best way to find out
+what those properties are is to look at the post-install script if you have
+the source or they can be found in a created project under
+<code>./lazybones/stored-params.properties</code></p>
+</div>
+<div class="paragraph">
+<p>The last option to mention is <code>--with-git</code> which will automatically create a
+new git repository in the project directory. The only requirement is that you
+have the <code>git</code> command on your path.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_subtemplates">Subtemplates</h3>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal generate --help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Generates new files in the current project based on a subtemplate.
+
+USAGE: generate &lt;template&gt;
+
+where  template = The name of the subtemplate to use.
+
+Option      Description
+------      -----------
+-P          Add a substitution variable for file filtering.
+-h, --help  Displays usage.
+--spaces    Sets the number of spaces to use for indent in files.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Project templates can incorporate subtemplates.
+Imagine that you have just created a new web application project from a template
+and that template documents that you can create new controllers using a
+subtemplate named <code>controller</code>. To use it, just <code>cd</code> into the project directory
+and run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal generate controller</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will probably ask you for the name of the controller and its package before
+generating the corresponding controller file in your project. You can reuse the
+command to create as many controllers as you need.</p>
+</div>
+<div class="paragraph">
+<p>As with the <code>create</code> command, you can also pass in parameter values on the command
+line if the subtemplate is parameterized:</p>
+</div>
+<div class="listingblock">
+<div class="title">generate with parameters</div>
+<div class="content">
+<pre>skeletal generate controller -Ppackage=org.example.myapp -Pclass=Book</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last option available to you as a user is template qualifiers. These only
+work if the subtemplate supports them, but they allow you to pass additional
+information in a concise way:</p>
+</div>
+<div class="listingblock">
+<div class="title">generate with qualifiers</div>
+<div class="content">
+<pre>skeletal generate artifact::controller</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the template name is <code>artifact</code>, but we have qualified it with
+an extra <code>controller</code>. You can pass in as many qualifiers as you want, you just
+separate them with <code>::</code>. Qualifiers are covered in the Template Developers Guide <a href="https://cbmarcum.github.io/skeletal/template-developers-guide.html#_subtemplates">Subtemplates section</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that you do not specify a version with the <code>generate</code> command. This is
+because the subtemplates are embedded directly in the project template, and
+so there can only be one version available to you.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skeletal will run out of the box without any extra configuration, but the tool
+does allow you to override the default behaviour via a fixed set of configuration
+options. These options can be provided in a number of ways following a set order
+of precedence:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>System properties of the form <code>lazybones.*</code>, which can be passed into the app
+via either <code>JAVA_OPTS</code> or <code>LAZYBONES_OPTS</code> environment variables. For example:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>env JAVA_OPTS="-Dlazybones.config.file=/path/to/my-custom-default-config.groovy" lazybones ...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Highest precedence, i.e. it overrides all other sources of setting data.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User configuration file in <code>$USER_HOME/.skeletal/config.groovy</code>. This is parsed
+using Groovy&#8217;s <code>ConfigSlurper</code>, so if you&#8217;re familiar with that syntax you&#8217;ll be
+right at home. Otherwise, just see the examples below.</p>
+</li>
+<li>
+<p>A JSON configuration file in <code>$USER_HOME/.skeletal/managed-config.groovy</code>
+that is used by the <code>config</code> commands. You can edit it this as well.</p>
+</li>
+<li>
+<p>A Groovy-based default configuration file that is provided by the application
+itself, but you can specify an alternative file via the <code>lazybones.config.file</code>
+system property.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Skeletal also provides a convenient mechanism for setting and removing options
+via the command line: the <code>config</code> command.</p>
+</div>
+<div class="sect2">
+<h3 id="_command_line_configuration">Command Line Configuration</h3>
+<div class="paragraph">
+<p>The <code>config</code> command provides several sub-commands that allow you to interact with
+the persisted Skeletal configuration; specifically, the JSON config file. You run a sub-command via</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal config &lt;sub-cmd&gt; &lt;args&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;sub-cmd&gt;</code> is one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set &lt;option&gt; &lt;value&gt; [&lt;value&gt; &#8230;&#8203;]</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Allows you to change the value of a configuration setting. Multiple values are
+treated as a single array/list value. The new value replaces any existing one.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>add &lt;option&gt; &lt;value&gt;</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Appends an extra value to an existing array/list setting. Reports an error if
+the setting doesn't accept multiple values. If the setting doesn't already have
+a value, this command will initialise it with an array containing the given
+value.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>clear &lt;option&gt;</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Removes a setting from the configuration, effectively reverting it to whatever
+the internal default is.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>show [--all] &lt;option&gt;</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Shows the current value of a setting. You can use the `--all` argument (without
+a setting name) to display all the current settings and their values.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>list</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Displays all the configuration settings supported by Skeletal.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So what configuration settings are you likely to customise?</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_custom_repositories">Custom Repositories</h3>
+<div class="paragraph">
+<p>Skeletal will by default download the templates from a specific repository as
+mentioned in the Creating Projects section. If you want to host template packages
+in a different repository you can add it to Skeletal&#8217;s search path via the <code>simpleRepositories</code>
+setting as a comma seperated list in $HOME/.skeletal/config.groovy:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">simpleRepositories = [
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://your.domain.tld/repo-dir</span><span style="color:#710">&quot;</span></span>
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or in $HOME/.skeletal/managed-config.json:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>simpleRepositories</span><span style="color:#404">&quot;</span></span>: [
+        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://your.domain.tld/repo-dir</span><span style="color:#710">&quot;</span></span>
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To add a simple repository listing to the managed configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal config add simpleRepositories "https://your.domain.tld/repo-dir"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will also create the file if it doesn&#8217;t exist yet.</p>
+</div>
+<div class="paragraph">
+<p>If a template exists in more than one repository, it will be downloaded from the
+first repository in the list that it appears in.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_repository_manifest">Repository Manifest</h3>
+<div class="paragraph">
+<p>Where Lazybones used web services to list and create projects from templates stored
+on Bintray, Skeletal uses a simple <code>skeletal-manifest.txt</code> file located in the
+repository to provide the necessary information. This file is in the CSV format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">name,version,owner,description
+   aoo-addin-java-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-In Template for Java&quot;
+aoo-addin-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-In Template for Groovy&quot;
+aoo-addon-java-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-On Template for Java&quot;
+aoo-addon-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-On Template for Groovy&quot;
+aoo-client-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Client Template for Groovy&quot;
+----</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the template name has a <code>-template</code> suffix. The zip file packages have a similar format of <code>&lt;name&gt;-template-&lt;version&gt;.zip</code></p>
+</div>
+<div class="paragraph">
+<p>When listing or creating projects from templates the <code>-template</code> is omitted. It is
+also removed from the zip file name when it is copied into the local cache directory when first used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_package_aliases">Package Aliases</h3>
+<div class="paragraph">
+<p>If you regularly use a template at a specific URL rather than from the default
+or configured repository, then you will want to alias that URL to a name.
+That&#8217;s where template mappings (or aliases) come in. The aliases are defined as
+normal settings of the form</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>templates.mappings.&lt;alias&gt; = &lt;url&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a Groovy configuration file, you can define multiple aliases in a block:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">templates {
+    mappings {
+        test = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://dl.dropboxusercontent.com/u/29802534/custom-ratpack.zip</span><span style="color:#710">&quot;</span></span>
+        after = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">file:///var/tmp/afterburnerfx-2.0.0.zip</span><span style="color:#710">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, add them from the command line like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal config set templates.mappings.after file:///var/tmp/afterburnerfx-2.0.0.zip</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The aliases will always be available to you until you remove them from the persisted
+configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setting_a_proxy_and_other_system_properties">Setting a Proxy (and other system properties)</h3>
+<div class="paragraph">
+<p>Many people have to work behind a proxy, one way to do it is to add the
+relevant system properties to a <code>JAVA_OPTS</code> environment variable. There is
+also another option.</p>
+</div>
+<div class="paragraph">
+<p>Skeletal has borrowed the idea of having a special form of configuration
+option for system properties from Gradle. So if you define a property with a
+<code>systemProp.</code> prefix, it will be added as a system property internally. So to
+configure an HTTP proxy, you only need to add the following to your Skeletal
+configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">systemProp {
+    http {
+        proxyHost = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">localhost</span><span style="color:#710">&quot;</span></span>
+        proxyPort = <span style="color:#00D">8181</span>
+    }
+    https {
+        proxyHost = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">localhost</span><span style="color:#710">&quot;</span></span>
+        proxyPort = <span style="color:#00D">8181</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To avoid potential configuration issues, use the same proxy settings for HTTP and
+HTTPS if possible.</p>
+</div>
+<div class="paragraph">
+<p>If your proxy requires authentication, you will need to add a couple of extra
+properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">systemProp {
+    http {
+        proxyUser = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">johndoe</span><span style="color:#710">&quot;</span></span>
+        proxyPassword = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">mypassword</span><span style="color:#710">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As with the host and port, there are <code>https</code> variants of the username and password
+as well.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_general_options">General Options</h3>
+<div class="paragraph">
+<p>These are miscellaneous options that can be overridden on the command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#777">// &lt;-- This starts a line comment</span>
+<span style="color:#777">// Set logging level - overridden by command line args</span>
+options.logLevel = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">SEVERE</span><span style="color:#710">&quot;</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The logging level can either be overridden using the same <code>logLevel</code> setting:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal --logLevel SEVERE info aoo-addin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or via <code>--verbose</code>, <code>--quiet</code>, and <code>--info</code> options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal --verbose info aoo-addin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The logging level can be one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OFF</p>
+</li>
+<li>
+<p>SEVERE</p>
+</li>
+<li>
+<p>WARNING</p>
+</li>
+<li>
+<p>INFO</p>
+</li>
+<li>
+<p>FINE</p>
+</li>
+<li>
+<p>FINEST</p>
+</li>
+<li>
+<p>ALL</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-08 17:42:30 -0400
+Last updated 2022-09-11 18:01:58 -0400
 </div>
 </div>
 </body>

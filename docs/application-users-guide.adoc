@@ -2,10 +2,558 @@
 :author: Carl Marcum
 :email: carl.marcum@codebuilders.net
 :toc: left
+:icons: font
+
+== Quick Links
+
+- https://github.com/cbmarcum/skeletal[Skeletal Project]
+- https://cbmarcum.github.io/skeletal/index.html[Guide Home]
+- https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide]
+- https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
 == Introduction
 
-Welcome to the Skeletal Project Docs!
+The https://github.com/cbmarcum/skeletal[Skeletal] application is a command
+line tool to create software project skeletons from available templates stored
+in Simple URL repositories. The application allows listing available templates, getting for information about individual templates, modify the application configuration including additional repositories, template aliases, and logging level. You can also configure a proxy by editing a configuration file.
 
-These are expanded documentation beyond the contents of the README.
+== Installation
 
+Grab the distribution https://codebuilders.jfrog.io/artifactory/generic/skeletal-app[from our JFrog repo] or use `curl`:
+
+----
+curl -o skeletal-<version>.zip -L https://codebuilders.jfrog.io/artifactory/generic/skeletal-app/<version>/skeletal-<version>.zip
+----
+
+Unpack it to a local directory, and then add its 'bin' directory to your `PATH`
+environment variable.
+
+== Commands
+
+These are the general usage commands that are used in the form of:
+
+----
+skeletal <command>
+----
+
+=== General Help
+
+You can get an application description and a list of available commands
+
+----
+skeletal help
+----
+----
+Skeletal is a command-line based tool for creating basic software projects from templates.
+
+Available commands:
+
+    create         Creates a new project from a template.
+    config         Allows users to interact with the configuration settings.
+    generate       Generates new files in the current project based on a subtemplate.
+    list           Lists the templates that are available for you to install.
+    info           Displays information about a template, such as latest version, description, etc.
+    help           Displays general help, or help for a specific command.
+----
+
+=== Command Help
+
+Commands generally have specific help available using the `--help` argument
+after the command.
+
+----
+skeletal <command> --help
+----
+
+Each command described below will begin with the help text and be followed by
+the examples.
+
+=== Listing Available Templates
+
+----
+skeletal list --help
+----
+----
+Lists the templates that are available for you to install.
+
+USAGE: list
+
+Option      Description
+------      -----------
+--cached    Lists the cached templates instead of the remote ones.
+-h, --help  Displays usage.
+--subs      Lists any subtemplates in the current project.
+----
+
+To see what templates you can use from the default and configured repositories
+as well as configured aliases:
+
+----
+skeletal list
+----
+
+Any remote templates used to create projects from repositories or aliases are
+copied into the local Skeletal cache `$HOME/.skeletal/templates`. If you want
+to see what templates you have cached locally, run
+
+----
+skeletal list --cached
+----
+
+In fact, `--cached` is implied if Skeletal can't connect to the internet.
+
+Example
+
+----
+skeletal list
+----
+----
+Available templates in https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates
+
+    lazybones-project
+    simple-java-spock-gradle
+----
+
+=== Template Information
+
+You can also find out more about a template through the `info` command:
+
+----
+skeletal info --help
+----
+----
+Displays information about a template, such as latest version, description, etc.
+
+USAGE: info <template>
+
+where  template = The name of the project template you want information about
+
+Option      Description
+------      -----------
+-h, --help  Displays usage.
+----
+
+.info example
+
+----
+skeletal info simple-java-spock-gradle
+----
+----
+Fetching package information for 'simple-java-spock-gradle' from repo
+Name:        simple-java-spock-gradle
+Latest:      1.1
+Description: A simple Java Spock Gradle project template
+Owner:       Skeletal Project
+Versions:    1.1
+
+More information at https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates/simple-java-spock-gradle-template-1.1.zip
+----
+
+`info` only works if you're online and can reach the repository the template
+resides in since the manifest contains the template information.
+
+=== Creating Projects
+
+----
+skeletal create --help
+----
+----
+Creates a new project from a template.
+
+USAGE: create <template> <version>? <dir>
+
+where  template = The name of the project template to use.
+version  = (optional) The version of the project template to use. Uses the latest version of the template by default.
+dir      = The name of the directory in which to create the project structure. This can be '.' to mean 'in the current directory.'
+
+Option      Description
+------      -----------
+-P          Add a substitution variable for file filtering.
+-h, --help  Displays usage.
+--spaces    Sets the number of spaces to use for indent in files.
+--with-git  Creates a git repository in the new project.
+----
+
+To create a new project, run
+
+----
+skeletal create <template name> <template version> <target directory>
+----
+
+So if you wanted to create a skeleton Java project in a new 'my-java-app'
+directory you would run
+
+.create example
+----
+skeletal create simple-java-spock-gradle 1.1 my-java-app
+----
+
+The version is optional and if you leave it out, Skeletal will install the
+latest version of the template it can find.
+
+The default templates are listed from `Code Builders, LLC` 's Artifactory account
+hosted by JFrog at `https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates`.
+Skeletal searches for templates at this URL by default, but you can use other
+URL repositories by adding some configuration. See the Custom Repositories
+section under Configuration later in this document.
+
+You're not limited to only the default repository as you can install templates directly from a URL also:
+
+----
+skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app
+----
+
+Of course, it can be pretty laborious copying and pasting URLs around, so
+Skeletal allows you to configure aliases for URLs that you use frequently.
+By adding the following configuration to your Skeletal settings file,
+`~/.skeletal/config.groovy` (see below for more details on this), you can
+install the template by name:
+
+.config.groovy
+[source,groovy]
+----
+templates {
+    mappings {
+        myTmpl = "https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip"
+    }
+}
+----
+
+In other words, you could now run
+
+----
+skeletal create myTmpl my-aoo-client-app
+----
+
+Note that when using the URL option, there is no need to specify a version. You
+should also be aware that mappings take precedence, i.e. if a mapping has the
+same name as an existing template, the mapping is used. This essentially creates
+a simple override mechanism.
+
+There is just one more thing to say about the `create` command: by default it
+creates the specified directory and puts the initial project in there. If you
+want to unpack a template in the current directory instead, for example if you
+have already created the project directory, then just pass '.' as the directory:
+
+.create in current directory
+----
+skeletal create myTmpl .
+----
+
+Once you have created a new project from a template, you may notice that the
+project directory contains a .lazybones sub-directory. You may delete this, but
+then you won't be able to use the `generate` command (see next section) if the
+project template has support for it.
+
+Many project templates request information from you, such as a project name, a
+group ID, a default package, etc. If this is the umpteenth time you have created
+a project from a given template, then answering the questions can become tedious.
+There is also the problem of scripting and automation when you want to create
+a project without user intervention. The solution to both these issues is to
+pass the values on the command line:
+
+.create with parameters
+----
+skeletal create simple-java-spock-gradle 1.1 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Ppackage=net.codebuilders.app -Pversion=1.0-SNAPSHOT -PclassName=MyJavaApp
+----
+
+The `-P` option allows you to pass parameter values into the project templates
+without user intervention. The key is to know what the property names are, and
+that comes down to the project template. At the moment, the best way to find out
+what those properties are is to look at the post-install script if you have
+the source or they can be found in a created project under
+`./lazybones/stored-params.properties`
+
+The last option to mention is `--with-git` which will automatically create a
+new git repository in the project directory. The only requirement is that you
+have the `git` command on your path.
+
+=== Subtemplates
+
+----
+skeletal generate --help
+----
+----
+Generates new files in the current project based on a subtemplate.
+
+USAGE: generate <template>
+
+where  template = The name of the subtemplate to use.
+
+Option      Description
+------      -----------
+-P          Add a substitution variable for file filtering.
+-h, --help  Displays usage.
+--spaces    Sets the number of spaces to use for indent in files.
+----
+
+Project templates can incorporate subtemplates.
+Imagine that you have just created a new web application project from a template
+and that template documents that you can create new controllers using a
+subtemplate named `controller`. To use it, just `cd` into the project directory
+and run
+
+----
+skeletal generate controller
+----
+
+This will probably ask you for the name of the controller and its package before
+generating the corresponding controller file in your project. You can reuse the
+command to create as many controllers as you need.
+
+As with the `create` command, you can also pass in parameter values on the command
+line if the subtemplate is parameterized:
+
+.generate with parameters
+----
+skeletal generate controller -Ppackage=org.example.myapp -Pclass=Book
+----
+
+The last option available to you as a user is template qualifiers. These only
+work if the subtemplate supports them, but they allow you to pass additional
+information in a concise way:
+
+.generate with qualifiers
+----
+skeletal generate artifact::controller
+----
+
+In this case, the template name is `artifact`, but we have qualified it with
+an extra `controller`. You can pass in as many qualifiers as you want, you just
+separate them with `::`. Qualifiers are covered in the Template Developers Guide https://cbmarcum.github.io/skeletal/template-developers-guide.html#_subtemplates[Subtemplates section].
+
+Note that you do not specify a version with the `generate` command. This is
+because the subtemplates are embedded directly in the project template, and
+so there can only be one version available to you.
+
+== Configuration
+
+Skeletal will run out of the box without any extra configuration, but the tool
+does allow you to override the default behaviour via a fixed set of configuration
+options. These options can be provided in a number of ways following a set order
+of precedence:
+
+1.   System properties of the form `lazybones.*`, which can be passed into the app
+via either `JAVA_OPTS` or `LAZYBONES_OPTS` environment variables. For example:
+
+----
+env JAVA_OPTS="-Dlazybones.config.file=/path/to/my-custom-default-config.groovy" lazybones ...
+----
+Highest precedence, i.e. it overrides all other sources of setting data.
+
+2.   User configuration file in `$USER_HOME/.skeletal/config.groovy`. This is parsed
+using Groovy's `ConfigSlurper`, so if you're familiar with that syntax you'll be
+right at home. Otherwise, just see the examples below.
+
+3.   A JSON configuration file in `$USER_HOME/.skeletal/managed-config.groovy`
+that is used by the `config` commands. You can edit it this as well.
+
+4.   A Groovy-based default configuration file that is provided by the application
+itself, but you can specify an alternative file via the `lazybones.config.file`
+system property.
+
+Skeletal also provides a convenient mechanism for setting and removing options
+via the command line: the `config` command.
+
+=== Command Line Configuration
+
+The `config` command provides several sub-commands that allow you to interact with
+the persisted Skeletal configuration; specifically, the JSON config file. You run a sub-command via
+
+----
+skeletal config <sub-cmd> <args>
+----
+where `<sub-cmd>` is one of:
+
+-   `set <option> <value> [<value> ...]`
+
+    Allows you to change the value of a configuration setting. Multiple values are
+    treated as a single array/list value. The new value replaces any existing one.
+
+-   `add <option> <value>`
+
+    Appends an extra value to an existing array/list setting. Reports an error if
+    the setting doesn't accept multiple values. If the setting doesn't already have
+    a value, this command will initialise it with an array containing the given
+    value.
+
+-   `clear <option>`
+
+    Removes a setting from the configuration, effectively reverting it to whatever
+    the internal default is.
+
+-   `show [--all] <option>`
+
+    Shows the current value of a setting. You can use the `--all` argument (without
+    a setting name) to display all the current settings and their values.
+
+-   `list`
+
+    Displays all the configuration settings supported by Skeletal.
+
+So what configuration settings are you likely to customise?
+
+=== Custom Repositories
+
+Skeletal will by default download the templates from a specific repository as
+mentioned in the Creating Projects section. If you want to host template packages
+in a different repository you can add it to Skeletal's search path via the `simpleRepositories`
+setting as a comma seperated list in $HOME/.skeletal/config.groovy:
+
+[source,groovy]
+----
+simpleRepositories = [
+    "https://your.domain.tld/repo-dir"
+]
+----
+
+Or in $HOME/.skeletal/managed-config.json:
+[source,json]
+----
+{
+    "simpleRepositories": [
+        "https://your.domain.tld/repo-dir"
+    ]
+}
+----
+
+To add a simple repository listing to the managed configuration file:
+
+----
+skeletal config add simpleRepositories "https://your.domain.tld/repo-dir"
+----
+
+This will also create the file if it doesn't exist yet.
+
+If a template exists in more than one repository, it will be downloaded from the
+first repository in the list that it appears in.
+
+=== Repository Manifest
+
+Where Lazybones used web services to list and create projects from templates stored
+on Bintray, Skeletal uses a simple `skeletal-manifest.txt` file located in the
+repository to provide the necessary information. This file is in the CSV format.
+
+[source,text]
+name,version,owner,description
+   aoo-addin-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Java"
+aoo-addin-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Groovy"
+aoo-addon-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Java"
+aoo-addon-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Groovy"
+aoo-client-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Client Template for Groovy"
+----
+
+Note that the template name has a `-template` suffix. The zip file packages have a similar format of `<name>-template-<version>.zip`
+
+When listing or creating projects from templates the `-template` is omitted. It is
+also removed from the zip file name when it is copied into the local cache directory when first used.
+
+=== Package Aliases
+
+If you regularly use a template at a specific URL rather than from the default
+or configured repository, then you will want to alias that URL to a name.
+That's where template mappings (or aliases) come in. The aliases are defined as
+normal settings of the form
+
+----
+templates.mappings.<alias> = <url>
+----
+
+In a Groovy configuration file, you can define multiple aliases in a block:
+
+[source,groovy]
+----
+templates {
+    mappings {
+        test = "http://dl.dropboxusercontent.com/u/29802534/custom-ratpack.zip"
+        after = "file:///var/tmp/afterburnerfx-2.0.0.zip"
+    }
+}
+----
+
+Alternatively, add them from the command line like this:
+
+----
+skeletal config set templates.mappings.after file:///var/tmp/afterburnerfx-2.0.0.zip
+----
+
+The aliases will always be available to you until you remove them from the persisted
+configuration.
+
+=== Setting a Proxy (and other system properties)
+
+Many people have to work behind a proxy, one way to do it is to add the
+relevant system properties to a `JAVA_OPTS` environment variable. There is
+also another option.
+
+Skeletal has borrowed the idea of having a special form of configuration
+option for system properties from Gradle. So if you define a property with a
+`systemProp.` prefix, it will be added as a system property internally. So to
+configure an HTTP proxy, you only need to add the following to your Skeletal
+configuration:
+
+[source,groovy]
+----
+systemProp {
+    http {
+        proxyHost = "localhost"
+        proxyPort = 8181
+    }
+    https {
+        proxyHost = "localhost"
+        proxyPort = 8181
+    }
+}
+----
+
+To avoid potential configuration issues, use the same proxy settings for HTTP and
+HTTPS if possible.
+
+If your proxy requires authentication, you will need to add a couple of extra
+properties:
+
+[source,groovy]
+----
+systemProp {
+    http {
+        proxyUser = "johndoe"
+        proxyPassword = "mypassword"
+    }
+}
+----
+
+As with the host and port, there are `https` variants of the username and password
+as well.
+
+=== General Options
+
+These are miscellaneous options that can be overridden on the command line:
+
+[source,groovy]
+----
+// <-- This starts a line comment
+// Set logging level - overridden by command line args
+options.logLevel = "SEVERE"
+----
+
+The logging level can either be overridden using the same `logLevel` setting:
+
+----
+skeletal --logLevel SEVERE info aoo-addin
+----
+
+or via `--verbose`, `--quiet`, and `--info` options:
+
+----
+skeletal --verbose info aoo-addin
+----
+
+The logging level can be one of:
+
+- OFF
+- SEVERE
+- WARNING
+- INFO
+- FINE
+- FINEST
+- ALL
