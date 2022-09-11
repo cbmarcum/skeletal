@@ -59,7 +59,7 @@ doesn't exist, or use whatever the latest version is (__not your development ver
 == Running Tests
 The Gradle `check` task is a lifecycle task used to compile and run your unit and integration 
 tests as well as any code style, vulnerability scans and other validation tasks you might have. 
-If you only hava unit tests this is the same as running `gradlew test`
+If you only have unit tests this is the same as running `gradlew test`
 
 Change to application directory and run tests:
 
