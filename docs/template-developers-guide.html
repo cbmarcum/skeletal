@@ -1287,22 +1287,26 @@ the cache and test project.</p>
 <div class="sect2">
 <h3 id="_packaging_installing_and_publishing">Packaging, Installing and Publishing</h3>
 <div class="paragraph">
-<p>There are three steps to publishing a template, each of which can be accomplished
-with a simple task provided by the <a href="https://github.com/cbmarcum/skeletal-gradle-plugin">Skeletal Gradle Plugin</a>:</p>
+<p>There are three options to use publishing a template, each of which can be
+accomplished with a simple task provided by the <a href="https://github.com/cbmarcum/skeletal-gradle-plugin">Skeletal Gradle Plugin</a>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>packaging - zipping up the template directory</p>
+<p>packaging - zipping up the template directory (no manifest created)</p>
 </li>
 <li>
-<p>installing - putting the template package into the local Skeletal template cache</p>
+<p>installing - putting the template package directly into the local Skeletal template cache</p>
 </li>
 <li>
 <p>publishing - making the template package and a manifest file to place in a
 simple URL repository.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Publishing takes care of the packaging and creates a manifest file in one task. The first time a template is used from a repository it is also added the cache
+so the install step isn&#8217;t required unless you don&#8217;t plan on using a remote repository or unless you are doing template development testing.</p>
 </div>
 <div class="paragraph">
 <p>The relevant Gradle tasks are:</p>
@@ -1388,6 +1392,9 @@ is a simple CSV formatted text file with an entry for each template published.</
 <pre>name,version,owner,description
 simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://github.com/cbmarcum/skeletal-gradle-plugin">Skeletal Gradle Plugin</a> for instructions on applying the plugin to your Gradle build, task usage, and advanced configuration.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1815,7 +1822,7 @@ to any variables in the property map passed to <code>processTemplates()</code>.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-11 21:59:04 -0400
+Last updated 2022-09-12 18:31:17 -0400
 </div>
 </div>
 </body>

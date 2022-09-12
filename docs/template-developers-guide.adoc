@@ -564,13 +564,16 @@ Once the template is ready, it's time to publish it.
 
 === Packaging, Installing and Publishing
 
-There are three steps to publishing a template, each of which can be accomplished
-with a simple task provided by the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin]:
+There are three options to use publishing a template, each of which can be
+accomplished with a simple task provided by the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin]:
 
-- packaging - zipping up the template directory
-- installing - putting the template package into the local Skeletal template cache
+- packaging - zipping up the template directory (no manifest created)
+- installing - putting the template package directly into the local Skeletal template cache
 - publishing - making the template package and a manifest file to place in a
 simple URL repository.
+
+Publishing takes care of the packaging and creates a manifest file in one task. The first time a template is used from a repository it is also added the cache
+so the install step isn't required unless you don't plan on using a remote repository or unless you are doing template development testing.
 
 The relevant Gradle tasks are:
 
@@ -626,6 +629,8 @@ is a simple CSV formatted text file with an entry for each template published.
 name,version,owner,description
 simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template
 ----
+
+See the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin] for instructions on applying the plugin to your Gradle build, task usage, and advanced configuration.
 
 === Fine-tuning the Packaging
 

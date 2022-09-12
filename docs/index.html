@@ -496,6 +496,21 @@ creating manually or copying from another project. Skeletal allows you to easily
 start with one of these framework skeletons and add more of your common code and
 create a more useful project template that can also contain subtemplates as well.</p>
 </div>
+<div class="paragraph">
+<p>The project templates are simply directory structures with whatever files in
+them that you want. Ultimately, the template project directories will be zipped
+up and placed in a repository which is a directory at a URL (<code>file</code> or <code>http(s)</code>)
+that contains a <code>skeletal-manifest.txt</code> with entries for each template version
+available. From there, Skeletal downloads the zips on demand and caches them in
+a local user directory (currently <code>$HOME/.skeletal/templates</code>).</p>
+</div>
+<div class="paragraph">
+<p>Publishing templates previously included uploading the templates to your
+Bintray account. Since Bintray is no longer available, Skeletal has replaced
+this with creating a manifest file that contains the template metadata needed
+by the command line application for listing template information. This manifest
+file along with the template packages form a Simple URL based repository.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -525,7 +540,7 @@ create a more useful project template that can also contain subtemplates as well
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-10 17:42:45 -0400
+Last updated 2022-09-12 18:41:44 -0400
 </div>
 </div>
 </body>

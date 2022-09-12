@@ -25,6 +25,19 @@ creating manually or copying from another project. Skeletal allows you to easily
 start with one of these framework skeletons and add more of your common code and 
 create a more useful project template that can also contain subtemplates as well.
 
+The project templates are simply directory structures with whatever files in
+them that you want. Ultimately, the template project directories will be zipped
+up and placed in a repository which is a directory at a URL (`file` or `http(s)`)
+that contains a `skeletal-manifest.txt` with entries for each template version
+available. From there, Skeletal downloads the zips on demand and caches them in
+a local user directory (currently `$HOME/.skeletal/templates`).
+
+Publishing templates previously included uploading the templates to your
+Bintray account. Since Bintray is no longer available, Skeletal has replaced
+this with creating a manifest file that contains the template metadata needed
+by the command line application for listing template information. This manifest
+file along with the template packages form a Simple URL based repository.
+
 == Credits
 Much of these guides were copied from the original https://github.com/pledbrook/lazybones[Lazybones] project README's and guides by Peter Ledbrook and updated for this https://github.com/cbmarcum/skeletal[Skeletal] fork of that project.
 

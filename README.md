@@ -70,7 +70,7 @@ Information on building the application can be found below.
 This project is split into three parts:
 
 1. The [Skeletal command line tool](https://github.com/cbmarcum/skeletal/tree/master/lazybones-app)
-2. The [Skeletal Gradle plugin](https://github.com/cbmarcum/skeletal/tree/master/lazybones-gradle-plugin) 
+2. The [Skeletal Gradle plugin](https://github.com/cbmarcum/skeletal-gradle-plugin) 
 3. The [project templates](https://github.com/cbmarcum/skeletal/tree/master/lazybones-templates)
 
 ### Command Line Tool
@@ -103,82 +103,19 @@ project.
 
 ### Lazybones Project Templates
 
-The project templates are simply directory structures with whatever files in
-them that you want. Ultimately, the template project directories will be zipped
-up and placed in a repository which is a directory at a URL (`file` or `http(s)`) 
-that contains a `skeletal-manifest.txt` with entries for each template version 
-available. From there, Skeletal downloads the zips on demand and caches them in 
-a local user directory (currently `$HOME/.skeletal/templates`).
-
-If you want empty directories to form part of the project template, then simply
-add an empty `.retain` file to each one. When the template archive is created,
-any `.retain` files are filtered out (but the containing directories are included).
-
-Publishing templates previously included uploading the templates to your 
-Bintray account. Since Bintray is no longer available, Skeletal has replaced 
-this with creating a manifest file that contains the template metadata needed 
-by the command line application for listing template information. This manifest 
-file along with the template packages form a Simple URL based repository.
-
-To publish a template contained in a template project created from the 
-`lazybones-project` template, simply run this from the directory with the 
-`build.gradle` file. Usually right above the `templates` directory that 
-contains the templates which are the sub-directories. 
-
-    ./gradlew publishTemplate<TemplateName>
-
 For core templates in this project, run from the Skeletal project root 
 directory and include the `lazybones-templates` sub-project:
 
     ./gradlew :lazybones-templates:publishTemplate<TemplateName>
 
-The name of the project template comes from the containing directory, which is
-assumed to be lowercase hyphenated. The template name is the equivalent camel
-case form. So the template directory structure in `templates/my-template`
-results in a template called 'MyTemplate', which can be published with:
-
-    ./gradlew publishTemplateMyTemplate
-
-The project template archive will be created in the build directory with the
-name `<template name>-template-<version>.zip`. See the small section below on
-how the template version is derived.
-
 You can also publish all the templates in one fell swoop:
 
     ./gradlew publishAllTemplates
 
-The manifest file `skeletal-manifest.txt` is just a CSV formatted text file 
-with a header and entries for each template version you want to make available 
-for Skeletal like:
-
-    name,version,owner,description
-    aoo-addin-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Java"
-    aoo-addin-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Groovy"
-    aoo-addon-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Java"
-    aoo-addon-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Groovy"
-    aoo-client-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Client Template for Groovy"
-
-The template packages and manifest are output to the `build/packages`. Then you need 
-to place the manifest and template zip files at the URL you use for your repository.
-
-If you only want to create the packages without the manifest file you can use 
-the package tasks
-
-    ./gradlew packageTemplate<TemplateName>
-and:
-
-    ./gradlew packageAllTemplates
-
-If you don't want to publish your template at a URL you can install it locally 
-using the installTemplate rule.
-
-     ./gradlew installTemplate<TemplateName>
-
-This will install the template to `$HOME/.skeletal/templates` so that you can use 
-it without moving it to a URL first. To list them you will need to use the 
-`skeletal list --cached` command since they are not in a repository also.
-
-And that's it for the project templates.
+More complete information about template publishing can be found in the
+[project documention pages](https://cbmarcum.github.io/skeletal/index.html) and 
+the [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
+project.
 
 #### Template Versions
 
