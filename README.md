@@ -35,7 +35,7 @@ extras (controllers, scaffolding etc.) inside a project.
 
 ## Documentation
 
-Skeletal application usage and template development guides are located in our [project documention pages]().
+Skeletal application usage and template development guides are located in our [project documention pages](https://cbmarcum.github.io/skeletal/index.html).
 
 Information on building the application can be found below.
 
