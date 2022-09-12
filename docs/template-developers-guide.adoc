@@ -341,7 +341,7 @@ value to use if the user hits enter without providing a value.  The third is a
 property name in the script binding that if provided on the command line will
 be used instead of prompting the user for one.
 
-To try the template, see https://cbmarcum.github.io/skeletal/template-testing-companion.html#trueinstalling-a-template-in-cache[install the template to cache].
+To try the template, see https://cbmarcum.github.io/skeletal/template-testing-companion.html#_installing_a_template_in_cache[installing the template to cache].
 
 Passing parameters to the script binding looks like `-P<param>=<value>`
 
@@ -367,7 +367,7 @@ version = "1.0-SNAPSHOT"
 ...
 ----
 
-Before continuing https://cbmarcum.github.io/skeletal/template-testing-companion.html#truecleaning-up[cleanup the cache and test project].
+Before continuing https://cbmarcum.github.io/skeletal/template-testing-companion.html#_cleaning_up[cleanup the cache and test project].
 
 Another useful method available to post-install scripts is `transformText()`.
 It's common for scripts to convert strings between camel case (for class names
@@ -554,10 +554,10 @@ This pattern continues until we have all the information we need.
 
 === Install into Cache and Test
 This is now covered in the https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion] document.
-To test, https://cbmarcum.github.io/skeletal/template-testing-companion.html#trueinstalling-a-template-in-cache[install the template]
-again, https://cbmarcum.github.io/skeletal/template-testing-companion.html#truecreating-a-test-project[create the test project]
-per the instructions, https://cbmarcum.github.io/skeletal/template-testing-companion.html#truebuilding-and-running-the-distribution[build and run the distribution]
-and then https://cbmarcum.github.io/skeletal/template-testing-companion.html#truecleaning-up[cleanup]
+To test, https://cbmarcum.github.io/skeletal/template-testing-companion.html#_installing_a_template_in_cache[install the template]
+again, https://cbmarcum.github.io/skeletal/template-testing-companion.html#_creating_a_test_project[create the test project]
+per the instructions, https://cbmarcum.github.io/skeletal/template-testing-companion.html#_building_and_running_the_distribution[build and run the distribution]
+and then https://cbmarcum.github.io/skeletal/template-testing-companion.html#_cleaning_up[cleanup]
 the cache and test project.
 
 Once the template is ready, it's time to publish it.
@@ -594,7 +594,7 @@ To use this name in the Gradle tasks, we simply camel-case it:
 `SimpleJavaSpockGradle`. Of course, this means your directories should use
 hyphenated notation rather than camel-case.
 
-See https://cbmarcum.github.io/skeletal/template-testing-companion.html#trueinstalling-a-template-in-cache[installing a template in cache].
+See https://cbmarcum.github.io/skeletal/template-testing-companion.html#_installing_a_template_in_cache[installing a template in cache].
 
 If the rules for converting between camel-case and hyphenated forms don't suit
 your template name, for example if you separate numbers with hyphens ('javaee-7'),
@@ -945,5 +945,4 @@ version = "${project_version}" // <1>
 ----
 <1> The `${}` expressions are executed as Groovy expressions, and they have access
 to any variables in the property map passed to `processTemplates()`.
-
 <2> Scriptlets, i.e. code inside `<% %>` delimiters, allow for more complex logic.
