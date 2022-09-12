@@ -1,5 +1,16 @@
 Skeletal Project Creation Tool
 ===============================
+
+Skeletal is a tool that allows you to create a new project structure for
+any framework or library for which the tool has a template.
+
+The concept of Skeletal is very similar to Maven archetypes, and what [Yeoman](http://yeoman.io/)
+does for web applications. Skeletal also includes a subtemplates feature that
+resembles the behavior of Yeoman's sub-generators, allowing you to generate optional
+extras (controllers, scaffolding etc.) inside a project.
+
+It consists of a command line application, a Gradle plugin for publishing templates, and a Lazybones Project template for template developers and some other core templates for developers.
+
 Skeletal is a fork of the popular [Lazybones](https://github.com/pledbrook/lazybones) 
 project created by Peter Ledbrook. Though unmaintained for some time, Lazybones 
 continued to be used by other projects as a means to generate project layouts 
@@ -24,14 +35,6 @@ Publishing to the simple repository is not yet implemented but only require copy
 published manifest file and the template packages to your URL repository.
 
 Existing Lazybones templates should still work if moved to a URL repository as described below.
-
-The tool is very simple: it allows you to create a new project structure for
-any framework or library for which the tool has a template. 
-
-The concept of Skeletal is very similar to Maven archetypes, and what [Yeoman](http://yeoman.io/)
-does for web applications. Skeletal also includes a subtemplates feature that
-resembles the behavior of Yeoman's sub-generators, allowing you to generate optional
-extras (controllers, scaffolding etc.) inside a project.
 
 ## Documentation
 
