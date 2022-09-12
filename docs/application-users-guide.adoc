@@ -408,6 +408,7 @@ simpleRepositories = [
 ----
 
 Or in $HOME/.skeletal/managed-config.json:
+
 [source,json]
 ----
 {
@@ -435,8 +436,9 @@ on Bintray, Skeletal uses a simple `skeletal-manifest.txt` file located in the
 repository to provide the necessary information. This file is in the CSV format.
 
 [source,text]
+----
 name,version,owner,description
-   aoo-addin-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Java"
+aoo-addin-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Java"
 aoo-addin-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Groovy"
 aoo-addon-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Java"
 aoo-addon-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Groovy"
@@ -461,6 +463,7 @@ templates.mappings.<alias> = <url>
 
 In a Groovy configuration file, you can define multiple aliases in a block:
 
+.multiple aliases
 [source,groovy]
 ----
 templates {
