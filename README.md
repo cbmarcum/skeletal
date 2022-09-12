@@ -110,7 +110,7 @@ directory and include the `lazybones-templates` sub-project:
 
 You can also publish all the templates in one fell swoop:
 
-    ./gradlew publishAllTemplates
+    ./gradlew :lazybones-templates:publishAllTemplates
 
 More complete information about template publishing can be found in the
 [project documention pages](https://cbmarcum.github.io/skeletal/index.html) and 
