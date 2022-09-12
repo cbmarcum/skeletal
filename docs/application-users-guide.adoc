@@ -398,7 +398,7 @@ So what configuration settings are you likely to customise?
 Skeletal will by default download the templates from a specific repository as
 mentioned in the Creating Projects section. If you want to host template packages
 in a different repository you can add it to Skeletal's search path via the `simpleRepositories`
-setting as a comma seperated list in $HOME/.skeletal/config.groovy:
+setting as a comma separated list in $HOME/.skeletal/config.groovy:
 
 [source,groovy]
 ----
