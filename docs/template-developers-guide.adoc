@@ -594,11 +594,10 @@ To use this name in the Gradle tasks, we simply camel-case it:
 `SimpleJavaSpockGradle`. Of course, this means your directories should use
 hyphenated notation rather than camel-case.
 
-See https://cbmarcum.github.io/skeletal/template-testing-companion.html#_installing_a_template_in_cache[installing a template in cache].
-
 If the rules for converting between camel-case and hyphenated forms don't suit
 your template name, for example if you separate numbers with hyphens ('javaee-7'),
 then you can use hyphens in the task name:
+
 ----
 ./gradlew packageTemplate-javaee-7
 ----
