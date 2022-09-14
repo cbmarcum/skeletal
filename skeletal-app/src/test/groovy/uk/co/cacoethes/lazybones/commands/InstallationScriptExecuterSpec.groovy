@@ -1,8 +1,7 @@
 package uk.co.cacoethes.lazybones.commands
 
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
 import uk.co.cacoethes.lazybones.LazybonesMain
 import uk.co.cacoethes.lazybones.LazybonesScript
 
@@ -11,17 +10,17 @@ import uk.co.cacoethes.lazybones.LazybonesScript
  */
 class InstallationScriptExecuterSpec extends Specification {
 
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    @TempDir
+    File testFolder
 
     void "lazybones gets deleted after running"() {
         given: "a create command instance"
         def cmd = new InstallationScriptExecuter()
 
         when: "I run lazybones.groovy"
-        File file = testFolder.newFile("lazybones.groovy")
+        File file = new File(testFolder, "lazybones.groovy")
         file.write("System.setProperty('ran','true')")
-        cmd.runPostInstallScript([], testFolder.root, testFolder.root, [:])
+        cmd.runPostInstallScript([], testFolder, testFolder, [:])
 
         then: "the script is deleted"
         !file.exists()
@@ -36,12 +35,13 @@ class InstallationScriptExecuterSpec extends Specification {
         InstallationScriptExecuter cmd = new InstallationScriptExecuter()
 
         when: "when I run lazybones.groovy"
-        File file = testFolder.newFile("lazybones.groovy")
+        File file = new File(testFolder, "lazybones.groovy")
         file.write("//do nothing")
-        def script = cmd.initializeScript([:], [], file, testFolder.root, testFolder.root)
+        LazybonesScript script = cmd.initializeScript([:], [], file, testFolder, testFolder)
 
         then: "the targetDir is set"
-        script.getProjectDir() == testFolder.root
+        // script.getProjectDir() == testFolder.root
+        script.getProjectDir() == testFolder
     }
 
     void "if lazybones does not exist, nothing happens"() {
@@ -53,6 +53,6 @@ class InstallationScriptExecuterSpec extends Specification {
 
         then: "nothing happens"
         !file.exists()
-        null == cmd.runPostInstallScript([], testFolder.root, testFolder.root, [:])
+        null == cmd.runPostInstallScript([], testFolder, testFolder, [:])
     }
 }

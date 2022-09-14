@@ -1,7 +1,7 @@
 package uk.co.cacoethes.lazybones.commands
 
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
 import uk.co.cacoethes.lazybones.config.Configuration
 
 /**
@@ -9,11 +9,21 @@ import uk.co.cacoethes.lazybones.config.Configuration
  */
 class CreateCommandSpec extends Specification {
 
+    @TempDir
+    File testFolder
+
+    File testCacheDir
+
+    void setup() {
+        testCacheDir = new File(testFolder, "templates")
+    }
+
     void "package name is replaced with url"() {
         given:
         def config = initConfig(
                 templates: [mappings: [foo: "http://bar.com"]],
-                cache: [dir: new TemporaryFolder().newFolder().absolutePath])
+                // cache: [dir: new TemporaryFolder().newFolder().absolutePath])
+                cache: [dir: testCacheDir.absolutePath])
 
         when:
         def createInfo = new CreateCommand(config).getCreateInfoFromArgs(["foo", "bar"])
