@@ -1,6 +1,7 @@
 package uk.co.cacoethes.lazybones.packagesources
 
 import groovy.util.logging.Log
+import sun.net.www.protocol.https.HttpsURLConnectionImpl
 import uk.co.cacoethes.lazybones.NoVersionsFoundException
 import uk.co.cacoethes.lazybones.PackageInfo
 import uk.co.cacoethes.lazybones.SimplePackageBean
@@ -102,7 +103,10 @@ class SimplePackageSource implements PackageSource {
         // uncomment this if you want to write output to this url
         //connection.setDoOutput(true)
 
-        connection.setFollowRedirects(true) // our new artifactory repo may have redirects
+        // only http(s) connections can redirect
+        if (connection instanceof HttpURLConnection) {
+            connection.setFollowRedirects(true) // our new artifactory repo may have redirects
+        }
 
         // give it 15 seconds to respond
         connection.setReadTimeout(15 * 1000)
