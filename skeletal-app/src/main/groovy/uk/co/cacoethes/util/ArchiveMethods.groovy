@@ -43,7 +43,7 @@ class ArchiveMethods {
     }
 
     protected static Collection<File> unpackZipEntries(ZipFile zipFile, File destination, Closure<Boolean> filter) {
-        def unzippedFiles = []
+        List<File> unzippedFiles = []
 
         // The type coercion here is down to http://jira.codehaus.org/browse/GROOVY-6123
         for (ZipArchiveEntry entry in (zipFile.entries as List<ZipArchiveEntry>)) {

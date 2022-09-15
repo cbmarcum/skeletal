@@ -7,7 +7,7 @@ import spock.lang.Unroll
 
 class OfflineFunctionalSpec extends AbstractFunctionalSpec {
 
-    void setup() {
+    def setup() {
         // Create dummy proxy to ensure the app can't access the internet.
         initProxy(new InetSocketAddress("localhost", 61431))
     }
@@ -30,7 +30,7 @@ class OfflineFunctionalSpec extends AbstractFunctionalSpec {
         output =~ /(?m)^Available mappings\s+/ +
                 /\s+customRatpack   -> http:\/\/dl.dropboxusercontent.com\/u\/29802534\/custom-ratpack.zip\s+/ +
                 /\s+doesNotExist    -> file:\/\/\/does\/not\/exist\s+/ +
-                /\s+customAooAddin  -> https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/skeletal-templates\/aoo-addin-template-0.3.0.zip\s+/
+                /\s+customAooAddin  -> https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/openoffice-templates\/aoo-addin-template-0.3.0.zip\s+/
 
         output =~ /(?m)^Cached templates\s+/ +
                 /Oops-stuff                    1.0.4\s+/ +

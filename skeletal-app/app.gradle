@@ -25,7 +25,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 ext {
-    groovyVersion = "2.4.15"
+    groovyVersion = "3.0.12" // was 2.4.15
     cachePath = new File(System.getProperty("user.home"), ".skeletal/templates").absolutePath
     isCiBuild = System.getProperty("drone.io") as boolean
     testWorkDir = file("$buildDir/testWork").path
@@ -69,16 +69,15 @@ dependencies {
 
     runtimeOnly "org.apache.ivy:ivy:2.3.0"
 
-    testImplementation("org.spockframework:spock-core:0.7-groovy-2.0") {
-        exclude module: "groovy-all"
-    }
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation 'junit:junit:4.13.2'
 
     integTestImplementation "org.codehaus.groovy:groovy-all:${groovyVersion}",
                      "commons-io:commons-io:2.7",
                      "co.freeside:betamax:1.1.2",
                      "org.littleshoot:littleproxy:1.1.0-beta1"
 
-    integTestImplementation "org.spockframework:spock-core:1.0-groovy-2.4"
+    integTestImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
 }
 
 jar {
@@ -122,6 +121,11 @@ task configureCachePath {
     project.extensions.lazybones.installDir = new File(project.cachePath)
 }
 
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
 // for a single test, you can run:
 // ./gradlew integTest --tests=uk.co.cacoethes.lazybones.ConfigFunctionalSpec
 task integTest(type: Test) {
@@ -158,6 +162,8 @@ task integTest(type: Test) {
 
     include "**/*Spec*"
     exclude "**/Abstract*Spec*"
+
+    useJUnitPlatform()
 }
 
 task packageReports(type: Zip) {

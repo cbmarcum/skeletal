@@ -3,9 +3,8 @@ package uk.co.cacoethes.lazybones
 import groovy.text.SimpleTemplateEngine
 import groovy.text.TemplateEngine
 import org.codehaus.groovy.control.CompilerConfiguration
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
 
 import static uk.co.cacoethes.lazybones.LazybonesScript.DEFAULT_ENCODING
 
@@ -15,21 +14,21 @@ import static uk.co.cacoethes.lazybones.LazybonesScript.DEFAULT_ENCODING
 class LazybonesScriptSpec extends Specification {
     static final String NEW_LINE = System.getProperty("line.separator")
 
-    def script = new LazybonesScript()
+    LazybonesScript script = new LazybonesScript()
     File fileToFilter
     File lazybonesScript
 
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    @TempDir
+    File testFolder
 
     void setup() {
-        lazybonesScript = testFolder.newFile("lazybones.groovy")
+        lazybonesScript = new File(testFolder, "lazybones.groovy")
         lazybonesScript.write("""
             def foo = ask("give me foo")
             def bar = ask("give me bar")
             processTemplates('foo', [foo:foo, bar:bar])
         """)
-        fileToFilter = testFolder.newFile("foo")
+        fileToFilter = new File(testFolder, "foo")
         fileToFilter.write("hello \${foo} and \${bar}")
     }
 
@@ -113,8 +112,8 @@ class LazybonesScriptSpec extends Specification {
     void "do full script inheritance with file filtering"() {
         given:
         LazybonesScript script = createScript(lazybonesScript.text)
-        script.setProjectDir(testFolder.root)
-        script.setTemplateDir(testFolder.root)
+        script.setProjectDir(testFolder)
+        script.setTemplateDir(testFolder)
         script.setReader(createReader("foobar${NEW_LINE}foofam"))
 
         when:
