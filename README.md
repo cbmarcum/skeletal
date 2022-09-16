@@ -1,8 +1,8 @@
 Skeletal Project Creation Tool
 ===============================
 ## Quick Links
-* [Application Installation](https://cbmarcum.github.io/skeletal/application-users-guide.html#_installation)
-* [Applying Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
+* [CLI Application Installation](https://cbmarcum.github.io/skeletal/application-users-guide.html#_installation)
+* [Applying the Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
 * [User Guides](https://cbmarcum.github.io/skeletal/index.html)
 
 ## Introduction
