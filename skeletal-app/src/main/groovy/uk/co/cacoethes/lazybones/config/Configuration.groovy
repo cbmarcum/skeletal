@@ -8,8 +8,8 @@ import java.net.Authenticator.RequestorType
 import java.util.logging.Level
 
 /**
- * <p>Central configuration for Lazybones, although only the static data and methods
- * are Lazybones specific. The instance-level API works on the basis of settings
+ * <p>Central configuration for Skeletal, although only the static data and methods
+ * are Skeletal specific. The instance-level API works on the basis of settings
  * whose names are dot-separated and supplied from various sources: a base
  * configuration (typically hard-coded in the app), an app-managed JSON file that
  * can be updated at runtime, and a user-defined configuration.</p>
@@ -85,10 +85,19 @@ class Configuration {
 
         this.settings = baseSettings
         addConfigEntries managedSettings, this.settings
-        addConfigEntries overrideSettings, this.settings
 
+        // get settings before overrides are added
+        ConfigObject settingsWithoutOverrides = this.settings.clone()
+        // now add the overrides
+        addConfigEntries overrideSettings, this.settings
         this.managedSettings = new ConfigObject()
-        addConfigEntries managedSettings, this.managedSettings
+
+        // this caused default repository to be forgotten when adding a new repo
+        // addConfigEntries managedSettings, this.managedSettings
+
+        // now managed settings include the base settings (defaults) but not overrides
+        // and defaults + managed will be written to json file
+        addConfigEntries settingsWithoutOverrides, this.managedSettings
 
         processSystemProperties(this.settings)
 
