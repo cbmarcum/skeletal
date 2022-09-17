@@ -512,7 +512,7 @@ in Simple URL repositories. The application allows listing available templates, 
 <h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Grab the latest distribution <a href="https://codebuilders.jfrog.io/artifactory/generic/skeletal-app">from our JFrog repo</a> or use <code>curl</code>:</p>
+<p>Grab the latest distribution from our JFrog repo using <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
 </div>
 <div class="listingblock">
 <div class="title">downloading with curl</div>
@@ -712,6 +712,7 @@ Option      Description
 <p>To create a new project, run</p>
 </div>
 <div class="listingblock">
+<div class="title">create syntax</div>
 <div class="content">
 <pre>skeletal create &lt;template name&gt; &lt;template version&gt; &lt;target directory&gt;</pre>
 </div>
@@ -741,6 +742,7 @@ section under Configuration later in this document.</p>
 <p>You&#8217;re not limited to only the default repository as you can install templates directly from a URL also:</p>
 </div>
 <div class="listingblock">
+<div class="title">create using URL example</div>
 <div class="content">
 <pre>skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app</pre>
 </div>
@@ -766,6 +768,7 @@ install the template by name:</p>
 <p>In other words, you could now run</p>
 </div>
 <div class="listingblock">
+<div class="title">create using a URL mapping</div>
 <div class="content">
 <pre>skeletal create myTmpl my-aoo-client-app</pre>
 </div>
@@ -1231,7 +1234,7 @@ options.logLevel = <span style="background-color:hsla(0,100%,50%,0.05)"><span st
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-16 21:55:24 -0400
+Last updated 2022-09-17 11:30:09 -0400
 </div>
 </div>
 </body>
