@@ -21,12 +21,12 @@ in Simple URL repositories. The application allows listing available templates, 
 
 == Installation
 
-Grab the latest distribution from our JFrog repo using https://curl.se/download.html[curl]. Most OS's come with this installed.
+Grab the latest *v{app-version}* distribution from our https://github.com/cbmarcum/skeletal/releases[GitHub releases] page or use https://curl.se/download.html[curl]. Most OS's come with this installed.
 
 .downloading with curl
 [subs="verbatim,attributes"]
 ----
-curl -o skeletal-{app-version}.zip -L https://codebuilders.jfrog.io/artifactory/generic/skeletal-app/{app-version}/skeletal-{app-version}.zip
+curl -o skeletal-{app-version}.zip -L https://github.com/cbmarcum/skeletal/releases/download/v{app-version}/skeletal-{app-version}.zip
 ----
 
 Unpack it to a local directory, and then add its 'bin' directory to your `PATH`
