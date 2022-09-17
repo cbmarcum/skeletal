@@ -1,22 +1,30 @@
-= Skeletal Project Documentation
+= {app-name} Project Creation Tool
 :author: Carl Marcum
 :email: carl.marcum@codebuilders.net
 :toc: left
+:imagesdir: images
+:app-name: Skeletal
+:app-version: 0.13.1
+
+image::skeletal-logo-300x350.png[width=300,alt="skeletal logo"]
 
 == Quick Links
 
-- https://github.com/cbmarcum/skeletal[Skeletal Project]
+- https://github.com/cbmarcum/skeletal[{app-name} Project]
 - https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide]
 - https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide]
 - https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion]
 
 == Introduction
 
-https://github.com/cbmarcum/skeletal[Skeletal] alone is just a tool that doesn't 
-do much. It needs a solid selection of template packages to make it a compelling 
-solution for developers' day-to-day needs. That's why we try to make it as easy 
-as possible to develop and publish templates. This guide explains how to go 
-about both steps.
+https://github.com/cbmarcum/skeletal[{app-name}] is a command line application that allows you to create a new project structure from a template.
+Typically, templates are software project skeletons ready to add logic and compile, and can be of any software language or framework where a template is available.
+
+{app-name} alone is just a tool that doesn't do much.
+It needs a solid selection of template packages to make it a compelling
+solution for developers' day-to-day needs.
+That's why we try to make it as easy as possible to develop and publish templates.
+This guide explains how to go about both steps.
 
 Many software frameworks today have online configurators or command line applications 
 to create skeleton projects. What many do not have is a subtemplate feature for 
