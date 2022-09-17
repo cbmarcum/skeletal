@@ -2,6 +2,9 @@
 :author: Carl Marcum
 :email: carl.marcum@codebuilders.net
 :toc: left
+:icons: font
+:app-name: Skeletal
+:app-version: 0.13.2
 
 == Quick Links
 
