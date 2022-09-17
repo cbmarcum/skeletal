@@ -21,7 +21,7 @@ in Simple URL repositories. The application allows listing available templates, 
 
 == Installation
 
-Grab the latest distribution https://codebuilders.jfrog.io/artifactory/generic/skeletal-app[from our JFrog repo] or use `curl`:
+Grab the latest distribution from our JFrog repo using https://curl.se/download.html[curl]. Most OS's come with this installed.
 
 .downloading with curl
 [subs="verbatim,attributes"]
@@ -180,6 +180,7 @@ Option      Description
 
 To create a new project, run
 
+.create syntax
 ----
 skeletal create <template name> <template version> <target directory>
 ----
@@ -203,6 +204,7 @@ section under Configuration later in this document.
 
 You're not limited to only the default repository as you can install templates directly from a URL also:
 
+.create using URL example
 ----
 skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app
 ----
@@ -225,6 +227,7 @@ templates {
 
 In other words, you could now run
 
+.create using a URL mapping
 ----
 skeletal create myTmpl my-aoo-client-app
 ----

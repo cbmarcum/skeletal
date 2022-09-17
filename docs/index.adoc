@@ -6,7 +6,7 @@
 :app-name: Skeletal
 :app-version: 0.13.1
 
-image::skeletal-logo-300x350.png[width=300,alt="skeletal logo"]
+image::skeletal-logo-300x350.png[width=200,alt="skeletal logo"]
 
 == Quick Links
 
