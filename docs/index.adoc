@@ -46,9 +46,6 @@ this with creating a manifest file that contains the template metadata needed
 by the command line application for listing template information. This manifest
 file along with the template packages form a Simple URL based repository.
 
-== Credits
-Much of these guides were copied from the original https://github.com/pledbrook/lazybones[Lazybones] project README's and guides by Peter Ledbrook and updated for this https://github.com/cbmarcum/skeletal[Skeletal] fork of that project.
-
 == Application Users Guide
 
 Command line application users should refer to the https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide].
@@ -56,3 +53,6 @@ Command line application users should refer to the https://cbmarcum.github.io/sk
 == Template Developers Guide
 
 Template developers should refer to the https://cbmarcum.github.io/skeletal/template-developers-guide.html[Template Developers Guide] and the https://cbmarcum.github.io/skeletal/template-testing-companion.html[Template Testing Companion].
+
+== Credits
+Much of these guides were copied from the original https://github.com/pledbrook/lazybones[Lazybones] project README's and guides by Peter Ledbrook and updated for this https://github.com/cbmarcum/skeletal[Skeletal] fork of that project.
