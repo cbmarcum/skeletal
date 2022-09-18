@@ -407,6 +407,7 @@ mentioned in the Creating Projects section. If you want to host template package
 in a different repository you can add it to Skeletal's search path via the `simpleRepositories`
 setting as a comma separated list in $HOME/.skeletal/config.groovy:
 
+.config.groovy
 [source,groovy]
 ----
 simpleRepositories = [
@@ -416,6 +417,7 @@ simpleRepositories = [
 
 Or in $HOME/.skeletal/managed-config.json:
 
+.managed-config.json
 [source,json]
 ----
 {
@@ -429,6 +431,17 @@ To add a simple repository listing to the managed configuration file:
 
 ----
 skeletal config add simpleRepositories "https://your.domain.tld/repo-dir"
+----
+
+Repositories can also be `file:`
+
+----
+skeletal config add simpleRepositories "file:////path/to/repo-dir"
+----
+
+or Windows
+----
+skeletal config add simpleRepositories "file:///C:/path/to/repo-dir"
 ----
 
 This will also create the file if it doesn't exist yet.
