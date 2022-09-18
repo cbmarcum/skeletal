@@ -48,30 +48,6 @@ Skeletal application usage and template development guides are located in our [p
 
 Information on building the application can be found below.
 
-## Credits
-
-### Skeletal Developer
-
-* [Carl Marcum](https://github.com/cbmarcum)
-
-### Skeletal Contributors
-
-* [Osian Hughes](https://github.com/osh-onstructive)
-* [Dónal Murtagh](https://github.com/donalmurtagh)
-
-### Lazybones Developers
-
-* [Peter Ledbrook](https://github.com/pledbrook)
-* [Kyle Boon](https://github.com/kyleboon)
-* [Tommy Barker](https://github.com/tbarker9)
-
-### Lazybones Contributors
-
-* [Luke Daley](https://github.com/alkemist)
-* [Tomas Lin](https://github.com/tomaslin)
-* [Russell Hart](https://github.com/rhart)
-* [Dave Syer](https://github.com/dsyer)
-* [Andy Duncan](https://github.com/andyjduncan)
 
 
 ## Building
@@ -154,3 +130,28 @@ for testing.
 Contributors are welcome and contributions are appreciated. If you have questions 
 about contributing you can drop a question in the [issues](https://github.com/cbmarcum/skeletal/issues) 
 or email carl dot marcum at codebuilders dot net.
+
+## Credits
+
+### Skeletal Developer
+
+* [Carl Marcum](https://github.com/cbmarcum)
+
+### Skeletal Contributors
+
+* [Osian Hughes](https://github.com/osh-onstructive)
+* [Dónal Murtagh](https://github.com/donalmurtagh)
+
+### Lazybones Developers
+
+* [Peter Ledbrook](https://github.com/pledbrook)
+* [Kyle Boon](https://github.com/kyleboon)
+* [Tommy Barker](https://github.com/tbarker9)
+
+### Lazybones Contributors
+
+* [Luke Daley](https://github.com/alkemist)
+* [Tomas Lin](https://github.com/tomaslin)
+* [Russell Hart](https://github.com/rhart)
+* [Dave Syer](https://github.com/dsyer)
+* [Andy Duncan](https://github.com/andyjduncan)
