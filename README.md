@@ -81,26 +81,30 @@ Unpack the zip file contents to anywhere you keep such applications and add the
 The `$HOME/.skeletal` profile directory will be created after the first `create` 
 or `config` command is ran.
 
+You can build an "installed" build for manual testing locally before production.
+
+    ./gradlew installDist
+
+You can run it using the path to the application script
+
+    skeletal-app/build/install/skeletal/bin/skeletal <command>
+
+#### Automated Tests
+We use [Spock](https://spockframework.org/) for tests (specifications). 
+There are approximatly 300 unit or integration tests currently ran during a build of the distribution.
+
+To run the tests alone 
+
+    ./gradlew check
+
+Gradle reports are found in `build/reports/tests`. We have recently added [Athaydes Spock Reports](https://github.com/renatoathaydes/spock-reports) but we haven't done much with the configuration of those yet.  Those reports are found in `build/spock-reports`
+
 ### Skeletal Gradle Plugin
 The Gradle plugin that was a subproject in Lazybones has been moved into
 its own [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
 project.
 
 ### Lazybones Project Templates
-
-For core templates in this project, run from the Skeletal project root 
-directory and include the `lazybones-templates` sub-project:
-
-    ./gradlew :lazybones-templates:publishTemplate<TemplateName>
-
-You can also publish all the templates in one fell swoop:
-
-    ./gradlew :lazybones-templates:publishAllTemplates
-
-More complete information about template publishing can be found in the
-[project documention pages](https://cbmarcum.github.io/skeletal/index.html) and 
-the [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
-project.
 
 #### Template Versions
 
@@ -113,13 +117,27 @@ you specify a version of 1.2.8 for the my-template template by adding the file
 
 #### Template Description
 
-Skeletal requires a `DESCRIPTION` file that contains a description for the 
+Skeletal requires a `DESCRIPTION` file that contains a description for the
 template.
 
     A project for managing Lazybones project templates.
 
+For core templates in this project, run from the Skeletal project root 
+directory and include the `lazybones-templates` sub-project:
+
+    ./gradlew :lazybones-templates:publishTemplate<TemplateName>
+
+You can also publish all the templates in one fell swoop:
+
+    ./gradlew :lazybones-templates:publishAllTemplates
+
 That's it! The `VERSION` and `DESCRIPTION` files will automatically be excluded from the project
 template archive.
+
+More complete information about template publishing can be found in the
+[project documention pages](https://cbmarcum.github.io/skeletal/index.html) and 
+the [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
+project.
 
 ## Contributing
 
