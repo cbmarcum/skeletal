@@ -4,17 +4,19 @@
  */
 
 plugins {
-    // Apply the groovy plugin to also add support for Groovy (needed for Spock)
+    // Apply the groovy Plugin to add support for Groovy.
     id 'groovy'
 
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }
 
-// group and version used for application 
+// group and version used for application
 group = "${project_group}"
 version = "${project_version}"
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -22,15 +24,25 @@ repositories {
 }
 
 dependencies {
-    // Use the latest Groovy version for Spock testing
-    testImplementation 'org.codehaus.groovy:groovy:3.0.10'
+    // Use the latest Groovy version for building this library
+    implementation 'org.codehaus.groovy:groovy-all:3.0.10'
+
+    // These dependency is used by the application.
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'info.picocli:picocli:4.6.3'
+
+    // provides slf4j-api-2.x
+    implementation 'ch.qos.logback:logback-classic:1.4.1'
 
     // Use the awesome Spock testing and specification framework even with Java
     testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation 'junit:junit:4.13.2'
 
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.0.1-jre'
+    // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
+    testImplementation( "com.athaydes:spock-reports:2.1.1-groovy-3.0" ) {
+        transitive = false // this avoids affecting your version of Groovy/Spock
+    }
+
 }
 
 jar {
@@ -48,4 +60,7 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+
+    // spock reports
+    systemProperty 'com.athaydes.spockframework.report.showCodeBlocks', true
 }

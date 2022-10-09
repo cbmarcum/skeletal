@@ -1,0 +1,36 @@
+<configuration debug="false">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <withJansi>true</withJansi> --> <!-- causes debug output to STDOUT -->
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property name="LOG_FILE" value="${project_name}" />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/${dollar}{LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${dollar}{LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+
+            <!-- keep 10 days' worth of history capped at 2GB total size -->
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %-5level [%thread] %logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- additivity="false" stops also logging to root appender -->
+    <logger name="${project_package}" level="INFO" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
