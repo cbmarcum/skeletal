@@ -15,7 +15,7 @@ props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "ve
 props.project_package = ask("Define value for 'package' [" + props.project_group + "]: ", props.project_group, "package")
 props.project_class_name = ask("Define value for 'className' [" + props.project_class_name + "]: ", props.project_class_name, "className").capitalize()
 props.project_property_name = transformText(props.project_class_name, from: NameType.CAMEL_CASE, to: NameType.PROPERTY)
-props.project_capitalized_name = props.project_property_name.capitalize()
+props.project_capitalized_name = props.project_name.capitalize()
 String packagePath = props.project_package.replace('.' as char, '/' as char)
 props.package_path = packagePath
 
@@ -46,8 +46,8 @@ mainSources.eachFile { File file ->
     renameFile(file, mainSourcesPath.absolutePath + '/' + file.name)
 }
 testSources.eachFile { File file ->
-    renameFile(file, testSourcesPath.absolutePath + '/' + props.project_capitalized_name + file.name)
+    renameFile(file, testSourcesPath.absolutePath + '/' + file.name)
 }
 
 renameFile(new File(mainSourcesPath, 'App.java'), mainSourcesPath.absolutePath + '/' + props.project_class_name + ".java")
-renameFile(new File(testSourcesPath, 'AppSpec.java'), testSourcesPath.absolutePath + '/' + props.project_class_name + "Spec" + ".groovy")
+renameFile(new File(testSourcesPath, 'AppSpec.groovy'), testSourcesPath.absolutePath + '/' + props.project_class_name + "Spec" + ".groovy")
