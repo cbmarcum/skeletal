@@ -1,58 +1,72 @@
-Simple Java Spock Gradle Application Project
---------------------------------------------
+# Simple Java Spock Gradle Application Project
 
-You have just created a simple Java application. 
-There is a standard project structure for source code and tests.
-Simply add your source files to `app/src/main/java`, your test cases 
-to `app/src/test/groovy` and see below for running your application.
+You have just created a simple Java application.
+It provides a standard project structure for source code and tests. It uses Spock for writing test specifications and uses the Gradle build tool.
 
-In this project you get:
+The project starts as simple Hello World application.
 
-* A Gradle build file
-* A standard project structure:
 ```
-   <proj>
-      |
-      |-- app
-      |   |-- src
-      |   |   |-- main
-      |   |   |   |-- java
-      |   |   |   |   `-- ${package_path}
-      |   |   |   |       `-- ${project_class_name}.java
-      |   |   |   |
-      |   |   |   `-- resources
-      |   |   |
-      |   |   `-- test
-      |   |       |-- groovy
-      |   |       |   `-- ${package_path}
-      |   |       |       `-- ${project_class_name}Spec.groovy
-      |   |       |
-      |   |       `-- resources
-      |   |
-      |   `-- build.gradle
-      |
-      |-- gradle
-      |   `-- wrapper
-      |       |-- gradle-wrapper.jar
-      |       `-- gradle-wrapper.properties
-      |
-      |-- .gitattributes
-      |-- .gitignore
-      |-- gradlew
-      |-- gradlew.bat
-      `-- settings.gradle
+<proj>
+|
+|-- app
+|   |-- src
+|   |   |-- main
+|   |   |   |-- java
+|   |   |   |   `-- ${package_path}
+|   |   |   |       `-- ${project_class_name}.java
+|   |   |   `-- resources
+|   |   `-- test
+|   |       |-- groovy
+|   |       |   `-- ${package_path}
+|   |       |       `-- ${project_class_name}Spec.groovy
+|   |       `-- resources
+|   `-- build.gradle
+|
+|-- .gitattributes
+|-- .gitignore
+|-- gradlew
+|-- gradlew.bat
+`-- settings.gradle
 ```
 
 ## Using the project: 
 1. Add any dependencies to build.gradle.
-2. Add logic to ${project_class_name}.groovy.
+2. Add logic to ${project_class_name}.java.
 
-## Building the Extension
-- Build archives for distribution:
+## Run Tests
+You can run tests with:
 ```
-./gradlew assemble
+./gradlew check
 ```
-- Build an install directory with a runnable project unpacked:
+Spock Reports are in `app/build/spock-reports`
+
+Run the sample application with Gradle:
+```
+./gradlew :app:run
+```
+
+## Building the Application
+### Packaged Distribution
+To package the application for a distribution to be unpacked later:
+```
+./gradlew assembleDist
+````
+
+The distribution archives are found in `app/build/distributions`
+
+### Unpacked Application
+You can assemble an "installed" unpacked application with:
 ```
 ./gradlew installDist
 ```
+
+The application is found `app/build/install`
+
+## Running the Application
+Run the application commands from the application root directory that contains `bin` and `lib` :
+
+## Additional Information
+
+- [Skeletal Project](https://github.com/cbmarcum/skeletal)
+- [Spock Framework](https://spockframework.org/)
+- [Gradle Build Tool](https://gradle.org/)
