@@ -1,10 +1,10 @@
-# Command Line Groovy Spock Gradle Project Template
+# Command Line Groovy Spock Gradle Application Project
 
 You have just created a skeletal Groovy application. 
 It provides a standard project structure, Picocli for command line argument parsing, and Spock for 
-writing test specifications and uses the Gradle built tool.
+writing test specifications and uses the Gradle build tool.
 
-It already has some example code to demonstrate command line options and tests as well as rolling file logging configured. using Logback. 
+It already has some example code to demonstrate command line options and tests as well as rolling file logging configured using Logback. 
 
 The template provides a sample command line math application that takes three arguments:
 1. --add or --subtract
@@ -38,6 +38,7 @@ The application outputs to `System.out` and a log file `logs/${project_name}.log
 |-- README.md
 `-- settings.gradle
 ```
+
 ## Using the project:
 1. Add any dependencies to `build.gradle`.
 2. Add logic to `${project_class_name}.groovy`.
@@ -61,7 +62,6 @@ Run the sample application with Gradle:
 ## Building the Application
 ### Packaged Distribution
 To package the application for a distribution to be unpacked later:
-
 ```
 ./gradlew assembleDist
 ````
