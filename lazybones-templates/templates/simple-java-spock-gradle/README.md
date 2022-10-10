@@ -38,7 +38,7 @@ You can run tests with:
 ```
 ./gradlew check
 ```
-Spock Reports are in `app/build/spock-reports`
+Gradle HTML report is located in app/build/reports/tests.
 
 Run the sample application with Gradle:
 ```
@@ -64,6 +64,10 @@ The application is found `app/build/install`
 
 ## Running the Application
 Run the application commands from the application root directory that contains `bin` and `lib` :
+
+```
+./bin/${project_name} 
+```
 
 ## Additional Information
 
