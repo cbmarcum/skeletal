@@ -1,4 +1,4 @@
-# Command Line Groovy Spock Gradle Project Template
+# Command Line Groovy Spock Gradle Application Project
 
 You have just created a skeletal Groovy application. 
 It provides a standard project structure, Picocli for command line argument parsing, and Spock for 
