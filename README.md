@@ -54,7 +54,7 @@ Information on building the application can be found below.
 
 This project is split into three parts:
 
-1. The [Skeletal command line tool](https://github.com/cbmarcum/skeletal/tree/master/lazybones-app)
+1. The [Skeletal command line tool](https://github.com/cbmarcum/skeletal/tree/master/skeletal-app)
 2. The [Skeletal Gradle plugin](https://github.com/cbmarcum/skeletal-gradle-plugin) 
 3. The [project templates](https://github.com/cbmarcum/skeletal/tree/master/lazybones-templates)
 
