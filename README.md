@@ -1,5 +1,8 @@
 Skeletal Project Creation Tool
 ===============================
+
+[![Join the chat at https://gitter.im/skeletal-app/community](https://badges.gitter.im/skeletal-app/community.svg)](https://gitter.im/skeletal-app/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Quick Links
 * [CLI Application Installation](https://cbmarcum.github.io/skeletal/application-users-guide.html#_installation)
 * [Applying the Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
