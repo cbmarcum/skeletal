@@ -64,7 +64,7 @@ The project uses the following guidelines:
 
 If in doubt, skim through the existing source code to get a feel for it. Just remember this project was forked and not every file will conform to everything yet.
 
-## Commits and Messages
+## Pull Requests and Commit and Messages
 
 ### Conventional Commits
 
@@ -153,9 +153,14 @@ You will then need to force push (assuming your initial commit(s) were posted to
 ```
 git push origin your-branch --force
 ```
-Alternatively, a core member can squash your commits within GitHub but this creates an additional Merge commit.
 
-A forced push should not be made to the upstream collaborative feature branch! A project maintainer can squash and merge crediting the committers for the work. An additional Merge commit is a small price for a larger collaborative work.
+Merge commits are disabled on the repository but maintainers can squash your commits within GitHub provided they can be fast-forwarded or legitimate multi-commit PR's can be rebased and merged.
+
+A forced push should not be made to the upstream collaborative feature branch! A project maintainer can squash and merge crediting the committers for the work.
+
+### Pull Requests
+
+Pull request titles should follow the same format as the commit message first line and the body of the request should contain the body and footer of the commit message to be used. This is to ensure any commits that need to be squashed by the maintainers are applied properly.
 
 ## Code of Conduct
 
