@@ -1,0 +1,42 @@
+# Generated with JReleaser 1.4.0 at 2023-01-01T11:11:51.477084-05:00
+project:
+  name: skeletal
+  description: A project creation tool
+  longDescription: Skeletal is a tool that allows you to create a new project structure for any framework or library for which the tool has a template.
+  authors:
+    - Carl Marcum
+  license: Apache-2.0
+  links:
+    homepage: https://github.com/cbmarcum/skeletal
+  java:
+    groupId: net.codebuilders
+    version: 8
+  inceptionYear: 2021
+  stereotype: cli
+
+release:
+  github:
+    owner: cbmarcum
+    overwrite: true
+    sign: false
+    # discussionCategoryName: 'Announcements'
+    changelog:
+      formatted: 'ALWAYS'
+      format: '- {{commitShortHash}} {{commitTitle}}'
+      preset: 'conventional-commits'
+      contributors:
+        format: '- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}'
+      # skipMergeCommits: true
+      # using this instead
+      hide:
+        categories:
+          - 'merge'
+
+signing:
+  active: never # always
+  armored: true
+
+distributions:
+  skeletal:
+    artifacts:
+      - path: skeletal-app/build/distributions/{{distributionName}}-{{projectVersion}}.zip
