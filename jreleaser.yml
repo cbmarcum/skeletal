@@ -22,7 +22,6 @@ release:
     # discussionCategoryName: 'Announcements'
     changelog:
       formatted: 'ALWAYS'
-      format: '- {{commitShortHash}} {{commitTitle}}'
       preset: 'conventional-commits'
       contributors:
         format: '- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}'
