@@ -32,9 +32,6 @@ projects have been created from them and that is how they are best known. The
 template structure has not been changed, except to add a description file, so 
 we see no reason to rebrand what the templates are called.
 
-Our goal is to get Skeletal updated and distributed on SDKMAN. As that is not the 
-case yet, We'll document the manual installation process as well.
-
 The big changes from Lazybones are: 
 1. The new project name and the application command are both now 'skeletal'.
 2. The user profile directory for configurations and template cache is now $HOME/.skeletal

@@ -1,8 +1,9 @@
 pluginManagement {
     /* this resolution strategy is a temporary solution to an issue with
-    * gradle looking for a jar at the location of the plugin marker pom
-    * that has the dependency back to the plugin. May not be required once
-    * the plugin is in the gradle plugin portal */
+     * gradle looking for a jar at the location of the plugin marker pom
+     * that has the dependency back to the plugin. Not required once
+     * the plugin is in the gradle plugin portal
+     */
     /*
     resolutionStrategy {
         eachPlugin {

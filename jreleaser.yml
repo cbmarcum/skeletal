@@ -6,13 +6,21 @@ project:
   authors:
     - Carl Marcum
   license: Apache-2.0
+  inceptionYear: 2021
+  stereotype: cli
   links:
     homepage: https://github.com/cbmarcum/skeletal
+    documentation: https://cbmarcum.github.io/skeletal/index.html
+  screenshots:
+    - url: https://github.com/cbmarcum/skeletal/blob/main/images/skeletal-open-graph-logo-1280x640.png
+      caption: Skeletal Project Creation Tool
   java:
     groupId: net.codebuilders
     version: 8
-  inceptionYear: 2021
-  stereotype: cli
+  tags:
+    - 'skeletal'
+    - 'project-template'
+    - 'template-engine'
 
 release:
   github:
@@ -37,5 +45,18 @@ signing:
 
 distributions:
   skeletal:
+    sdkman:
+      active: ALWAYS
     artifacts:
       - path: skeletal-app/build/distributions/{{distributionName}}-{{projectVersion}}.zip
+
+packagers:
+  sdkman:
+    active: always
+
+announce:
+  sdkman:
+    active: always
+  twitter:
+    active: always
+    status: '🚀 {{projectNameCapitalized}} {{projectVersion}} has been released! {{releaseNotesUrl}}'
