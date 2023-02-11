@@ -9,3 +9,4 @@ build/
 out
 /.sdkmanrc
 /trace.log
+.DS_Store
