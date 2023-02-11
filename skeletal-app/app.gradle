@@ -14,7 +14,7 @@ archivesBaseName = 'skeletal-app'
 applicationName = "skeletal"
 mainClassName = "uk.co.cacoethes.lazybones.LazybonesMain"
 // make sure to update the asciidoc guide headers also
-version = "0.13.3"
+version = "0.14.0"
 
 // These settings mimic the old client VM behavior. Should result in faster startup.
 applicationDefaultJvmArgs = ["-XX:+TieredCompilation", "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=3"]
@@ -66,7 +66,7 @@ dependencies {
 
     runtimeOnly "org.apache.ivy:ivy:2.3.0"
 
-    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
     testImplementation 'junit:junit:4.13.2'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
@@ -83,7 +83,7 @@ dependencies {
                      "co.freeside:betamax:1.1.2",
                      "org.littleshoot:littleproxy:1.1.0-beta1"
 
-    integTestImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    integTestImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
     integTestImplementation( "com.athaydes:spock-reports:2.3.1-groovy-3.0" ) {
@@ -103,17 +103,7 @@ jar {
 }
 
 lazybones {
-    // templateDirs = files(file("${projectDir}/src/integTest/templates").listFiles())
-    FileCollection templateDirs = files("${projectDir}/src/integTest/templates/subtmpl-bad",
-            "${projectDir}/src/integTest/templates/subtemplates-tmpl",
-            "${projectDir}/src/integTest/templates/test-handlebars-default",
-            "${projectDir}/src/integTest/templates/Oops-stuff",
-            "${projectDir}/src/integTest/templates/test-no-default-engine",
-            "${projectDir}/src/integTest/templates/test-tmpl-subscripts",
-            "${projectDir}/src/integTest/templates/test-handlebars",
-            "${projectDir}/src/integTest/templates/subtmpl-entity",
-            "${projectDir}/src/integTest/templates/test-tmpl",
-            "${projectDir}/src/integTest/templates/subtmpl-controller")
+    templateDirs = files(file("${projectDir}/src/integTest/templates").listFiles())
 
     template "subtemplates-tmpl" includes "controller", "entity", "bad"
     template "test-handlebars", {
@@ -173,6 +163,7 @@ task integTest(type: Test) {
 }
 
 task packageReports(type: Zip) {
+    dependsOn "check"
     from "build/reports"
     archiveFileName = "reports.zip"
     destinationDirectory = buildDir
@@ -180,5 +171,5 @@ task packageReports(type: Zip) {
 
 integTest.finalizedBy packageReports
 
-distZip.dependsOn("test", "integTest")
 check.dependsOn("test", "integTest")
+distZip.dependsOn("check")
