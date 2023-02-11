@@ -4,7 +4,7 @@
 :toc: left
 :icons: font
 :app-name: Skeletal
-:app-version: 0.13.3
+:app-version: 0.14.0
 
 == Quick Links
 
@@ -20,6 +20,16 @@ line tool to create software project skeletons from available templates stored
 in Simple URL repositories. The application allows listing available templates, getting for information about individual templates, modify the application configuration including additional repositories, template aliases, and logging level. You can also configure a proxy by editing a configuration file.
 
 == Installation
+The easiest way for Unix/Linux users to get Skeletal is to use https://sdkman.io[SDKMAN].
+
+.installing with sdkman
+[subs="verbatim,attributes"]
+----
+sdk install skeletal {app-version}
+----
+SDKMAN will take care of the installation and setting of environment variables.
+
+All operating systems with Java 8+ can also download and install Skeletal manually as follows:
 
 Grab the latest *v{app-version}* distribution from our https://github.com/cbmarcum/skeletal/releases[GitHub releases] page or use https://curl.se/download.html[curl]. Most OS's come with this installed.
 
