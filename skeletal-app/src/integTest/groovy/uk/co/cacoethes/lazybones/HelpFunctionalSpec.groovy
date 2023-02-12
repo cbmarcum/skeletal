@@ -2,7 +2,7 @@ package uk.co.cacoethes.lazybones
 
 class HelpFunctionalSpec extends AbstractFunctionalSpec {
     def "A missing command prints the help text"() {
-        when: "I run lazybones without any arguments"
+        when: "I run skeletal without any arguments"
         def exitCode = runCommand([], baseWorkDir)
 
         then: "It displays the help"
@@ -20,7 +20,7 @@ class HelpFunctionalSpec extends AbstractFunctionalSpec {
     }
 
     def "help option prints out the command specific help"() {
-        when: "I run lazybones with ${option} for command ${command}"
+        when: "I run skeletal with ${option} for command ${command}"
         def exitCode = runCommand([option, command], baseWorkDir)
 
         then: "It displays the help"
@@ -38,7 +38,7 @@ class HelpFunctionalSpec extends AbstractFunctionalSpec {
     }
 
     def "a command with the help option prints the command specific help"() {
-        when: "I run lazybones with command ${command} and option ${option}"
+        when: "I run skeletal with command ${command} and option ${option}"
         def exitCode = runCommand([command, option], baseWorkDir)
 
         then: "It displays the help"
@@ -57,7 +57,7 @@ class HelpFunctionalSpec extends AbstractFunctionalSpec {
     }
 
     def "help option prints out the help command"() {
-        when: "I run lazybones with ${option}"
+        when: "I run skeletal with ${option}"
         def exitCode = runCommand([option], baseWorkDir)
 
         then: "It displays the help"

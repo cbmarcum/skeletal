@@ -128,6 +128,10 @@ class Configuration {
      */
     List storeSettings() {
         def sharedKeys = findIntersectKeys(managedSettings, overrideSettings)
+        // make sure we have a user profile directory created
+        File profileDir = jsonConfigFile.parentFile
+        profileDir.mkdirs()
+
         jsonConfigFile.setText(new JsonBuilder(managedSettings).toPrettyString(), ENCODING)
 
         return sharedKeys

@@ -456,6 +456,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_general_help">General Help</a></li>
 <li><a href="#_command_help">Command Help</a></li>
+<li><a href="#_application_version">Application Version</a></li>
 <li><a href="#_listing_available_templates">Listing Available Templates</a></li>
 <li><a href="#_template_information">Template Information</a></li>
 <li><a href="#_creating_projects">Creating Projects</a></li>
@@ -516,7 +517,7 @@ in Simple URL repositories. The application allows listing available templates, 
 <div class="listingblock">
 <div class="title">installing with sdkman</div>
 <div class="content">
-<pre>sdk install skeletal 0.14.0</pre>
+<pre>sdk install skeletal 0.15.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -526,12 +527,12 @@ in Simple URL repositories. The application allows listing available templates, 
 <p>All operating systems with Java 8+ can also download and install Skeletal manually as follows:</p>
 </div>
 <div class="paragraph">
-<p>Grab the latest <strong>v0.14.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
+<p>Grab the latest <strong>v0.15.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
 </div>
 <div class="listingblock">
 <div class="title">downloading with curl</div>
 <div class="content">
-<pre>curl -o skeletal-0.14.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.14.0/skeletal-0.14.0.zip</pre>
+<pre>curl -o skeletal-0.15.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.15.0/skeletal-0.15.0.zip</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -572,7 +573,8 @@ Available commands:
     generate       Generates new files in the current project based on a subtemplate.
     list           Lists the templates that are available for you to install.
     info           Displays information about a template, such as latest version, description, etc.
-    help           Displays general help, or help for a specific command.</pre>
+    help           Displays general help, or help for a specific command.
+    version        Displays the application name and version.</pre>
 </div>
 </div>
 </div>
@@ -590,6 +592,40 @@ after the command.</p>
 <div class="paragraph">
 <p>Each command described below will begin with the help text and be followed by
 the examples.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_application_version">Application Version</h3>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal version --help</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Displays the application name and version.
+
+USAGE: version
+
+  The command displays the application name and version.
+
+Option      Description
+------      -----------
+-h, --help  Displays usage.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skeletal version</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Skeletal v0.15.0</pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1266,7 +1302,7 @@ options.logLevel = <span style="background-color:hsla(0,100%,50%,0.05)"><span st
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-06 18:24:46 -0500
+Last updated 2023-02-12 12:46:32 -0500
 </div>
 </div>
 </body>

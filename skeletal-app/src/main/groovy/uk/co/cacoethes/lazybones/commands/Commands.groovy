@@ -13,7 +13,8 @@ final class Commands {
             new GenerateCommand(),
             new ListCommand(config),
             new InfoCommand(),
-            new HelpCommand() ])
+            new HelpCommand(),
+            new VersionCommand() ])
     }
 
     private Commands() { }

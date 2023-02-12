@@ -4,7 +4,7 @@
 :toc: left
 :icons: font
 :app-name: Skeletal
-:app-version: 0.14.0
+:app-version: 0.15.0
 
 == Quick Links
 
@@ -68,6 +68,7 @@ Available commands:
     list           Lists the templates that are available for you to install.
     info           Displays information about a template, such as latest version, description, etc.
     help           Displays general help, or help for a specific command.
+    version        Displays the application name and version.
 ----
 
 === Command Help
@@ -81,6 +82,31 @@ skeletal <command> --help
 
 Each command described below will begin with the help text and be followed by
 the examples.
+
+=== Application Version
+
+----
+skeletal version --help
+----
+----
+Displays the application name and version.
+
+USAGE: version
+
+  The command displays the application name and version.
+
+Option      Description
+------      -----------
+-h, --help  Displays usage.
+----
+Example
+----
+skeletal version
+----
+[subs="verbatim,attributes"]
+----
+Skeletal v{app-version}
+----
 
 === Listing Available Templates
 
