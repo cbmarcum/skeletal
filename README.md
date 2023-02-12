@@ -139,6 +139,24 @@ More complete information about template publishing can be found in the
 the [Skeletal Gradle Plugin](https://github.com/cbmarcum/skeletal-gradle-plugin)
 project.
 
+## Creating a Release
+Releases are created in the GitHub repo by creating a tag and a Release based on that tag and a Changelog of major changes and uploading build artifacts and source archives.
+
+This is automated by [JReleaser](https://jreleaser.org/) using the `jreleaser.yml` configuration file and the [JReleaser CLI](https://jreleaser.org/guide/latest/tools/jreleaser-cli.html).
+
+### Pre-Release Checklist
+1. App version is correct in `skeletal-app/app.gradle` and `docs/*.adoc` files.
+2. build distribution with `./gradlew distZip`
+3. verify all tests passed.
+
+### Steps to Create a Release
+1. `export JRELEASER_PROJECT_VERSION=version to release`
+2. `export JRELEASER_OUTPUT_DIRECTORY=skeletal-app/build`
+3. `jreleaser config`
+4. `jreleaser full-release --dry-run`
+5. check `skeletal-app/build/jreleaser/release/CHANGELOG.md` for errors
+6. `jreleaser full-release`
+
 ## Contributing
 
 Skeletal is written in [Apache Groovy](https://groovy.apache.org/), builds 
