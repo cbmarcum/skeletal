@@ -86,7 +86,7 @@ class CreateFunctionalSpec extends AbstractFunctionalSpec {
 
     def "Create command installs a template from an HTTP URL"() {
         when: "I run skeletal with the create command using a full URL for the aoo-addin template"
-        def packageUrl = "https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-addin-template-0.3.0.zip"
+        def packageUrl = "https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-addin-template-0.3.0.zip"
         def exitCode = runCommand(["--verbose", "create", packageUrl, "test-addin", "-Pgroup=org.example", "-PartifactId=test-addin", "-Pversion=0.1.0", "-Ppackage=org.example", "-PclassName=TestAddin"], baseWorkDir)
 
         then: "It unpacks the template, retaining file permissions"
@@ -99,7 +99,7 @@ class CreateFunctionalSpec extends AbstractFunctionalSpec {
         new File(appDir, "src/main/groovy/org/example/TestAddinImpl.groovy").isFile()
 
         and: "It says that the latest version of the package is being installed in the target directory"
-        output =~ /Creating project from template https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/openoffice-templates\/aoo-addin-template-0.3.0.zip \(latest\) in 'test-addin'/
+        output =~ /Creating project from template https:\/\/skeletal.s3.us-east-2.amazonaws.com\/openoffice-templates\/aoo-addin-template-0.3.0.zip \(latest\) in 'test-addin'/
 
     }
 
@@ -117,7 +117,7 @@ class CreateFunctionalSpec extends AbstractFunctionalSpec {
         new File(appDir, "src/main/groovy/org/example/TestAddinImpl.groovy").isFile()
 
         and: "It says that the latest version of the package is being installed in the target directory"
-        output =~ /Creating project from template https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/openoffice-templates\/aoo-addin-template-0.3.0.zip \(latest\) in 'test-addin'/
+        output =~ /Creating project from template https:\/\/skeletal.s3.us-east-2.amazonaws.com\/openoffice-templates\/aoo-addin-template-0.3.0.zip \(latest\) in 'test-addin'/
 
     }
 

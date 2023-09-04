@@ -6,5 +6,5 @@
 config.file = new File(System.getProperty('user.home'), '.skeletal/config.groovy').path
 cache.dir = new File(System.getProperty('user.home'), ".skeletal/templates").path
 simpleRepositories = [
-        "https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates"
+        "https://skeletal.s3.us-east-2.amazonaws.com/default-templates"
 ]

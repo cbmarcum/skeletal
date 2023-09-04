@@ -25,7 +25,7 @@ class ListFunctionalSpec extends AbstractFunctionalSpec {
         output =~ /(?m)^Available mappings\s+/ +
                 /\s+customRatpack   -> http:\/\/dl.dropboxusercontent.com\/u\/29802534\/custom-ratpack.zip\s+/ +
                 /\s+doesNotExist    -> file:\/\/\/does\/not\/exist\s+/ +
-                /\s+customAooAddin  -> https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/openoffice-templates\/aoo-addin-template-0.3.0.zip\s+/
+                /\s+customAooAddin  -> https:\/\/skeletal.s3.us-east-2.amazonaws.com\/openoffice-templates\/aoo-addin-template-0.3.0.zip\s+/
 
         output =~ /\s+${remoteTemplates.join('\\s+')}\s+/
         !(output =~ /Exception/)
@@ -46,7 +46,7 @@ class ListFunctionalSpec extends AbstractFunctionalSpec {
         output =~ /(?m)^Available mappings\s+/ +
                 /\s+customRatpack   -> http:\/\/dl.dropboxusercontent.com\/u\/29802534\/custom-ratpack.zip\s+/ +
                 /\s+doesNotExist    -> file:\/\/\/does\/not\/exist\s+/ +
-                /\s+customAooAddin  -> https:\/\/codebuilders.jfrog.io\/artifactory\/generic\/openoffice-templates\/aoo-addin-template-0.3.0.zip\s+/
+                /\s+customAooAddin  -> https:\/\/skeletal.s3.us-east-2.amazonaws.com\/openoffice-templates\/aoo-addin-template-0.3.0.zip\s+/
 
         output =~ /(?m)^Cached templates\s+/ +
                 /Oops-stuff                    1.0.4\s+/ +

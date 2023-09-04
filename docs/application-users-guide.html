@@ -517,7 +517,7 @@ in Simple URL repositories. The application allows listing available templates, 
 <div class="listingblock">
 <div class="title">installing with sdkman</div>
 <div class="content">
-<pre>sdk install skeletal 0.15.0</pre>
+<pre>sdk install skeletal 0.16.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -527,12 +527,12 @@ in Simple URL repositories. The application allows listing available templates, 
 <p>All operating systems with Java 8+ can also download and install Skeletal manually as follows:</p>
 </div>
 <div class="paragraph">
-<p>Grab the latest <strong>v0.15.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
+<p>Grab the latest <strong>v0.16.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
 </div>
 <div class="listingblock">
 <div class="title">downloading with curl</div>
 <div class="content">
-<pre>curl -o skeletal-0.15.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.15.0/skeletal-0.15.0.zip</pre>
+<pre>curl -o skeletal-0.16.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.16.0/skeletal-0.16.0.zip</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -624,7 +624,7 @@ Option      Description
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Skeletal v0.15.0</pre>
+<pre>Skeletal v0.16.0</pre>
 </div>
 </div>
 </div>
@@ -680,7 +680,7 @@ to see what templates you have cached locally, run</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Available templates in https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates
+<pre>Available templates in https://skeletal.s3.us-east-2.amazonaws.com/default-templates
 
     lazybones-project
     simple-java-spock-gradle</pre>
@@ -725,7 +725,7 @@ Description: A simple Java Spock Gradle project template
 Owner:       Skeletal Project
 Versions:    1.1
 
-More information at https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates/simple-java-spock-gradle-template-1.1.zip</pre>
+More information at https://skeletal.s3.us-east-2.amazonaws.com/default-templates/simple-java-spock-gradle-template-1.1.zip</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -782,8 +782,8 @@ directory you would run</p>
 latest version of the template it can find.</p>
 </div>
 <div class="paragraph">
-<p>The default templates are listed from <code>Code Builders, LLC</code> 's Artifactory account
-hosted by JFrog at <code><a href="https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates" class="bare">https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates</a></code>.
+<p>The default templates are listed from <code>Code Builders, LLC</code> 's S3 account
+hosted at Amazon AWS at <code><a href="https://skeletal.s3.us-east-2.amazonaws.com/default-templates" class="bare">https://skeletal.s3.us-east-2.amazonaws.com/default-templates</a></code>.
 Skeletal searches for templates at this URL by default, but you can use other
 URL repositories by adding some configuration. See the Custom Repositories
 section under Configuration later in this document.</p>
@@ -794,7 +794,7 @@ section under Configuration later in this document.</p>
 <div class="listingblock">
 <div class="title">create using URL example</div>
 <div class="content">
-<pre>skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app</pre>
+<pre>skeletal create https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -809,7 +809,7 @@ install the template by name:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">templates {
     mappings {
-        myTmpl = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip</span><span style="color:#710">&quot;</span></span>
+        myTmpl = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip</span><span style="color:#710">&quot;</span></span>
     }
 }</code></pre>
 </div>
@@ -1302,7 +1302,7 @@ options.logLevel = <span style="background-color:hsla(0,100%,50%,0.05)"><span st
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-12 12:46:32 -0500
+Last updated 2023-09-04 11:03:15 -0400
 </div>
 </div>
 </body>
