@@ -38,6 +38,11 @@ class PackageDownloader {
                 packageFile.deleteOnExit()
                 throw new PackageNotFoundException(packageName, version, ex)
             }
+            // amazon s3 throws IOException HTTP response 403
+            catch (IOException ex) {
+                packageFile.deleteOnExit()
+                throw new PackageNotFoundException(packageName, version, ex)
+            }
             catch (all) {
                 packageFile.deleteOnExit()
                 throw all

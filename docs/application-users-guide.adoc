@@ -4,7 +4,7 @@
 :toc: left
 :icons: font
 :app-name: Skeletal
-:app-version: 0.15.0
+:app-version: 0.16.0
 
 == Quick Links
 
@@ -148,7 +148,7 @@ Example
 skeletal list
 ----
 ----
-Available templates in https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates
+Available templates in https://skeletal.s3.us-east-2.amazonaws.com/default-templates
 
     lazybones-project
     simple-java-spock-gradle
@@ -186,7 +186,7 @@ Description: A simple Java Spock Gradle project template
 Owner:       Skeletal Project
 Versions:    1.1
 
-More information at https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates/simple-java-spock-gradle-template-1.1.zip
+More information at https://skeletal.s3.us-east-2.amazonaws.com/default-templates/simple-java-spock-gradle-template-1.1.zip
 ----
 
 `info` only works if you're online and can reach the repository the template
@@ -232,8 +232,8 @@ skeletal create simple-java-spock-gradle 1.1 my-java-app
 The version is optional and if you leave it out, Skeletal will install the
 latest version of the template it can find.
 
-The default templates are listed from `Code Builders, LLC` 's Artifactory account
-hosted by JFrog at `https://codebuilders.jfrog.io/artifactory/generic/skeletal-templates`.
+The default templates are listed from `Code Builders, LLC` 's S3 account
+hosted at Amazon AWS at `https://skeletal.s3.us-east-2.amazonaws.com/default-templates`.
 Skeletal searches for templates at this URL by default, but you can use other
 URL repositories by adding some configuration. See the Custom Repositories
 section under Configuration later in this document.
@@ -242,7 +242,7 @@ You're not limited to only the default repository as you can install templates d
 
 .create using URL example
 ----
-skeletal create https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app
+skeletal create https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip my-aoo-client-app
 ----
 
 Of course, it can be pretty laborious copying and pasting URLs around, so
@@ -256,7 +256,7 @@ install the template by name:
 ----
 templates {
     mappings {
-        myTmpl = "https://codebuilders.jfrog.io/artifactory/generic/openoffice-templates/aoo-client-template-0.3.0.zip"
+        myTmpl = "https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip"
     }
 }
 ----
