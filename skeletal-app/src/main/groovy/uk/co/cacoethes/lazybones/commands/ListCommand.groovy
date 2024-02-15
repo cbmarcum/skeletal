@@ -4,10 +4,9 @@ import groovy.util.logging.Log
 import joptsimple.OptionParser
 import joptsimple.OptionSet
 import uk.co.cacoethes.lazybones.config.Configuration
-// import uk.co.cacoethes.lazybones.packagesources.BintrayPackageSource
+import uk.co.cacoethes.lazybones.packagesources.ArtifactoryPackageSource
+import uk.co.cacoethes.lazybones.packagesources.DefaultArtifactoryClientFactory
 import uk.co.cacoethes.lazybones.packagesources.SimplePackageSource
-import wslite.http.HTTPClientException
-
 import java.util.logging.Level
 import java.util.regex.Pattern
 
@@ -53,7 +52,7 @@ USAGE: list
     @Override
     protected int doExecute(OptionSet optionSet, Map globalOptions, Configuration config) {
 
-        def remoteTemplates = fetchRemoteTemplates(config.getSetting("simpleRepositories"))
+        def remoteTemplates = fetchRemoteTemplates(config)
 
         boolean offline = false
         if (!optionSet.hasOptions()) {
@@ -133,10 +132,20 @@ USAGE: list
         println()
     }
 
-    protected Map<String, Object> fetchRemoteTemplates(Collection<String> repositories) {
-        repositories.collectEntries { String repoName ->
-            [repoName, fetchPackageNames(repoName)]
+    protected Map<String, Object> fetchRemoteTemplates(Configuration config) {
+        def simpleRepos = config.getSetting("simpleRepositories") as Collection<String>
+        def artifactory = config.getSetting("artifactory")
+        def sources = [:]
+        if (simpleRepos) {
+            sources << simpleRepos.collectEntries { String repoName ->
+                [repoName, fetchPackageNames(repoName)]
+            }
         }
+        if (artifactory) {
+            sources << [ "Artifactory:": new ArtifactoryPackageSource(config, new DefaultArtifactoryClientFactory()).listPackageNames()]
+        }
+        return sources as Map<String, Object>
+
     }
 
     protected fetchPackageNames(String repoName) {

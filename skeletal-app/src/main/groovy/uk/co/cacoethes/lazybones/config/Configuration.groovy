@@ -3,6 +3,7 @@ package uk.co.cacoethes.lazybones.config
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovy.util.logging.Log
+import uk.co.cacoethes.lazybones.packagesources.ArtifactoryPackageSource
 
 import java.net.Authenticator.RequestorType
 import java.util.logging.Level
@@ -49,6 +50,7 @@ class Configuration {
                 "bintrayRepositories": String[],
                 "simpleRepositories": String[],
                 "templates.mappings.*": URI,
+                "artifactory": ArtifactoryPackageSource.ArtifactoryConfig,
                 "systemProp.*": Object]
 
         // These settings should only be active for the functional tests, not when the
