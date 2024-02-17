@@ -24,7 +24,6 @@ import java.util.concurrent.Callable
 import java.util.function.Function
 import java.util.stream.Collectors
 
-import static org.jfrog.artifactory.client.ArtifactoryClientBuilder.create
 
 /**
  * Package source for artifactory
@@ -51,7 +50,7 @@ class ArtifactoryPackageSource implements PackageSource {
     private final ArtifactoryClientFactory artifactoryClientFactory
 
 
-    ArtifactoryPackageSource(@NotNull Configuration config,ArtifactoryClientFactory artifactoryClientFactory ) {
+    ArtifactoryPackageSource(@NotNull Configuration config, ArtifactoryClientFactory artifactoryClientFactory) {
         this.config = config
         this.artifactoryConfig = new ArtifactoryConfig(config.getSetting("artifactory") as Map<String, Object>)
         this.artifactoryClientFactory = artifactoryClientFactory
@@ -73,8 +72,8 @@ class ArtifactoryPackageSource implements PackageSource {
     List<String> listPackageNames() {
 
         return loadDefinitions().stream().map {
-            it.groupId + "/" + it.artifactId + "/" + it.version
-        }.toList()
+            it.groupId + "/" + it.artifactId
+        }.distinct().collect(Collectors.toList())
 
     }
 
@@ -109,14 +108,14 @@ class ArtifactoryPackageSource implements PackageSource {
             return null
         }
         def sorted = found.keySet().sort()
-        def latest = sorted.first()
+        def latest = sorted.last()
         def path = gavCalc.gavToPath(found[latest])
         return new PackageInfo(this,
                 packageName,
                 latest.toString(), sorted.collect { it.toString() },
                 "Undefined",
                 "Undefined",
-                "${artifactory.getUri()}/${repo}/${path}"
+                "${artifactory.getUri()}${artifactory.getUri().endsWith("/") ? "" : "/"}${repo}${path}"
         )
     }
 
@@ -173,7 +172,9 @@ class ArtifactoryPackageSource implements PackageSource {
                 .stream()
                 .map {
                     gavCalc.pathToGav(it.itemPath)
-                }.filter { !it.hash && it.extension == "zip" }
+                }
+                .filter { it != null }
+                .filter { !it.hash && it.extension == "zip" }
                 .collect(Collectors.toSet())
         def json = JsonOutput.toJson(found)
         if (!path.toFile().exists()) {

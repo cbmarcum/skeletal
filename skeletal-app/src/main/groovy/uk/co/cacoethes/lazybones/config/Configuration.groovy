@@ -2,6 +2,7 @@ package uk.co.cacoethes.lazybones.config
 
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log
 import uk.co.cacoethes.lazybones.packagesources.ArtifactoryPackageSource
 
@@ -527,14 +528,16 @@ class Configuration {
     }
 
     @SuppressWarnings("DuplicateStringLiteral")
+    @CompileStatic
     private static class ProxyAuthenticator extends Authenticator {
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
             if (requestorType == RequestorType.PROXY) {
                 def prot = requestingProtocol.toLowerCase()
-                def (host, port, user, password) = ["Host", "Port", "User", "Password"].collect { prop ->
+                def strings = ["Host", "Port", "User", "Password"].collect { prop ->
                     System.getProperty(prot + ".proxy${prop}", prop == "Port" ? "80" : "")
                 }
+                def (host, port, user, password) = [strings[0], strings[1], strings[2], strings[3]]
 
                 if (requestingHost.equalsIgnoreCase(host) && port.toInteger() == requestingPort) {
                     return new PasswordAuthentication(user, password.toCharArray())
