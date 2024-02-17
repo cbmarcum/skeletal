@@ -16,6 +16,11 @@ class PackageSourceBuilder {
      */
     List<PackageSource> buildPackageSourceList(Configuration config) {
         List<String> repositoryList = (List) config.getSetting("simpleRepositories")
-        return repositoryList.collect { new SimplePackageSource(it) }
+        def artifactory = config.getSetting("artifactory")
+        def sources = repositoryList.collect { new SimplePackageSource(it) } as List<PackageSource>
+        if (artifactory) {
+            sources.add(new ArtifactoryPackageSource(config))
+        }
+        return sources
     }
 }

@@ -6,6 +6,8 @@ import uk.co.cacoethes.lazybones.PackageInfo
 import wslite.http.HTTPClientException
 import wslite.rest.RESTClient
 
+import java.util.concurrent.Callable
+
 /**
  * The default location for Lazybones packaged templates is on Bintray, which
  * also happens to have a REST API. This class uses that API to interrogate
@@ -26,6 +28,16 @@ class BintrayPackageSource implements PackageSource {
         restClient = new RESTClient(API_BASE_URL)
         if (System.getProperty("integration.test") == "true") {
             restClient.httpClient.sslTrustAllCerts = true
+        }
+    }
+
+    @Override
+    Callable<InputStream> getRemoteSource(String pkgName, String version) {
+        return new Callable<InputStream>() {
+            @Override
+            InputStream call() throws Exception {
+                new URL(getTemplateUrl(pkgName, version)).newInputStream()
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 package uk.co.cacoethes.lazybones.config
 
+import uk.co.cacoethes.lazybones.packagesources.ArtifactoryPackageSource
+
 /**
  * Created by pledbrook on 09/08/2014.
  */
@@ -9,6 +11,7 @@ class Converters {
             (Boolean): new BooleanConverter(),
             (Integer): new IntegerConverter(),
             (String): new StringConverter(),
+            (ArtifactoryPackageSource.ArtifactoryConfig): new ArtifactoryConfigConverter(),
             (URI): new UriConverter()])
 
     static <T> Converter<T> getConverter(Class<T> theClass) {

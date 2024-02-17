@@ -25,7 +25,7 @@ class PackageSourceFactorySpec extends Specification {
                 new ConfigObject(),
                 settings,
                 [:],
-                ["simpleRepositories": String[]],
+                ["simpleRepositories": String[],"artifactory":ArtifactoryPackageSource.ArtifactoryConfig],
                 new File("delete-me.json"))
     }
 }

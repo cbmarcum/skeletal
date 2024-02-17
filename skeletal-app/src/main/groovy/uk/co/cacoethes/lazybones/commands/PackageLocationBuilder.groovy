@@ -30,7 +30,7 @@ class PackageLocationBuilder {
         def packageName = FilenameUtils.getBaseName(new URI(url).path)
         log.fine("entered buildForUrl")
         log.fine("url = ${url}")
-        return new PackageLocation(remoteLocation: url, cacheLocation: cacheLocationPattern(packageName, null))
+        return new PackageLocation(remoteLocation: () -> new URL(url).newInputStream(), cacheLocation: cacheLocationPattern(packageName, null))
     }
 
     @Deprecated
@@ -47,9 +47,11 @@ class PackageLocationBuilder {
         PackageInfo packageInfo = getPackageInfo(packageName, packageSources)
         String versionToDownload = version ?: packageInfo.latestVersion
         String cacheLocation = cacheLocationPattern(packageName, versionToDownload)
-        String remoteLocation = packageInfo.source.getTemplateUrl(packageInfo.name, versionToDownload)
 
-        return new PackageLocation(remoteLocation: remoteLocation, cacheLocation: cacheLocation)
+        return new PackageLocation(
+                remoteLocation: packageInfo.source.getTemplateUrl(packageInfo.name, versionToDownload),
+                cacheLocation: cacheLocation
+        )
     }
 
     private PackageLocation buildForSimple(String packageName, String version, List<PackageSource> packageSources) {
@@ -65,9 +67,9 @@ class PackageLocationBuilder {
         PackageInfo packageInfo = getPackageInfo(packageName, packageSources)
         String versionToDownload = version ?: packageInfo.latestVersion
         String cacheLocation = cacheLocationPattern(packageName, versionToDownload)
-        String remoteLocation = packageInfo.source.getTemplateUrl(packageInfo.name, versionToDownload)
+        def remoteSource = packageInfo.source.getRemoteSource(packageInfo.name, versionToDownload)
 
-        return new PackageLocation(remoteLocation: remoteLocation, cacheLocation: cacheLocation)
+        return new PackageLocation(remoteLocation: remoteSource, cacheLocation: cacheLocation)
     }
 
     protected PackageInfo getPackageInfo(String packageName, List<PackageSource> packageSources) {

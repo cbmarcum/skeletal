@@ -25,11 +25,10 @@ class PackageDownloader {
             // There is an argument for having getPackageInfo() throw the exception
             // itself. May still do that.
             log.fine "${packageLocation.cacheLocation} is not cached locally. Searching the repositories for it."
-            log.fine "Attempting to download ${packageLocation.remoteLocation} into ${packageLocation.cacheLocation}"
 
             try {
                 packageFile.withOutputStream { OutputStream out ->
-                    new URL(packageLocation.remoteLocation).withInputStream { InputStream input ->
+                    packageLocation.remoteLocation.call().withCloseable { input ->
                         out << input
                     }
                 }
