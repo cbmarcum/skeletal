@@ -13,12 +13,7 @@ import com.opencsv.bean.CsvToBeanBuilder
 import com.opencsv.bean.CsvBindByName
 import uk.co.cacoethes.util.VersionUtils
 
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
+import java.util.concurrent.Callable
 
 /**
  * A simple location for Skeletal packaged templates at a URL.
@@ -167,9 +162,19 @@ class SimplePackageSource implements PackageSource {
         return pkgInfo
     }
 
-    /**
-     * Returns the URL to download particular package and version from this package source
-     */
+    @Override
+    Callable<InputStream> getRemoteSource(String pkgName, String version) {
+        String url = "${repoName}/${pkgName}${PACKAGE_SUFFIX}-${version}.zip"
+        return new Callable<InputStream>() {
+            @Override
+            InputStream call() throws Exception {
+                new URL(url).newInputStream()
+            }
+        }
+    }
+/**
+ * Returns the URL to download particular package and version from this package source
+ */
     String getTemplateUrl(String pkgName, String version) {
         // TODO: may need fixed for windows file urls unless we can use forward slash with java like ant
         String url = "${repoName}/${pkgName}${PACKAGE_SUFFIX}-${version}.zip"

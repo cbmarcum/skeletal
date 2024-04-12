@@ -2,6 +2,8 @@ package uk.co.cacoethes.lazybones.packagesources
 
 import uk.co.cacoethes.lazybones.PackageInfo
 
+import java.util.concurrent.Callable
+
 /**
  * Represents a source of information about Lazybones packaged templates. This
  * could be a REST service, a cached file, or something else.
@@ -22,5 +24,5 @@ interface PackageSource {
     /**
      * Returns the URL to download particular package and version from this package source
      */
-    String getTemplateUrl(String pkgName, String version)
+    Callable<InputStream> getRemoteSource(String pkgName, String version)
 }
