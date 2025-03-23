@@ -14,7 +14,7 @@ archivesBaseName = 'skeletal-app'
 applicationName = "skeletal"
 mainClassName = "uk.co.cacoethes.lazybones.LazybonesMain"
 // make sure to update the asciidoc guide headers also
-version = "0.16.0"
+version = "0.17.0"
 
 // These settings mimic the old client VM behavior. Should result in faster startup.
 applicationDefaultJvmArgs = ["-XX:+TieredCompilation", "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=3"]
@@ -70,6 +70,10 @@ dependencies {
     implementation "org.apache.maven.indexer:indexer-core:7.1.2"
     implementation "com.opencsv:opencsv:5.5.1"
 
+    // TEST
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.17'
+
     runtimeOnly "org.apache.ivy:ivy:2.3.0"
 
     testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
@@ -79,10 +83,6 @@ dependencies {
     testImplementation( "com.athaydes:spock-reports:2.3.1-groovy-3.0" ) {
         transitive = false // this avoids affecting your version of Groovy/Spock
     }
-    // if you don't already have slf4j-api and an implementation of it in the classpath, add this!
-    testImplementation 'org.slf4j:slf4j-api:1.7.30'
-    testRuntimeClasspath 'org.slf4j:slf4j-simple:1.7.30'
-
 
     integTestImplementation "org.codehaus.groovy:groovy-all:${groovyVersion}",
                      "commons-io:commons-io:2.7",

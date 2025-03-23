@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Carl Marcum">
 <title>Template Developers Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -209,13 +209,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -394,7 +391,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -437,6 +434,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -448,27 +446,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_quick_links">Quick Links</a></li>
-<li><a href="#_preface">Preface</a></li>
-<li><a href="#_getting_started">Getting Started</a>
+<li><a href="#quick-links">Quick Links</a></li>
+<li><a href="#preface">Preface</a></li>
+<li><a href="#getting-started">Getting Started</a>
 <ul class="sectlevel2">
-<li><a href="#_creating_a_template">Creating a Template</a></li>
-<li><a href="#_creating_a_post_install_script">Creating a Post-install Script</a></li>
-<li><a href="#_install_into_cache_and_test">Install into Cache and Test</a></li>
-<li><a href="#_packaging_installing_and_publishing">Packaging, Installing and Publishing</a></li>
-<li><a href="#_fine_tuning_the_packaging">Fine-tuning the Packaging</a></li>
+<li><a href="#creating-a-template">Creating a Template</a></li>
+<li><a href="#creating-a-post-install-script">Creating a Post-install Script</a></li>
+<li><a href="#install-into-cache-and-test">Install into Cache and Test</a></li>
+<li><a href="#packaging-installing-and-publishing">Packaging, Installing and Publishing</a></li>
+<li><a href="#fine-tuning-the-packaging">Fine-tuning the Packaging</a></li>
 </ul>
 </li>
-<li><a href="#_simple_url_repositories">Simple URL Repositories</a></li>
-<li><a href="#_template_engines">Template engines</a></li>
-<li><a href="#_subtemplates">Subtemplates</a></li>
-<li><a href="#_post_install_script_in_depth">Post Install Script In-depth</a></li>
+<li><a href="#simple-url-repositories">Simple URL Repositories</a></li>
+<li><a href="#template-engines">Template engines</a></li>
+<li><a href="#subtemplates">Subtemplates</a></li>
+<li><a href="#post-install-script-in-depth">Post Install Script In-depth</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_quick_links">Quick Links</h2>
+<h2 id="quick-links"><a class="anchor" href="#quick-links"></a>Quick Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -489,7 +487,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_preface">Preface</h2>
+<h2 id="preface"><a class="anchor" href="#preface"></a>Preface</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Instructions in this guide also refer to the
@@ -498,7 +496,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_getting_started">Getting Started</h2>
+<h2 id="getting-started"><a class="anchor" href="#getting-started"></a>Getting Started</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The first thing you want to do is set up a build for your templates, because creating and publishing a template involves several steps:</p>
@@ -560,13 +558,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">plugins {
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">net.codebuilders.lazybones-templates</span><span style="color:#710">&quot;</span></span> version <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.6.2</span><span style="color:#710">&quot;</span></span>  <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">plugins {
+    id "net.codebuilders.lazybones-templates" version "1.6.2"  <i class="conum" data-value="1"></i><b>(1)</b>
 }
 
 lazybones {
-    packageExclude <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.swp</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.swo</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/.gradle</span><span style="color:#710">&quot;</span></span>  <i class="conum" data-value="2"></i><b>(2)</b>
-    templateOwner = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">&lt;owner of templates in this project&gt;</span><span style="color:#710">&quot;</span></span>  <i class="conum" data-value="3"></i><b>(3)</b>
+    packageExclude "**/*.swp", "**/*.swo", "**/.gradle"  <i class="conum" data-value="2"></i><b>(2)</b>
+    templateOwner = "&lt;owner of templates in this project&gt;"  <i class="conum" data-value="3"></i><b>(3)</b>
 }</code></pre>
 </div>
 </div>
@@ -590,7 +588,7 @@ lazybones {
 <p>The next step is to create the template.</p>
 </div>
 <div class="sect2">
-<h3 id="_creating_a_template">Creating a Template</h3>
+<h3 id="creating-a-template"><a class="anchor" href="#creating-a-template"></a>Creating a Template</h3>
 <div class="paragraph">
 <p>Lazybones templates are simple zip files containing a directory structure and a
 bunch of files. How you create that zip file is up to you, but we&#8217;re going to use
@@ -745,9 +743,9 @@ directory structure. Since the <code>.retain</code> files can be empty, a simple
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">plugins { <i class="conum" data-value="1"></i><b>(1)</b>
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">groovy</span><span style="color:#710">'</span></span>
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application</span><span style="color:#710">'</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">plugins { <i class="conum" data-value="1"></i><b>(1)</b>
+    id 'groovy'
+    id 'application'
 }
 
 repositories {
@@ -755,18 +753,18 @@ repositories {
 }
 
 dependencies { <i class="conum" data-value="3"></i><b>(3)</b>
-    testImplementation <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">org.codehaus.groovy:groovy:3.0.10</span><span style="color:#710">'</span></span>
-    testImplementation <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">org.spockframework:spock-core:2.1-groovy-3.0</span><span style="color:#710">'</span></span>
-    testImplementation <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">junit:junit:4.13.2</span><span style="color:#710">'</span></span>
-    implementation <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">com.google.guava:guava:31.0.1-jre</span><span style="color:#710">'</span></span>
+    testImplementation 'org.codehaus.groovy:groovy:3.0.10'
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.guava:guava:31.0.1-jre'
 }
 
 application {
-    mainClass = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">org.example.App</span><span style="color:#710">'</span></span> <i class="conum" data-value="4"></i><b>(4)</b>
+    mainClass = 'org.example.App' <i class="conum" data-value="4"></i><b>(4)</b>
 }
 
-tasks.named(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">test</span><span style="color:#710">'</span></span>) {
-    <span style="color:#777">// Use JUnit Platform for unit tests.</span>
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }</code></pre>
 </div>
@@ -865,7 +863,7 @@ without hunting through the directories.</p>
 <div class="listingblock">
 <div class="title">example tree command</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">tree -a --dirsfirst --charset nwildner</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tree -a --dirsfirst --charset nwildner</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -879,7 +877,7 @@ problem: we can add a post-install script.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_creating_a_post_install_script">Creating a Post-install Script</h3>
+<h3 id="creating-a-post-install-script"><a class="anchor" href="#creating-a-post-install-script"></a>Creating a Post-install Script</h3>
 <div class="paragraph">
 <p>Post-install scripts are executed immediately after a template is unpacked into
 the new project directory and just before the README is displayed. They are
@@ -933,13 +931,13 @@ time, we modify <code>build.gradle</code> slightly:</p>
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">plugins {
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">groovy</span><span style="color:#710">'</span></span>
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application</span><span style="color:#710">'</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">plugins {
+    id 'groovy'
+    id 'application'
 }
 
-group = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>project_group<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
-version = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>project_version<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="2"></i><b>(2)</b>
+group = "${project_group}" <i class="conum" data-value="1"></i><b>(1)</b>
+version = "${project_version}" <i class="conum" data-value="2"></i><b>(2)</b>
 
 repositories {
     mavenCentral()
@@ -965,12 +963,12 @@ repositories {
 <div class="listingblock">
 <div class="title">lazybones.groovy</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#0a8;font-weight:bold">Map</span> props = [:] <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">Map props = [:] <i class="conum" data-value="1"></i><b>(1)</b>
 
-props.project_group = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'group' [org.example]: </span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">org.example</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">group</span><span style="color:#710">&quot;</span></span>) <i class="conum" data-value="2"></i><b>(2)</b>
-props.project_version = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'version' [0.1.0]: </span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.1.0</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>) <i class="conum" data-value="3"></i><b>(3)</b>
+props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group") <i class="conum" data-value="2"></i><b>(2)</b>
+props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version") <i class="conum" data-value="3"></i><b>(3)</b>
 
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/build.gradle</span><span style="color:#710">'</span></span>, props) <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+processTemplates('app/build.gradle', props) <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1011,7 +1009,7 @@ be used instead of prompting the user for one.</p>
 <div class="listingblock">
 <div class="title">create command using parameters</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1024,9 +1022,9 @@ new <code>my-java-app/app/build.gradle</code> you should see group and version u
 <div class="listingblock">
 <div class="title">processed build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">...
-group = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">net.codebuilders</span><span style="color:#710">&quot;</span></span>
-version = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">1.0-SNAPSHOT</span><span style="color:#710">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">...
+group = "net.codebuilders"
+version = "1.0-SNAPSHOT"
 ...</code></pre>
 </div>
 </div>
@@ -1042,11 +1040,11 @@ perhaps), lower-case hyphenated (for directory names), and other forms. The
 <div class="listingblock">
 <div class="title">transformText() example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.util.NameType</span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">import uk.co.cacoethes.util.NameType
 
-<span style="color:#080;font-weight:bold">def</span> className = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">MyClass</span><span style="color:#710">&quot;</span></span>
-<span style="color:#080;font-weight:bold">def</span> directoryForClass = transformText(className, <span style="color:#606">from</span>: NameType.CAMEL_CASE, <span style="color:#606">to</span>: NameType.HYPHENATED)
-<span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(directoryForClass).mkdirs()</code></pre>
+def className = "MyClass"
+def directoryForClass = transformText(className, from: NameType.CAMEL_CASE, to: NameType.HYPHENATED)
+new File(directoryForClass).mkdirs()</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1074,16 +1072,16 @@ the <code>org/example</code> directories.</p>
 <div class="listingblock">
 <div class="title">App.java</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#080;font-weight:bold">package</span> <span style="color:#F00;background-color:#FAA">$</span>{<span style="color:#707;font-weight:bold">project_package</span>}; <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package ${project_package}; <i class="conum" data-value="1"></i><b>(1)</b>
 
-<span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#F00;background-color:#FAA">$</span>{project_class_name} { <i class="conum" data-value="2"></i><b>(2)</b>
+public class ${project_class_name} { <i class="conum" data-value="2"></i><b>(2)</b>
 
-    <span style="color:#088;font-weight:bold">public</span> <span style="color:#0a8;font-weight:bold">String</span> getGreeting() {
-        <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Hello World!</span><span style="color:#710">&quot;</span></span>;
+    public String getGreeting() {
+        return "Hello World!";
     }
 
-    <span style="color:#088;font-weight:bold">public</span> <span style="color:#088;font-weight:bold">static</span> <span style="color:#339;font-weight:bold">void</span> main(<span style="color:#0a8;font-weight:bold">String</span><span style="color:#339;font-weight:bold">[]</span> args) {
-        <span style="color:#0a8;font-weight:bold">System</span>.out.println(<span style="color:#080;font-weight:bold">new</span> <span style="color:#F00;background-color:#FAA">$</span>{project_class_name}().getGreeting()); <i class="conum" data-value="2"></i><b>(2)</b>
+    public static void main(String[] args) {
+        System.out.println(new ${project_class_name}().getGreeting()); <i class="conum" data-value="2"></i><b>(2)</b>
     }
 }</code></pre>
 </div>
@@ -1107,20 +1105,20 @@ rename <code>AppTest.groovy</code> to <code>AppSpec.groovy</code> and then edit 
 <div class="listingblock">
 <div class="title">AppSpec.groovy</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">package</span> <span style="color:#F00;background-color:#FAA">$</span>{project_package}
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">package ${project_package}
 
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">spock.lang.Specification</span>
+import spock.lang.Specification
 
-<span style="color:#339;font-weight:bold">class</span> <span style="color:#F00;background-color:#FAA">$</span>{project_class_name}Spec <span style="color:#088;font-weight:bold">extends</span> Specification {
-    <span style="color:#080;font-weight:bold">def</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">application has a greeting</span><span style="color:#710">&quot;</span></span>() {
-        <span style="color:#606">setup</span>:
-        <span style="color:#080;font-weight:bold">def</span> app = <span style="color:#080;font-weight:bold">new</span> <span style="color:#F00;background-color:#FAA">$</span>{project_class_name}()
+class ${project_class_name}Spec extends Specification {
+    def "application has a greeting"() {
+        setup:
+        def app = new ${project_class_name}()
 
-        <span style="color:#606">when</span>:
-        <span style="color:#080;font-weight:bold">def</span> result = app.greeting
+        when:
+        def result = app.greeting
 
-        <span style="color:#606">then</span>:
-        result != <span style="color:#069">null</span>
+        then:
+        result != null
     }
 }</code></pre>
 </div>
@@ -1135,14 +1133,14 @@ is the subproject we are working in.</p>
 <div class="listingblock">
 <div class="title">build.gradle changes</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">...
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">...
 jar {
-    archiveBaseName = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">${project_name}</span><span style="color:#710">'</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+    archiveBaseName = '${project_name}' <i class="conum" data-value="1"></i><b>(1)</b>
 }
 
 application {
-    mainClass = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">${project_package}.${project_class_name}</span><span style="color:#710">'</span></span> <i class="conum" data-value="2"></i><b>(2)</b>
-    applicationName = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">${project_name}</span><span style="color:#710">'</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
+    mainClass = '${project_package}.${project_class_name}' <i class="conum" data-value="2"></i><b>(2)</b>
+    applicationName = '${project_name}' <i class="conum" data-value="1"></i><b>(1)</b>
 }
 ...</code></pre>
 </div>
@@ -1164,7 +1162,7 @@ application {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">rootProject.name = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">${project_name}</span><span style="color:#710">'</span></span> <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">rootProject.name = '${project_name}' <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1181,63 +1179,63 @@ application {
 <div class="listingblock">
 <div class="title">lazybones.groovy</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.util.NameType</span>
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FileUtils</span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">import uk.co.cacoethes.util.NameType
+import org.apache.commons.io.FileUtils
 
-<span style="color:#0a8;font-weight:bold">Map</span> props = [:]
+Map props = [:]
 <i class="conum" data-value="1"></i><b>(1)</b>
-<span style="color:#080;font-weight:bold">if</span> (projectDir.name =~ <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">\-</span><span style="color:#404">/</span></span>) {
-    props.project_class_name = transformText(projectDir.name, <span style="color:#606">from</span>: NameType.HYPHENATED, <span style="color:#606">to</span>: NameType.CAMEL_CASE)
-} <span style="color:#080;font-weight:bold">else</span> {
-    props.project_class_name = transformText(projectDir.name, <span style="color:#606">from</span>: NameType.PROPERTY, <span style="color:#606">to</span>: NameType.CAMEL_CASE)
+if (projectDir.name =~ /\-/) {
+    props.project_class_name = transformText(projectDir.name, from: NameType.HYPHENATED, to: NameType.CAMEL_CASE)
+} else {
+    props.project_class_name = transformText(projectDir.name, from: NameType.PROPERTY, to: NameType.CAMEL_CASE)
 }
 <i class="conum" data-value="2"></i><b>(2)</b>
-props.project_name = transformText(props.project_class_name, <span style="color:#606">from</span>: NameType.CAMEL_CASE, <span style="color:#606">to</span>: NameType.HYPHENATED)
+props.project_name = transformText(props.project_class_name, from: NameType.CAMEL_CASE, to: NameType.HYPHENATED)
 <i class="conum" data-value="3"></i><b>(3)</b>
-props.project_group = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'group' [org.example]: </span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">org.example</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">group</span><span style="color:#710">&quot;</span></span>)
-props.project_name = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'artifactId' [</span><span style="color:#710">&quot;</span></span> + props.project_name + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">]: </span><span style="color:#710">&quot;</span></span>, props.project_name , <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">artifactId</span><span style="color:#710">&quot;</span></span>)
-props.project_version = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'version' [0.1.0]: </span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.1.0</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>)
-props.project_package = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'package' [</span><span style="color:#710">&quot;</span></span> + props.project_group + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">]: </span><span style="color:#710">&quot;</span></span>, props.project_group, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">package</span><span style="color:#710">&quot;</span></span>)
-props.project_class_name = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'className' [</span><span style="color:#710">&quot;</span></span> + props.project_class_name + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">]: </span><span style="color:#710">&quot;</span></span>, props.project_class_name, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">className</span><span style="color:#710">&quot;</span></span>).capitalize()
-props.project_property_name = transformText(props.project_class_name, <span style="color:#606">from</span>: NameType.CAMEL_CASE, <span style="color:#606">to</span>: NameType.PROPERTY)
+props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
+props.project_name = ask("Define value for 'artifactId' [" + props.project_name + "]: ", props.project_name , "artifactId")
+props.project_version = ask("Define value for 'version' [0.1.0]: ", "0.1.0", "version")
+props.project_package = ask("Define value for 'package' [" + props.project_group + "]: ", props.project_group, "package")
+props.project_class_name = ask("Define value for 'className' [" + props.project_class_name + "]: ", props.project_class_name, "className").capitalize()
+props.project_property_name = transformText(props.project_class_name, from: NameType.CAMEL_CASE, to: NameType.PROPERTY)
 props.project_capitalized_name = props.project_property_name.capitalize()
-<span style="color:#0a8;font-weight:bold">String</span> packagePath = props.project_package.replace(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.</span><span style="color:#710">'</span></span> as <span style="color:#339;font-weight:bold">char</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">as</span> <span style="color:#339;font-weight:bold">char</span>)
+String packagePath = props.project_package.replace('.' as char, '/' as char)
 props.package_path = packagePath
 
 <i class="conum" data-value="4"></i><b>(4)</b>
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">README.md</span><span style="color:#710">'</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/build.gradle</span><span style="color:#710">'</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">settings.gradle</span><span style="color:#710">'</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">gradle.properties</span><span style="color:#710">'</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/src/main/java/*.java</span><span style="color:#710">'</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/src/test/groovy/*.groovy</span><span style="color:#710">'</span></span>, props)
+processTemplates('README.md', props)
+processTemplates('app/build.gradle', props)
+processTemplates('settings.gradle', props)
+processTemplates('gradle.properties', props)
+processTemplates('app/src/main/java/*.java', props)
+processTemplates('app/src/test/groovy/*.groovy', props)
 
-<span style="color:#0a8;font-weight:bold">File</span> mainSources = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(projectDir, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/src/main/java</span><span style="color:#710">'</span></span>)
-<span style="color:#0a8;font-weight:bold">File</span> testSources = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(projectDir, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/src/test/groovy</span><span style="color:#710">'</span></span>)
+File mainSources = new File(projectDir, 'app/src/main/java')
+File testSources = new File(projectDir, 'app/src/test/groovy')
 
-<span style="color:#0a8;font-weight:bold">File</span> mainSourcesPath = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(mainSources, packagePath)
+File mainSourcesPath = new File(mainSources, packagePath)
 mainSourcesPath.mkdirs()
-<span style="color:#0a8;font-weight:bold">File</span> testSourcesPath = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(testSources, packagePath)
+File testSourcesPath = new File(testSources, packagePath)
 testSourcesPath.mkdirs()
 
-<span style="color:#080;font-weight:bold">def</span> renameFile = { <span style="color:#0a8;font-weight:bold">File</span> from, <span style="color:#0a8;font-weight:bold">String</span> path -&gt;
-    <span style="color:#080;font-weight:bold">if</span> (from.file) {
-        <span style="color:#0a8;font-weight:bold">File</span> to = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(path)
+def renameFile = { File from, String path -&gt;
+    if (from.file) {
+        File to = new File(path)
         to.parentFile.mkdirs()
         FileUtils.moveFile(from, to)
     }
 }
 
 <i class="conum" data-value="5"></i><b>(5)</b>
-mainSources.eachFile { <span style="color:#0a8;font-weight:bold">File</span> file -&gt;
-    renameFile(file, mainSourcesPath.absolutePath + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> + file.name)
+mainSources.eachFile { File file -&gt;
+    renameFile(file, mainSourcesPath.absolutePath + '/' + file.name)
 }
-testSources.eachFile { <span style="color:#0a8;font-weight:bold">File</span> file -&gt;
-    renameFile(file, testSourcesPath.absolutePath + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> + props.project_capitalized_name + file.name)
+testSources.eachFile { File file -&gt;
+    renameFile(file, testSourcesPath.absolutePath + '/' + props.project_capitalized_name + file.name)
 }
 
-renameFile(<span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(mainSourcesPath, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">App.java</span><span style="color:#710">'</span></span>), mainSourcesPath.absolutePath + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> + props.project_class_name + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.java</span><span style="color:#710">&quot;</span></span>)
-renameFile(<span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(testSourcesPath, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">AppSpec.java</span><span style="color:#710">'</span></span>), testSourcesPath.absolutePath + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> + props.project_class_name + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Spec</span><span style="color:#710">&quot;</span></span> + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.groovy</span><span style="color:#710">&quot;</span></span>)</code></pre>
+renameFile(new File(mainSourcesPath, 'App.java'), mainSourcesPath.absolutePath + '/' + props.project_class_name + ".java")
+renameFile(new File(testSourcesPath, 'AppSpec.java'), testSourcesPath.absolutePath + '/' + props.project_class_name + "Spec" + ".groovy")</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1270,7 +1268,7 @@ This pattern continues until we have all the information we need.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_install_into_cache_and_test">Install into Cache and Test</h3>
+<h3 id="install-into-cache-and-test"><a class="anchor" href="#install-into-cache-and-test"></a>Install into Cache and Test</h3>
 <div class="paragraph">
 <p>This is now covered in the <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html">Template Testing Companion</a> document.
 To test, <a href="https://cbmarcum.github.io/skeletal/template-testing-companion.html#_installing_a_template_in_cache">install the template</a>
@@ -1284,7 +1282,7 @@ the cache and test project.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_packaging_installing_and_publishing">Packaging, Installing and Publishing</h3>
+<h3 id="packaging-installing-and-publishing"><a class="anchor" href="#packaging-installing-and-publishing"></a>Packaging, Installing and Publishing</h3>
 <div class="paragraph">
 <p>There are three options to use publishing a template, each of which can be
 accomplished with a simple task provided by the <a href="https://github.com/cbmarcum/skeletal-gradle-plugin">Skeletal Gradle Plugin</a>:</p>
@@ -1364,9 +1362,9 @@ repository. To do that, you have to configure the build. If you have a look at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
     ...
-    templateOwner = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Skeletal Project</span><span style="color:#710">&quot;</span></span>
+    templateOwner = "Skeletal Project"
 }</code></pre>
 </div>
 </div>
@@ -1397,7 +1395,7 @@ simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradl
 </div>
 </div>
 <div class="sect2">
-<h3 id="_fine_tuning_the_packaging">Fine-tuning the Packaging</h3>
+<h3 id="fine-tuning-the-packaging"><a class="anchor" href="#fine-tuning-the-packaging"></a>Fine-tuning the Packaging</h3>
 <div class="paragraph">
 <p>The packaging process is by default rather dumb. It will include all files and
 directories in the target template directory except for a few hard-coded
@@ -1409,8 +1407,8 @@ extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patt
 <div class="listingblock">
 <div class="title">global excludes</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
-    packageExclude <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.swp</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.gradle</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">build</span><span style="color:#710">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
+    packageExclude "**/*.swp", ".gradle", "build"
     ....
 }</code></pre>
 </div>
@@ -1421,9 +1419,9 @@ extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patt
 <div class="listingblock">
 <div class="title">template specific excludes</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
-    template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span>) {     <span style="color:#777">// Template (directory) name</span>
-        packageExclude <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.swp</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.settings</span><span style="color:#710">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
+    template("simple-java-spock-gradle") {     // Template (directory) name
+        packageExclude "**/*.swp", ".settings"
     }
 }</code></pre>
 </div>
@@ -1437,8 +1435,8 @@ extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patt
 <div class="listingblock">
 <div class="title">file permissions</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
-    fileMode <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">755</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">gradlew</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.sh</span><span style="color:#710">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
+    fileMode "755", "gradlew", "**/*.sh"
 }</code></pre>
 </div>
 </div>
@@ -1451,12 +1449,12 @@ extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patt
 <div class="listingblock">
 <div class="title">template specific file permissions</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
-    template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java</span><span style="color:#710">&quot;</span></span>) {
-        fileMode <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">600</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">secret.properties</span><span style="color:#710">&quot;</span></span>
-        fileMode <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">755, </span><span style="color:#710">&quot;</span></span>gradlew<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">, </span><span style="color:#710">&quot;</span></span>**<span style="color:#777">/*.sh&quot;
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
+    template("simple-java") {
+        fileMode "600", "secret.properties"
+        fileMode "755, "gradlew", "**/*.sh"
     }
-}</span></code></pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1471,7 +1469,7 @@ look at the template creation in more detail.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_simple_url_repositories">Simple URL Repositories</h2>
+<h2 id="simple-url-repositories"><a class="anchor" href="#simple-url-repositories"></a>Simple URL Repositories</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In a break from the original Lazybones project and their use of Bintray for
@@ -1487,7 +1485,7 @@ use additional repositories is covered in the <a href="https://cbmarcum.github.i
 </div>
 </div>
 <div class="sect1">
-<h2 id="_template_engines">Template engines</h2>
+<h2 id="template-engines"><a class="anchor" href="#template-engines"></a>Template engines</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>processTemplates()</code> method available to post-install scripts allows you to
@@ -1512,7 +1510,7 @@ but the JAR is no longer available so the remainder of this section is TBD until
 </div>
 </div>
 <div class="sect1">
-<h2 id="_subtemplates">Subtemplates</h2>
+<h2 id="subtemplates"><a class="anchor" href="#subtemplates"></a>Subtemplates</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>It&#8217;s very easy to add subtemplate support to your project templates. The key
@@ -1574,21 +1572,21 @@ are a few slight differences. Consider the template source file for tests:</p>
 <div class="listingblock">
 <div class="title">Spec.groovy.gtpl</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">package</span> <span style="color:#F00;background-color:#FAA">$</span>{pkg}
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">package ${pkg}
 
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">spock.lang.Specification</span>
+import spock.lang.Specification
 
-<span style="color:#339;font-weight:bold">class</span> <span style="color:#F00;background-color:#FAA">$</span>{cls} <span style="color:#088;font-weight:bold">extends</span> Specification {
+class ${cls} extends Specification {
 
-    <span style="color:#080;font-weight:bold">def</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">application has a greeting</span><span style="color:#710">&quot;</span></span>() {
-        <span style="color:#606">given</span>: <span style="color:#777">// setup</span>
-        <span style="color:#080;font-weight:bold">def</span> app = <span style="color:#080;font-weight:bold">new</span> <span style="color:#F00;background-color:#FAA">$</span>{parentClassName}()
+    def "application has a greeting"() {
+        given: // setup
+        def app = new ${parentClassName}()
 
-        <span style="color:#606">when</span>: <span style="color:#777">// stimulus</span>
-        <span style="color:#080;font-weight:bold">def</span> result = app.greeting
+        when: // stimulus
+        def result = app.greeting
 
-        <span style="color:#606">then</span>: <span style="color:#777">// response</span>
-        result != <span style="color:#069">null</span>
+        then: // response
+        result != null
     }
 }</code></pre>
 </div>
@@ -1601,29 +1599,29 @@ do these parameters come from? We need to look into the post-install script
 <div class="listingblock">
 <div class="title">lazybones.groovy</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FileUtils</span>
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FilenameUtils</span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">import org.apache.commons.io.FileUtils
+import org.apache.commons.io.FilenameUtils
 
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">static</span> <span style="color:#B44;font-weight:bold">org.apache.commons.io.FilenameUtils.concat</span>
+import static org.apache.commons.io.FilenameUtils.concat
 
-<span style="color:#0a8;font-weight:bold">Map</span> props = [:]
-<span style="color:#777">// Pass in parameters from the project template</span>
-<span style="color:#0a8;font-weight:bold">String</span> parentPackage = parentParams.package <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
-props.parentClassName = parentParams.className <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+Map props = [:]
+// Pass in parameters from the project template
+String parentPackage = parentParams.package <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
+props.parentClassName = parentParams.className <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
 
-props.pkg = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value 'package' [</span><span style="color:#710">&quot;</span></span> + parentPackage + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">]: </span><span style="color:#710">&quot;</span></span>, parentPackage, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">package</span><span style="color:#710">&quot;</span></span>) <i class="conum" data-value="1"></i><b>(1)</b>
-props.cls = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Define value for 'class' name: [SimpleSpec]</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">SimpleSpec</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">class</span><span style="color:#710">&quot;</span></span>).capitalize() <i class="conum" data-value="1"></i><b>(1)</b>
+props.pkg = ask("Define value 'package' [" + parentPackage + "]: ", parentPackage, "package") <i class="conum" data-value="1"></i><b>(1)</b>
+props.cls = ask("Define value for 'class' name: [SimpleSpec]", "SimpleSpec", "class").capitalize() <i class="conum" data-value="1"></i><b>(1)</b>
 
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Spec.groovy</span><span style="color:#710">&quot;</span></span>, props)
+processTemplates("Spec.groovy", props)
 
-<span style="color:#0a8;font-weight:bold">String</span> pkgPath = props.pkg.replace(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">.</span><span style="color:#710">'</span></span> as <span style="color:#339;font-weight:bold">char</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">as</span> <span style="color:#339;font-weight:bold">char</span>)
-<span style="color:#0a8;font-weight:bold">String</span> filename = props.cls.capitalize() + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.groovy</span><span style="color:#710">&quot;</span></span>
-<span style="color:#0a8;font-weight:bold">File</span> destFile = <span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(projectDir, concat(concat(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">app/src/test/groovy</span><span style="color:#710">&quot;</span></span>, pkgPath), filename))
+String pkgPath = props.pkg.replace('.' as char, '/' as char)
+String filename = props.cls.capitalize() + ".groovy"
+File destFile = new File(projectDir, concat(concat("app/src/test/groovy", pkgPath), filename))
 destFile.parentFile.mkdirs()
 
-FileUtils.moveFile(<span style="color:#080;font-weight:bold">new</span> <span style="color:#0a8;font-weight:bold">File</span>(templateDir, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Spec.groovy</span><span style="color:#710">&quot;</span></span>), destFile) <i class="conum" data-value="4"></i><b>(4)</b>
+FileUtils.moveFile(new File(templateDir, "Spec.groovy"), destFile) <i class="conum" data-value="4"></i><b>(4)</b>
 
-println <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Created new Spock Test </span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>FilenameUtils.normalize(destFile.path)<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span></code></pre>
+println "Created new Spock Test ${FilenameUtils.normalize(destFile.path)}"</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1668,9 +1666,9 @@ So open up the build file and add this line to the <code>lazybones</code> block:
 <div class="listingblock">
 <div class="title">include subtemplates</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>
+    template "simple-java-spock-gradle" includes "simple-spock-test"
 }</code></pre>
 </div>
 </div>
@@ -1685,9 +1683,9 @@ included in it, ready for use with Lazybones' <code>generate</code> command.</p>
 <div class="listingblock">
 <div class="title">include multiple subtemplates</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
+    template "simple-java-spock-gradle" includes "simple-spock-test", "controller", "repository"
 }</code></pre>
 </div>
 </div>
@@ -1713,15 +1711,15 @@ a <code>tmplQualifiers</code> property:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">def</span> artifactTemplate
-<span style="color:#080;font-weight:bold">if</span> (tmplQualifiers) {
-    artifactTemplate = tmplQualifiers[<span style="color:#00D">0</span>].capitalize() + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.groovy.gtpl</span><span style="color:#710">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">def artifactTemplate
+if (tmplQualifiers) {
+    artifactTemplate = tmplQualifiers[0].capitalize() + ".groovy.gtpl"
 }
-<span style="color:#080;font-weight:bold">else</span> {
-    artifactTemplate = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Which type of artifact do you want to generate? </span><span style="color:#710">&quot;</span></span>, <span style="color:#069">null</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">type</span><span style="color:#710">&quot;</span></span>)
+else {
+    artifactTemplate = ask("Which type of artifact do you want to generate? ", null, "type")
 }
 
-<span style="color:#777">// ... process the corresponding template file.</span></code></pre>
+// ... process the corresponding template file.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1741,7 +1739,7 @@ a <code>tmplQualifiers</code> property:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_post_install_script_in_depth">Post Install Script In-depth</h2>
+<h2 id="post-install-script-in-depth"><a class="anchor" href="#post-install-script-in-depth"></a>Post Install Script In-depth</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>lazybones.groovy</code> post install script is a generic groovy script with a few extra
@@ -1778,12 +1776,12 @@ file:</p>
 <div class="listingblock">
 <div class="title">lazybones.groovy example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">def</span> props = [:]
-props[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">groupId</span><span style="color:#710">&quot;</span></span>] = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">What is the group ID for this project?</span><span style="color:#710">&quot;</span></span>)
-props[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>] = ask(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">What is the project's initial version?</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.1</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">version</span><span style="color:#710">&quot;</span></span>)
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">def props = [:]
+props["groupId"] = ask("What is the group ID for this project?")
+props["version"] = ask("What is the project's initial version?", "0.1", "version")
 
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">*.gradle</span><span style="color:#710">&quot;</span></span>, props)
-processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">pom.xml</span><span style="color:#710">&quot;</span></span>, props)</code></pre>
+processTemplates("*.gradle", props)
+processTemplates("pom.xml", props)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1792,15 +1790,15 @@ processTemplates(<span style="background-color:hsla(0,100%,50%,0.05)"><span styl
 <div class="listingblock">
 <div class="title">build.gradle example</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">plugins {
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">groovy</span><span style="color:#710">'</span></span>
-    id <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application</span><span style="color:#710">'</span></span>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">plugins {
+    id 'groovy'
+    id 'application'
 }
 
-&lt;% <span style="color:#080;font-weight:bold">if</span> (group) { %&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-group = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>project_group<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span>
+&lt;% if (group) { %&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+group = "${project_group}"
 &lt;% } %&gt;
-version = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="background-color:hsla(0,0%,0%,0.07);color:black"><span style="font-weight:bold;color:#666">${</span>project_version<span style="font-weight:bold;color:#666">}</span></span><span style="color:#710">&quot;</span></span> <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+version = "${project_version}" <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1821,8 +1819,15 @@ to any variables in the property map passed to <code>processTemplates()</code>.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-12-28 08:20:14 -0500
+Last updated 2025-03-23 09:59:44 -0400
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
 </body>
 </html>

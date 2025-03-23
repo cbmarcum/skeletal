@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="application-name" content="Skeletal">
 <meta name="author" content="Carl Marcum">
 <title>Template Testing Companion</title>
@@ -210,13 +210,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -395,7 +392,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -438,6 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -449,20 +447,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_quick_links">Quick Links</a></li>
-<li><a href="#_introduction">Introduction</a></li>
-<li><a href="#_basic_steps">Basic Steps</a></li>
-<li><a href="#_installing_a_template_in_cache">Installing a Template in Cache</a></li>
-<li><a href="#_creating_a_test_project">Creating a Test Project</a></li>
-<li><a href="#_running_tests">Running Tests</a></li>
-<li><a href="#_building_and_running_the_distribution">Building and Running the Distribution</a></li>
-<li><a href="#_cleaning_up">Cleaning Up</a></li>
+<li><a href="#quick-links">Quick Links</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#basic-steps">Basic Steps</a></li>
+<li><a href="#installing-a-template-in-cache">Installing a Template in Cache</a></li>
+<li><a href="#creating-a-test-project">Creating a Test Project</a></li>
+<li><a href="#running-tests">Running Tests</a></li>
+<li><a href="#building-and-running-the-distribution">Building and Running the Distribution</a></li>
+<li><a href="#cleaning-up">Cleaning Up</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_quick_links">Quick Links</h2>
+<h2 id="quick-links"><a class="anchor" href="#quick-links"></a>Quick Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -480,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is a companion document to the <a href="https://cbmarcum.github.io/skeletal/template-developers-guide.html">Template Developer&#8217;s Guide</a> to help describe a template developer&#8217;s workflow
@@ -496,7 +494,7 @@ used multiple times throughout.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basic_steps">Basic Steps</h2>
+<h2 id="basic-steps"><a class="anchor" href="#basic-steps"></a>Basic Steps</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -523,7 +521,7 @@ used multiple times throughout.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installing_a_template_in_cache">Installing a Template in Cache</h2>
+<h2 id="installing-a-template-in-cache"><a class="anchor" href="#installing-a-template-in-cache"></a>Installing a Template in Cache</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When templates are first used from a repository they are copied to the Skeletal
@@ -533,13 +531,13 @@ cache <code>$HOME/./skeletal/templates</code> but you can install them directly 
 <div class="listingblock">
 <div class="title">gradle installTemplate* task</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">./gradlew installTemplateSimpleJavaSpockGradle</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./gradlew installTemplateSimpleJavaSpockGradle</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_creating_a_test_project">Creating a Test Project</h2>
+<h2 id="creating-a-test-project"><a class="anchor" href="#creating-a-test-project"></a>Creating a Test Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Use the installed <code>simple-java-spock-gradle</code> version <code>0.1.0</code> template to create
@@ -551,7 +549,7 @@ application command in the template. From a directory to create a test project i
 <div class="listingblock">
 <div class="title">create command</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -562,7 +560,7 @@ doesn&#8217;t exist, or use whatever the latest version is (<em>not your develop
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_tests">Running Tests</h2>
+<h2 id="running-tests"><a class="anchor" href="#running-tests"></a>Running Tests</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Gradle <code>check</code> task is a lifecycle task used to compile and run your unit and integration
@@ -575,7 +573,7 @@ If you only have unit tests this is the same as running <code>gradlew test</code
 <div class="listingblock">
 <div class="title">gradle check task</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">cd my-java-app/
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd my-java-app/
 
 ./gradlew check</code></pre>
 </div>
@@ -586,7 +584,7 @@ If you only have unit tests this is the same as running <code>gradlew test</code
 </div>
 </div>
 <div class="sect1">
-<h2 id="_building_and_running_the_distribution">Building and Running the Distribution</h2>
+<h2 id="building-and-running-the-distribution"><a class="anchor" href="#building-and-running-the-distribution"></a>Building and Running the Distribution</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A distribution is your application and launch scripts packed in a <code>zip</code> or <code>tar</code>
@@ -599,7 +597,7 @@ build directory layout.</p>
 <div class="listingblock">
 <div class="title">gradle installDist task</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">./gradlew installDist</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./gradlew installDist</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -607,7 +605,7 @@ build directory layout.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">cd app/build/install/java-app</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd app/build/install/java-app</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -616,14 +614,14 @@ build directory layout.</p>
 <div class="listingblock">
 <div class="title">run application</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">bin/java-app
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bin/java-app
 Hello World!</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cleaning_up">Cleaning Up</h2>
+<h2 id="cleaning-up"><a class="anchor" href="#cleaning-up"></a>Cleaning Up</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To prepare for more development and testing you can delete the test application
@@ -634,8 +632,15 @@ and the template from the Skeletal cache.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-12 12:59:36 -0500
+Last updated 2025-03-23 09:59:55 -0400
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
 </body>
 </html>
