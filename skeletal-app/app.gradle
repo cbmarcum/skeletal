@@ -19,11 +19,9 @@ version = "0.17.0"
 // These settings mimic the old client VM behavior. Should result in faster startup.
 applicationDefaultJvmArgs = ["-XX:+TieredCompilation", "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=3"]
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 ext {
-    groovyVersion = "3.0.12" // was 2.4.15
+    groovyVersion = "4.0.29"
     cachePath = new File(System.getProperty("user.home"), ".skeletal/templates").absolutePath
     testWorkDir = file("$buildDir/testWork").path
 }
@@ -42,7 +40,7 @@ sourceSets {
 
 configurations {
     integTestImplementation.resolutionStrategy {
-        force "org.codehaus.groovy:groovy-all:${groovyVersion}"
+        force "org.apache.groovy:groovy:${groovyVersion}"
     }
 }
 
@@ -51,14 +49,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.codehaus.groovy:groovy:${groovyVersion}"
-    implementation "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    implementation "org.apache.groovy:groovy:${groovyVersion}"
 
     implementation "commons-io:commons-io:2.7"
-    implementation "org.codehaus.groovy:groovy-json:${groovyVersion}"
-    implementation "org.codehaus.groovy:groovy-templates:${groovyVersion}"
+    implementation "org.apache.groovy:groovy-json:${groovyVersion}"
+    implementation "org.apache.groovy:groovy-templates:${groovyVersion}"
     implementation "org.apache.commons:commons-compress:1.5"
-    implementation "com.github.groovy-wslite:groovy-wslite:1.1.2"
     implementation "net.sf.jopt-simple:jopt-simple:4.4"
     implementation "org.ini4j:ini4j:0.5.2"
     // artifactory integration
@@ -70,35 +66,51 @@ dependencies {
     implementation "org.apache.maven.indexer:indexer-core:7.1.2"
     implementation "com.opencsv:opencsv:5.5.1"
 
-    // TEST
     implementation 'org.slf4j:slf4j-api:2.0.17'
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.17'
 
     runtimeOnly "org.apache.ivy:ivy:2.3.0"
 
-    testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
+    testImplementation 'org.spockframework:spock-core:2.2-groovy-4.0'
     testImplementation 'junit:junit:4.13.2'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
-    testImplementation( "com.athaydes:spock-reports:2.3.1-groovy-3.0" ) {
+    testImplementation("com.athaydes:spock-reports:2.5.1-groovy-4.0") {
         transitive = false // this avoids affecting your version of Groovy/Spock
     }
 
-    integTestImplementation "org.codehaus.groovy:groovy-all:${groovyVersion}",
-                     "commons-io:commons-io:2.7",
-                     "co.freeside:betamax:1.1.2",
-                     "org.littleshoot:littleproxy:1.1.0-beta1"
+    integTestImplementation "org.apache.groovy:groovy:${groovyVersion}",
+            "org.apache.groovy:groovy-json:${groovyVersion}",
+            "commons-io:commons-io:2.7",
+            "co.freeside:betamax:1.1.2",
+            "org.littleshoot:littleproxy:1.1.0-beta1"
 
-    integTestImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
+    integTestImplementation 'org.spockframework:spock-core:2.2-groovy-4.0'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
-    integTestImplementation( "com.athaydes:spock-reports:2.3.1-groovy-3.0" ) {
+    integTestImplementation("com.athaydes:spock-reports:2.5.1-groovy-4.0") {
         transitive = false // this avoids affecting your version of Groovy/Spock
     }
     // if you don't already have slf4j-api and an implementation of it in the classpath, add this!
-    integTestImplementation 'org.slf4j:slf4j-api:1.7.30'
-    integTestRuntimeClasspath 'org.slf4j:slf4j-simple:1.7.30'
+    integTestImplementation 'org.slf4j:slf4j-api:2.0.17'
+    integTestRuntimeClasspath 'org.slf4j:slf4j-simple:2.0.17'
 
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 11
+}
+
+tasks.withType(GroovyCompile).configureEach {
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
 }
 
 
@@ -152,7 +164,7 @@ task integTest(type: Test) {
     // Allows us to disable tests that don't work on Drone.io, such as the
     // CreateFunctionalSpec feature test for --with-git.
     systemProperty "lazybones.config.file",
-                   new File(sourceSets.integTest.output.resourcesDir, "test-config.groovy").absolutePath
+            new File(sourceSets.integTest.output.resourcesDir, "test-config.groovy").absolutePath
 
     // def cachePath
 
