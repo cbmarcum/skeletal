@@ -1,6 +1,7 @@
 # Generated with JReleaser 1.4.0 at 2023-01-01T11:11:51.477084-05:00
 project:
   name: skeletal
+  version: 0.18.0
   description: A project creation tool
   longDescription: Skeletal is a tool that allows you to create a new project structure for any framework or library for which the tool has a template.
   authors:

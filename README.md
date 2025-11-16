@@ -145,17 +145,17 @@ Releases are created in the GitHub repo by creating a tag and a Release based on
 This is automated by [JReleaser](https://jreleaser.org/) using the `jreleaser.yml` configuration file and the [JReleaser CLI](https://jreleaser.org/guide/latest/tools/jreleaser-cli.html).
 
 ### Pre-Release Checklist
-1. App version is correct in `skeletal-app/app.gradle` and `docs/application-users-guide.adoc` files.
-2. build distribution with `./gradlew distZip`
-3. verify all tests passed.
+1. App version is correct in `skeletal-app/app.gradle`, `jreleaser.yml`, and `docs/application-users-guide.adoc` files.
+2. Recreate `docs/application-users-guide.html` file with IntelliJ AsciiDoc plugin.
+3. Build distribution with `./gradlew distZip`
+4. Verify all tests passed.
 
 ### Steps to Create a Release
-1. `export JRELEASER_PROJECT_VERSION=version to release`
-2. `export JRELEASER_OUTPUT_DIRECTORY=skeletal-app/build`
-3. `jreleaser config`
-4. `jreleaser full-release --dry-run`
-5. check `skeletal-app/build/jreleaser/release/CHANGELOG.md` for errors
-6. `jreleaser full-release`
+1. `export JRELEASER_OUTPUT_DIRECTORY=skeletal-app/build`
+2. `jreleaser config`
+3. `jreleaser full-release --dry-run`
+4. Check `skeletal-app/build/jreleaser/release/CHANGELOG.md` for errors
+5. `jreleaser full-release`
 
 ## Contributing
 
