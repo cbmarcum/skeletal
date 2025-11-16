@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="application-name" content="Skeletal">
 <meta name="author" content="Carl Marcum">
 <title>Skeletal Application Users Guide</title>
@@ -142,7 +142,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -164,6 +164,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -329,7 +330,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -435,7 +436,118 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
+<style>
+/*! Asciidoctor Tabs | Copyright (c) 2018-present Dan Allen | MIT License */
+.tabs {
+    margin-bottom: 1.25em;
+}
+
+.tablist > ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tablist > ul li {
+    align-items: center;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0.25em 1em;
+    position: relative;
+}
+
+.tablist > ul li:focus-visible {
+    outline: none;
+}
+
+.tablist.ulist,
+.tablist.ulist > ul li {
+    margin: 0;
+}
+
+.tablist.ulist > ul li + li {
+    margin-left: 0.25em;
+}
+
+.tabs .tablist li::after {
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+}
+
+.tabs.is-loading .tablist li:not(:first-child),
+.tabs:not(.is-loading) .tablist li:not(.is-selected) {
+    background-color: #f5f5f5;
+}
+
+.tabs.is-loading .tablist li:first-child::after,
+.tabs:not(.is-loading) .tablist li.is-selected::after {
+    background-color: #fff;
+}
+
+/*
+.tabs:not(.is-loading) .tablist li,
+.tabs:not(.is-loading) .tablist li::after {
+  transition: background-color 200ms ease-in-out;
+}
+*/
+
+.tablist > ul p {
+    line-height: inherit;
+    margin: 0;
+}
+
+.tabpanel {
+    background-color: #fff;
+    padding: 1.25em;
+}
+
+.tablist > ul li,
+.tabpanel {
+    border: 1px solid #dcdcdc;
+}
+
+.tablist > ul li {
+    border-bottom: 0;
+}
+
+.tabs.is-loading .tabpanel + .tabpanel,
+.tabs:not(.is-loading) .tabpanel.is-hidden {
+    display: none;
+}
+
+.tabpanel > :first-child {
+    margin-top: 0;
+}
+
+/* #content is a signature of the Asciidoctor standalone HTML output */
+#content .tabpanel > :last-child,
+#content .tabpanel > :last-child > :last-child,
+#content .tabpanel > :last-child > :last-child > li:last-child > :last-child {
+    margin-bottom: 0;
+}
+
+.tablecontainer {
+    overflow-x: auto;
+}
+
+#content .tablecontainer {
+    margin-bottom: 1.25em;
+}
+
+#content .tablecontainer > table.tableblock {
+    margin-bottom: 0;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -447,28 +559,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#quick-links">Quick Links</a></li>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#commands">Commands</a>
+<li><a href="#_quick_links">Quick Links</a></li>
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_installation">Installation</a></li>
+<li><a href="#_commands">Commands</a>
 <ul class="sectlevel2">
-<li><a href="#general-help">General Help</a></li>
-<li><a href="#command-help">Command Help</a></li>
-<li><a href="#application-version">Application Version</a></li>
-<li><a href="#listing-available-templates">Listing Available Templates</a></li>
-<li><a href="#template-information">Template Information</a></li>
-<li><a href="#creating-projects">Creating Projects</a></li>
-<li><a href="#subtemplates">Subtemplates</a></li>
+<li><a href="#_general_help">General Help</a></li>
+<li><a href="#_command_help">Command Help</a></li>
+<li><a href="#_application_version">Application Version</a></li>
+<li><a href="#_listing_available_templates">Listing Available Templates</a></li>
+<li><a href="#_template_information">Template Information</a></li>
+<li><a href="#_creating_projects">Creating Projects</a></li>
+<li><a href="#_subtemplates">Subtemplates</a></li>
 </ul>
 </li>
-<li><a href="#configuration">Configuration</a>
+<li><a href="#_configuration">Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#command-line-configuration">Command Line Configuration</a></li>
-<li><a href="#custom-repositories">Custom Repositories</a></li>
-<li><a href="#repository-manifest">Repository Manifest</a></li>
-<li><a href="#package-aliases">Package Aliases</a></li>
-<li><a href="#setting-a-proxy-and-other-system-properties">Setting a Proxy (and other system properties)</a></li>
-<li><a href="#general-options">General Options</a></li>
+<li><a href="#_command_line_configuration">Command Line Configuration</a></li>
+<li><a href="#_custom_repositories">Custom Repositories</a></li>
+<li><a href="#_repository_manifest">Repository Manifest</a></li>
+<li><a href="#_package_aliases">Package Aliases</a></li>
+<li><a href="#_setting_a_proxy_and_other_system_properties">Setting a Proxy (and other system properties)</a></li>
+<li><a href="#_general_options">General Options</a></li>
 </ul>
 </li>
 </ul>
@@ -476,7 +588,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="quick-links"><a class="anchor" href="#quick-links"></a>Quick Links</h2>
+<h2 id="_quick_links">Quick Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -497,7 +609,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <a href="https://github.com/cbmarcum/skeletal">Skeletal</a> application is a command
@@ -507,7 +619,7 @@ in Simple URL repositories. The application allows listing available templates, 
 </div>
 </div>
 <div class="sect1">
-<h2 id="installation"><a class="anchor" href="#installation"></a>Installation</h2>
+<h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The easiest way for Unix/Linux users to get Skeletal is to use <a href="https://sdkman.io">SDKMAN</a>.</p>
@@ -515,7 +627,7 @@ in Simple URL repositories. The application allows listing available templates, 
 <div class="listingblock">
 <div class="title">installing with sdkman</div>
 <div class="content">
-<pre>sdk install skeletal 0.17.0</pre>
+<pre>sdk install skeletal 0.18.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -525,12 +637,12 @@ in Simple URL repositories. The application allows listing available templates, 
 <p>All operating systems with Java 8+ can also download and install Skeletal manually as follows:</p>
 </div>
 <div class="paragraph">
-<p>Grab the latest <strong>v0.17.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
+<p>Grab the latest <strong>v0.18.0</strong> distribution from our <a href="https://github.com/cbmarcum/skeletal/releases">GitHub releases</a> page or use <a href="https://curl.se/download.html">curl</a>. Most OS&#8217;s come with this installed.</p>
 </div>
 <div class="listingblock">
 <div class="title">downloading with curl</div>
 <div class="content">
-<pre>curl -o skeletal-0.17.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.17.0/skeletal-0.17.0.zip</pre>
+<pre>curl -o skeletal-0.18.0.zip -L https://github.com/cbmarcum/skeletal/releases/download/v0.18.0/skeletal-0.18.0.zip</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -540,7 +652,7 @@ environment variable.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="commands"><a class="anchor" href="#commands"></a>Commands</h2>
+<h2 id="_commands">Commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>These are the general usage commands that are used in the form of:</p>
@@ -551,7 +663,7 @@ environment variable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="general-help"><a class="anchor" href="#general-help"></a>General Help</h3>
+<h3 id="_general_help">General Help</h3>
 <div class="paragraph">
 <p>You can get an application description and a list of available commands</p>
 </div>
@@ -577,7 +689,7 @@ Available commands:
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-help"><a class="anchor" href="#command-help"></a>Command Help</h3>
+<h3 id="_command_help">Command Help</h3>
 <div class="paragraph">
 <p>Commands generally have specific help available using the <code>--help</code> argument
 after the command.</p>
@@ -593,7 +705,7 @@ the examples.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="application-version"><a class="anchor" href="#application-version"></a>Application Version</h3>
+<h3 id="_application_version">Application Version</h3>
 <div class="listingblock">
 <div class="content">
 <pre>skeletal version --help</pre>
@@ -622,12 +734,12 @@ Option      Description
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Skeletal v0.17.0</pre>
+<pre>Skeletal v0.18.0</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-available-templates"><a class="anchor" href="#listing-available-templates"></a>Listing Available Templates</h3>
+<h3 id="_listing_available_templates">Listing Available Templates</h3>
 <div class="listingblock">
 <div class="content">
 <pre>skeletal list --help</pre>
@@ -686,7 +798,7 @@ to see what templates you have cached locally, run</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="template-information"><a class="anchor" href="#template-information"></a>Template Information</h3>
+<h3 id="_template_information">Template Information</h3>
 <div class="paragraph">
 <p>You can also find out more about a template through the <code>info</code> command:</p>
 </div>
@@ -732,7 +844,7 @@ resides in since the manifest contains the template information.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-projects"><a class="anchor" href="#creating-projects"></a>Creating Projects</h3>
+<h3 id="_creating_projects">Creating Projects</h3>
 <div class="listingblock">
 <div class="content">
 <pre>skeletal create --help</pre>
@@ -805,9 +917,9 @@ install the template by name:</p>
 <div class="listingblock">
 <div class="title">config.groovy</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">templates {
+<pre class="CodeRay highlight"><code data-lang="groovy">templates {
     mappings {
-        myTmpl = "https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip"
+        myTmpl = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://skeletal.s3.us-east-2.amazonaws.com/openoffice-templates/aoo-client-template-0.3.0.zip</span><span style="color:#710">&quot;</span></span>
     }
 }</code></pre>
 </div>
@@ -874,7 +986,7 @@ have the <code>git</code> command on your path.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="subtemplates"><a class="anchor" href="#subtemplates"></a>Subtemplates</h3>
+<h3 id="_subtemplates">Subtemplates</h3>
 <div class="listingblock">
 <div class="content">
 <pre>skeletal generate --help</pre>
@@ -947,7 +1059,7 @@ so there can only be one version available to you.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Skeletal will run out of the box without any extra configuration, but the tool
@@ -994,7 +1106,7 @@ system property.</p>
 via the command line: the <code>config</code> command.</p>
 </div>
 <div class="sect2">
-<h3 id="command-line-configuration"><a class="anchor" href="#command-line-configuration"></a>Command Line Configuration</h3>
+<h3 id="_command_line_configuration">Command Line Configuration</h3>
 <div class="paragraph">
 <p>The <code>config</code> command provides several sub-commands that allow you to interact with
 the persisted Skeletal configuration; specifically, the JSON config file. You run a sub-command via</p>
@@ -1062,7 +1174,7 @@ a setting name) to display all the current settings and their values.</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="custom-repositories"><a class="anchor" href="#custom-repositories"></a>Custom Repositories</h3>
+<h3 id="_custom_repositories">Custom Repositories</h3>
 <div class="paragraph">
 <p>Skeletal will by default download the templates from a specific repository as
 mentioned in the Creating Projects section. If you want to host template packages
@@ -1072,8 +1184,8 @@ setting as a comma separated list in $HOME/.skeletal/config.groovy:</p>
 <div class="listingblock">
 <div class="title">config.groovy</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">simpleRepositories = [
-    "https://your.domain.tld/repo-dir"
+<pre class="CodeRay highlight"><code data-lang="groovy">simpleRepositories = [
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://your.domain.tld/repo-dir</span><span style="color:#710">&quot;</span></span>
 ]</code></pre>
 </div>
 </div>
@@ -1083,9 +1195,9 @@ setting as a comma separated list in $HOME/.skeletal/config.groovy:</p>
 <div class="listingblock">
 <div class="title">managed-config.json</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-    "simpleRepositories": [
-        "https://your.domain.tld/repo-dir"
+<pre class="CodeRay highlight"><code data-lang="json">{
+    <span style="color:#606"><span style="color:#404">&quot;</span><span>simpleRepositories</span><span style="color:#404">&quot;</span></span>: [
+        <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">https://your.domain.tld/repo-dir</span><span style="color:#710">&quot;</span></span>
     ]
 }</code></pre>
 </div>
@@ -1123,7 +1235,7 @@ first repository in the list that it appears in.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="repository-manifest"><a class="anchor" href="#repository-manifest"></a>Repository Manifest</h3>
+<h3 id="_repository_manifest">Repository Manifest</h3>
 <div class="paragraph">
 <p>Where Lazybones used web services to list and create projects from templates stored
 on Bintray, Skeletal uses a simple <code>skeletal-manifest.txt</code> file located in the
@@ -1131,12 +1243,12 @@ repository to provide the necessary information. This file is in the CSV format.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">name,version,owner,description
-aoo-addin-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Java"
-aoo-addin-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-In Template for Groovy"
-aoo-addon-java-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Java"
-aoo-addon-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Add-On Template for Groovy"
-aoo-client-template,0.3.0,"Code Builders, LLC","Apache OpenOffice Client Template for Groovy"</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">name,version,owner,description
+aoo-addin-java-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-In Template for Java&quot;
+aoo-addin-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-In Template for Groovy&quot;
+aoo-addon-java-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-On Template for Java&quot;
+aoo-addon-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Add-On Template for Groovy&quot;
+aoo-client-template,0.3.0,&quot;Code Builders, LLC&quot;,&quot;Apache OpenOffice Client Template for Groovy&quot;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1148,7 +1260,7 @@ also removed from the zip file name when it is copied into the local cache direc
 </div>
 </div>
 <div class="sect2">
-<h3 id="package-aliases"><a class="anchor" href="#package-aliases"></a>Package Aliases</h3>
+<h3 id="_package_aliases">Package Aliases</h3>
 <div class="paragraph">
 <p>If you regularly use a template at a specific URL rather than from the default
 or configured repository, then you will want to alias that URL to a name.
@@ -1166,10 +1278,10 @@ normal settings of the form</p>
 <div class="listingblock">
 <div class="title">multiple aliases</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">templates {
+<pre class="CodeRay highlight"><code data-lang="groovy">templates {
     mappings {
-        test = "http://dl.dropboxusercontent.com/u/29802534/custom-ratpack.zip"
-        after = "file:///var/tmp/afterburnerfx-2.0.0.zip"
+        test = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">http://dl.dropboxusercontent.com/u/29802534/custom-ratpack.zip</span><span style="color:#710">&quot;</span></span>
+        after = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">file:///var/tmp/afterburnerfx-2.0.0.zip</span><span style="color:#710">&quot;</span></span>
     }
 }</code></pre>
 </div>
@@ -1188,7 +1300,7 @@ configuration.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-a-proxy-and-other-system-properties"><a class="anchor" href="#setting-a-proxy-and-other-system-properties"></a>Setting a Proxy (and other system properties)</h3>
+<h3 id="_setting_a_proxy_and_other_system_properties">Setting a Proxy (and other system properties)</h3>
 <div class="paragraph">
 <p>Many people have to work behind a proxy, one way to do it is to add the
 relevant system properties to a <code>JAVA_OPTS</code> environment variable. There is
@@ -1203,14 +1315,14 @@ configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">systemProp {
+<pre class="CodeRay highlight"><code data-lang="groovy">systemProp {
     http {
-        proxyHost = "localhost"
-        proxyPort = 8181
+        proxyHost = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">localhost</span><span style="color:#710">&quot;</span></span>
+        proxyPort = <span style="color:#00D">8181</span>
     }
     https {
-        proxyHost = "localhost"
-        proxyPort = 8181
+        proxyHost = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">localhost</span><span style="color:#710">&quot;</span></span>
+        proxyPort = <span style="color:#00D">8181</span>
     }
 }</code></pre>
 </div>
@@ -1225,10 +1337,10 @@ properties:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">systemProp {
+<pre class="CodeRay highlight"><code data-lang="groovy">systemProp {
     http {
-        proxyUser = "johndoe"
-        proxyPassword = "mypassword"
+        proxyUser = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">johndoe</span><span style="color:#710">&quot;</span></span>
+        proxyPassword = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">mypassword</span><span style="color:#710">&quot;</span></span>
     }
 }</code></pre>
 </div>
@@ -1239,15 +1351,15 @@ as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="general-options"><a class="anchor" href="#general-options"></a>General Options</h3>
+<h3 id="_general_options">General Options</h3>
 <div class="paragraph">
 <p>These are miscellaneous options that can be overridden on the command line:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">// &lt;-- This starts a line comment
-// Set logging level - overridden by command line args
-options.logLevel = "SEVERE"</code></pre>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#777">// &lt;-- This starts a line comment</span>
+<span style="color:#777">// Set logging level - overridden by command line args</span>
+options.logLevel = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">SEVERE</span><span style="color:#710">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1300,15 +1412,137 @@ options.logLevel = "SEVERE"</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-23 09:58:49 -0400
+Last updated 2025-11-16 16:45:29 -0500
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
 <script>
-if (!hljs.initHighlighting.called) {
-  hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
-}
+;(function () { /*! Asciidoctor Tabs | Copyright (c) 2018-present Dan Allen | MIT License */
+  'use strict'
+
+  var config = (document.currentScript || {}).dataset || {}
+  var forEach = Array.prototype.forEach
+
+  init(document.querySelectorAll('.tabs'))
+
+  function init (tabsBlocks) {
+    if (!tabsBlocks.length) return
+    forEach.call(tabsBlocks, function (tabs) {
+      var syncIds = tabs.classList.contains('is-sync') ? {} : undefined
+      var tablist = tabs.querySelector('.tablist ul')
+      tablist.setAttribute('role', 'tablist')
+      var start
+      forEach.call(tablist.querySelectorAll('li'), function (tab, idx) {
+        tab.tabIndex = -1
+        tab.setAttribute('role', tab.classList.add('tab') || 'tab')
+        var id, anchor, syncId
+        if (!(id = tab.id) && (anchor = tab.querySelector('a[id]'))) {
+          id = tab.id = anchor.parentNode.removeChild(anchor).id
+        }
+        var panel = id && tabs.querySelector('.tabpanel[aria-labelledby~="' + id + '"]')
+        if (!panel) return idx ? undefined : toggleSelected(tab, true) // invalid state
+        syncIds && (((syncId = tab.textContent.trim()) in syncIds) ? (syncId = undefined) : true) &&
+        (syncIds[(tab.dataset.syncId = syncId)] = tab)
+        idx || (syncIds && (start = { tab: tab, panel: panel })) ? toggleHidden(panel, true) : toggleSelected(tab, true)
+        tab.setAttribute('aria-controls', panel.id)
+        panel.setAttribute('role', 'tabpanel')
+        var onClick = syncId === undefined ? activateTab : activateTabSync
+        tab.addEventListener('click', onClick.bind({ tabs: tabs, tab: tab, panel: panel }))
+      })
+      if (!tabs.closest('.tabpanel')) {
+        forEach.call(tabs.querySelectorAll('.tabpanel table.tableblock'), function (table) {
+          var container = Object.assign(document.createElement('div'), { className: 'tablecontainer' })
+          table.parentNode.insertBefore(container, table).appendChild(table)
+        })
+      }
+      if (start) {
+        var syncGroupId
+        for (var i = 0, lst = tabs.classList, len = lst.length, className; i !== len; i++) {
+          if (!(className = lst.item(i)).startsWith('data-sync-group-id=')) continue
+          tabs.dataset.syncGroupId = syncGroupId = lst.remove(className) || className.slice(19).replace(/\u00a0/g, ' ')
+          break
+        }
+        if (syncGroupId === undefined) tabs.dataset.syncGroupId = syncGroupId = Object.keys(syncIds).sort().join('|')
+        var preferredSyncId = 'syncStorageKey' in config &&
+          window[(config.syncStorageScope || 'local') + 'Storage'].getItem(config.syncStorageKey + '-' + syncGroupId)
+        var tab = preferredSyncId && syncIds[preferredSyncId]
+        tab && Object.assign(start, { tab: tab, panel: document.getElementById(tab.getAttribute('aria-controls')) })
+        toggleSelected(start.tab, true) || toggleHidden(start.panel, false)
+      }
+    })
+    onHashChange()
+    toggleClassOnEach(tabsBlocks, 'is-loading', 'remove')
+    window.setTimeout(toggleClassOnEach.bind(null, tabsBlocks, 'is-loaded', 'add'), 0)
+    window.addEventListener('hashchange', onHashChange)
+  }
+
+  function activateTab (e) {
+    var tab = this.tab
+    var tabs = this.tabs || (this.tabs = tab.closest('.tabs'))
+    var panel = this.panel || (this.panel = document.getElementById(tab.getAttribute('aria-controls')))
+    querySelectorWithSiblings(tabs, '.tablist .tab', 'tab').forEach(function (el) {
+      toggleSelected(el, el === tab)
+    })
+    querySelectorWithSiblings(tabs, '.tabpanel', 'tabpanel').forEach(function (el) {
+      toggleHidden(el, el !== panel)
+    })
+    if (!this.isSync && 'syncStorageKey' in config && 'syncGroupId' in tabs.dataset) {
+      var storageKey = config.syncStorageKey + '-' + tabs.dataset.syncGroupId
+      window[(config.syncStorageScope || 'local') + 'Storage'].setItem(storageKey, tab.dataset.syncId)
+    }
+    if (!e) return
+    var loc = window.location
+    var hashIdx = loc.hash ? loc.href.indexOf('#') : -1
+    if (~hashIdx) window.history.replaceState(null, '', loc.href.slice(0, hashIdx))
+    e.preventDefault()
+  }
+
+  function activateTabSync (e) {
+    activateTab.call(this, e)
+    var thisTabs = this.tabs
+    var thisTab = this.tab
+    var initialY = thisTabs.getBoundingClientRect().y
+    forEach.call(document.querySelectorAll('.tabs'), function (tabs) {
+      if (tabs === thisTabs || tabs.dataset.syncGroupId !== thisTabs.dataset.syncGroupId) return
+      querySelectorWithSiblings(tabs, '.tablist .tab', 'tab').forEach(function (tab) {
+        if (tab.dataset.syncId === thisTab.dataset.syncId) activateTab.call({ tabs: tabs, tab: tab, isSync: true })
+      })
+    })
+    var shiftedBy = thisTabs.getBoundingClientRect().y - initialY
+    if (shiftedBy && (shiftedBy = Math.round(shiftedBy))) window.scrollBy({ top: shiftedBy, behavior: 'instant' })
+  }
+
+  function querySelectorWithSiblings (scope, selector, siblingClass) {
+    var el = scope.querySelector(selector)
+    if (!el) return []
+    var result = [el]
+    while ((el = el.nextElementSibling) && el.classList.contains(siblingClass)) result.push(el)
+    return result
+  }
+
+  function toggleClassOnEach (elements, className, method) {
+    forEach.call(elements, function (el) {
+      el.classList[method](className)
+    })
+  }
+
+  function toggleHidden (el, state) {
+    el.classList[(el.hidden = state) ? 'add' : 'remove']('is-hidden')
+  }
+
+  function toggleSelected (el, state) {
+    el.setAttribute('aria-selected', '' + state)
+    el.classList[state ? 'add' : 'remove']('is-selected')
+    el.tabIndex = state ? 0 : -1
+  }
+
+  function onHashChange () {
+    var id = window.location.hash.slice(1)
+    if (!id) return
+    var tab = document.getElementById(~id.indexOf('%') ? decodeURIComponent(id) : id)
+    if (!(tab && tab.classList.contains('tab'))) return
+    'syncId' in tab.dataset ? activateTabSync.call({ tab: tab }) : activateTab.call({ tab: tab })
+  }
+})()
 </script>
 </body>
 </html>
