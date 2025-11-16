@@ -4,11 +4,10 @@ import groovy.transform.CompileStatic
 import groovy.util.logging.Log
 import joptsimple.OptionSet
 import uk.co.cacoethes.lazybones.config.Configuration
-import uk.co.cacoethes.lazybones.packagesources.BintrayPackageSource // TODO: remove BintrayPackageSource import
+
 import uk.co.cacoethes.lazybones.packagesources.SimplePackageSource
 import uk.co.cacoethes.lazybones.NoVersionsFoundException
 import uk.co.cacoethes.lazybones.PackageInfo
-import wslite.http.HTTPClientException
 
 import java.util.logging.Level
 
@@ -58,19 +57,6 @@ USAGE: info <template>
             log.severe "No version of '${packageName}' has been published"
             return 1
         }
-        catch (HTTPClientException ex) {
-            if (OfflineMode.isOffline(ex)) {
-                OfflineMode.printlnOfflineMessage(ex, log, globalOptions.stacktrace as boolean)
-            }
-            else {
-                log.severe "Unexpected failure: ${ex.message}"
-                if (globalOptions.stacktrace) log.log Level.SEVERE, "", ex
-            }
-
-            println()
-            println "Cannot fetch package info"
-            return 1
-        }
         catch (ConnectException ex) {
             if (OfflineMode.isOffline(ex)) {
                 OfflineMode.printlnOfflineMessage(ex, log, globalOptions.stacktrace as boolean)
@@ -105,16 +91,6 @@ USAGE: info <template>
             println "More information at " + pkgInfo.url
         }
         return 0
-    }
-
-    @Deprecated
-    protected PackageInfo findPackageInBintrayRepositories(String pkgName, Collection<String> repositories) {
-        for (String bintrayRepoName in repositories) {
-            def pkgInfo = new BintrayPackageSource(bintrayRepoName).fetchPackageInfo(pkgName)
-            if (pkgInfo) return pkgInfo
-        }
-
-        return null
     }
 
     protected PackageInfo findPackageInSimpleRepositories(String pkgName, Collection<String> repositories) {

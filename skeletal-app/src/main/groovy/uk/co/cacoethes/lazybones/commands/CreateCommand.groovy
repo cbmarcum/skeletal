@@ -11,7 +11,6 @@ import uk.co.cacoethes.lazybones.packagesources.PackageSource
 import uk.co.cacoethes.lazybones.packagesources.PackageSourceBuilder
 import uk.co.cacoethes.lazybones.scm.GitAdapter
 import uk.co.cacoethes.util.ArchiveMethods
-import wslite.http.HTTPClientException
 
 import java.util.logging.Level
 
@@ -122,19 +121,6 @@ USAGE: create <template> <version>? <dir>
         catch (NoVersionsFoundException ex) {
             log.severe "No version of '${ex.packageName}' has been published. This can also happen if " +
                     "the latest version on Bintray is 'null'."
-            return 1
-        }
-        catch (HTTPClientException ex) {
-            if (OfflineMode.isOffline(ex)) {
-                OfflineMode.printlnOfflineMessage(ex, log, globalOptions.stacktrace as boolean)
-            }
-            else {
-                log.severe "Unexpected failure: ${ex.message}"
-                if (globalOptions.stacktrace) log.log Level.SEVERE, "", ex
-            }
-
-            println()
-            println "Cannot create a new project when the template isn't locally cached or no version is specified"
             return 1
         }
         catch (ConnectException ex) {
