@@ -16,7 +16,7 @@ project:
       caption: Skeletal Project Creation Tool
   java:
     groupId: net.codebuilders
-    version: 17
+    version: 11
   tags:
     - 'skeletal'
     - 'project-template'

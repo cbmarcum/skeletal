@@ -145,7 +145,7 @@ Releases are created in the GitHub repo by creating a tag and a Release based on
 This is automated by [JReleaser](https://jreleaser.org/) using the `jreleaser.yml` configuration file and the [JReleaser CLI](https://jreleaser.org/guide/latest/tools/jreleaser-cli.html).
 
 ### Pre-Release Checklist
-1. App version is correct in `skeletal-app/app.gradle` and `docs/*.adoc` files.
+1. App version is correct in `skeletal-app/app.gradle` and `docs/application-users-guide.adoc` files.
 2. build distribution with `./gradlew distZip`
 3. verify all tests passed.
 

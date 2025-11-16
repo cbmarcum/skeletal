@@ -4,7 +4,7 @@
 :toc: left
 :icons: font
 :app-name: Skeletal
-:app-version: 0.17.0
+:app-version: 0.18.0
 
 == Quick Links
 
