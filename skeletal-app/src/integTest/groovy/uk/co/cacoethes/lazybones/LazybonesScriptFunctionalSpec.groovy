@@ -1,20 +1,14 @@
 package uk.co.cacoethes.lazybones
 
-import co.freeside.betamax.Betamax
-import co.freeside.betamax.Recorder
-import org.junit.Rule
 import spock.lang.Stepwise
 
 @Stepwise
 class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
-    // @Rule Recorder recorder = new Recorder()
 
     void setup() {
-        // initProxy(recorder.proxy.address())
         System.err.println "My Groovy Version is: ${GroovySystem.version}"
     }
 
-    // @Betamax(tape="create-tape")
     def "Post-install scripts can access the logger"() {
         when: "I run lazybones with the create command for the groovy-gradle template"
         def exitCode = runCommand(["create", "test-tmpl", "0.2", "groovyapp"], baseWorkDir, ["foo", "", "4"])
@@ -26,7 +20,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         output =~ "User should see this log message"
     }
 
-    // @Betamax(tape="create-tape")
     def "lazybones is deleted after package is installed"() {
         given: "The Lazybones version"
         def lazybonesVersion = readLazybonesVersion()
@@ -60,7 +53,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         testText.contains("Version: ${lazybonesVersion}")
     }
 
-    // @Betamax(tape="create-tape")
     def "Default 'ask' values are used"() {
         when: "I run lazybones with the create command for the groovy-gradle template"
         def exitCode = runCommand(["create", "test-tmpl", "0.2", "groovyapp"], baseWorkDir, ["foo", "", ""])
@@ -77,7 +69,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         text.contains("test.maxParallelForks = 5")
     }
 
-    // @Betamax(tape="create-tape")
     def "lazybones passes commandline P args to the root script"() {
         when: "creating a groovyapp with all options passed in"
         def args = [
@@ -101,7 +92,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         text.contains("version = \"0.2\"")
     }
 
-    // @Betamax(tape="create-tape")
     def "Can use naming utils in post-install script"() {
         given: "A directory to create a new project in"
         def appDir = new File(baseWorkDir, "groovyapp")
@@ -116,7 +106,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         testText.contains("Missing 'to' argument for transformText()")
     }
 
-    // @Betamax(tape="create-tape")
     def "Handlebars templates are processed with Groovy ones"() {
         given: "A directory to create a new project in"
         def appDir = new File(baseWorkDir, "dummy-app")
@@ -150,7 +139,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         !new File(appDir, "PrintHello.groovy.hbs").exists()
     }
 
-    // @Betamax(tape="create-tape")
     def "Non-suffixed templates are processed with Handlebars engine"() {
         given: "A directory to create a new project in"
         def appDir = new File(baseWorkDir, "dummy-app2")
@@ -180,7 +168,6 @@ class LazybonesScriptFunctionalSpec extends AbstractFunctionalSpec {
         nmlText.contains('println 100')
     }
 
-    // @Betamax(tape="create-tape")
     def "Disabling default template engine removes processing of non-suffixed files"() {
         given: "A directory to create a new project in"
         def appDir = new File(baseWorkDir, "dummy-app3")

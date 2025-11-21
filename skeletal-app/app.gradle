@@ -14,7 +14,7 @@ archivesBaseName = 'skeletal-app'
 applicationName = "skeletal"
 mainClassName = "uk.co.cacoethes.lazybones.LazybonesMain"
 // make sure to update the asciidoc guide headers also
-version = "0.18.0"
+version = "0.19.0"
 
 // These settings mimic the old client VM behavior. Should result in faster startup.
 applicationDefaultJvmArgs = ["-XX:+TieredCompilation", "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=3"]
@@ -57,6 +57,7 @@ dependencies {
     implementation "org.apache.commons:commons-compress:1.5"
     implementation "net.sf.jopt-simple:jopt-simple:4.4"
     implementation "org.ini4j:ini4j:0.5.2"
+    implementation "net.codebuilders:groovy-handlebars-engine:0.3.0-M1"
     // artifactory integration
     implementation("org.apache.httpcomponents:httpcore:4.4.16")
     implementation("org.apache.httpcomponents:httpclient:4.5.14")
@@ -71,7 +72,7 @@ dependencies {
 
     runtimeOnly "org.apache.ivy:ivy:2.3.0"
 
-    testImplementation 'org.spockframework:spock-core:2.2-groovy-4.0'
+    testImplementation 'org.spockframework:spock-core:2.4-M6-groovy-4.0'
     testImplementation 'junit:junit:4.13.2'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
@@ -85,7 +86,7 @@ dependencies {
             "co.freeside:betamax:1.1.2",
             "org.littleshoot:littleproxy:1.1.0-beta1"
 
-    integTestImplementation 'org.spockframework:spock-core:2.2-groovy-4.0'
+    integTestImplementation 'org.spockframework:spock-core:2.4-M6-groovy-4.0'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
     integTestImplementation("com.athaydes:spock-reports:2.5.1-groovy-4.0") {
@@ -105,12 +106,12 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.release = 11
+    options.release = 17
 }
 
 tasks.withType(GroovyCompile).configureEach {
-    sourceCompatibility = '11'
-    targetCompatibility = '11'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 
