@@ -706,7 +706,7 @@ To create a repository just copy the manifest file and project template
 archives to a local directory, file share, or webserver and use `file:` or `http(s)` type repository URLs to access them.  Configuring Skeletal to
 use additional repositories is covered in the https://cbmarcum.github.io/skeletal/application-users-guide.html[Application Users Guide].
 
-== Template engines
+== Template Engines
 
 The `processTemplates()` method available to post-install scripts allows you to
 generate files based on templates. By default, any files that match the pattern
@@ -717,13 +717,87 @@ end of the story though.
 
 Skeletal allows you to use any template engine that implements Groovy's
 https://docs.groovy-lang.org/latest/html/api/groovy/text/TemplateEngine.html[TemplateEngine],
-meaning that your source templates could be https://mustache.github.io/[Mustache], https://velocity.apache.org/[Apache Velocity], or anything
-else. Of course, not every template engine has a Groovy implementation, but it's
+meaning that your source templates could be https://mustache.github.io/[Mustache], https://velocity.apache.org/[Apache Velocity], or anything else. Of course, not every template engine has a Groovy implementation, but it's
 often trivial to create an adapter `TemplateEngine` implementation.
 
-The original Lazybones version of this guide contained examples of using their
-https://github.com/pledbrook/groovy-handlebars-engine[Handlebars Template Engine]
-but the JAR is no longer available so the remainder of this section is TBD until it can be replaced.
+For the following examples, we'll use our https://github.com/cbmarcum/groovy-handlebars-engine[Groovy Handlebars Engine] implementation of https://jknack.github.io/handlebars.java/[Handlebars.java].
+
+The first step to using an alternative template engine is to include the implementation JAR in the post-install script for your project template. Lazybones uses Groovy's https://docs.groovy-lang.org/latest/html/documentation/grape.html#_add_a_dependency[@Grab] annotation for that:
+
+[source,groovy]
+----
+@Grab(group="net.codebuilders", module="groovy-handlebars-engine", version="0.3.0-M1")
+import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
+
+registerDefaultEngine new HandlebarsTemplateEngine()
+----
+
+The Handlebars engine JAR is in Maven Central that @Grab automatically searches. If you have the JAR hosted elsewhere, you'll need to use https://docs.groovy-lang.org/latest/html/documentation/grape.html#Grape-SpecifyAdditionalRepositories[@GrabResolver].
+
+Once you have the JAR on the script's classpath, you can register the engine. There are several ways to do this depending on what you want to do. The above example uses `registerDefaultEngine()` to make the Handlebars template engine the default, which means that any files handled by `processTemplates` will be treated as Handlbars templates rather than Groovy ones.
+
+What if you want to use different engines for different templates? Or perhaps you prefer to give the source templates a suffix that identifies them as such? In these cases, you can use `registerEngine()`:
+
+[source,groovy]
+----
+@Grab(group="net.codebuilders", module="groovy-handlebars-engine", version="0.3.0-M1")
+import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
+
+registerEngine "hbs", new HandlebarsTemplateEngine()
+
+processTemplates "**/*.groovy", [foo: "bar"]
+----
+
+This method registers a template engine against a specific suffix. If any files match the `processTemplates()` pattern with the addition of the registered suffix, Lazybones will use the corresponding template engine for that file.
+
+So let's say your template project has a `src/main/groovy/org/example/App.groovy.hbs` file. The `App.groovy` part matches the pattern and `hbs` is a registered extension. So that file will be processed by the Handlebars template engine, creating a `src/main/groovy/org/example/App.groovy` file in the target project. Here's a summary of how source template files are processed:
+
+|===
+|Filename |Resulting file |Processing
+
+|App.groovy
+|App.groovy
+|Registered default template engine
+
+|App.groovy.gtpl
+|App.groovy
+|Groovy template engine
+
+|App.groovy.hbs
+|App.groovy
+|Handlebars template engine
+|===
+
+Skeletal automatically registers the Groovy template engine against the suffix `gtpl`. Also note that you should not include the template suffix in your file pattern. If you try:
+
+[source,groovy]
+----
+processTemplates "**/*.hbs", [foo: "bar"]
+----
+
+then Skeletal will in fact use the default template engine for any source file that has a hbs suffix. It's better to use the `**/*` pattern instead:
+
+[source,groovy]
+----
+processTemplates "**/*", [foo: "bar"]
+----
+
+Then any files ending with `hbs` will be processed with the Handlebars template engine. This does raise a problem: the pattern above will match non-template files too, and Skeletal will process those files with the default template engine.
+
+If you do want to take this approach, then you can disable the default template engine:
+
+[source,groovy]
+----
+@Grab(group="net.codebuilders", module="groovy-handlebars-engine", version="0.3.0-M1")
+import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
+
+registerEngine "hbs", new HandlebarsTemplateEngine()
+clearDefaultEngine()
+
+processTemplates "**/*", [foo: "bar"]
+----
+
+This will ensure that only source files with a registered template suffix get processed. All other files are left untouched.
 
 == Subtemplates
 
