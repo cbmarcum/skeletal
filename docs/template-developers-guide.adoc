@@ -734,13 +734,14 @@ registerDefaultEngine new HandlebarsTemplateEngine()
 
 The Handlebars engine JAR is in Maven Central that @Grab automatically searches. If you have the JAR hosted elsewhere, you'll need to use https://docs.groovy-lang.org/latest/html/documentation/grape.html#Grape-SpecifyAdditionalRepositories[@GrabResolver].
 
+_As of Skeletal 0.19.0, Groovy Handlebars Engine is an included library, so @Grab is not required as it is already on the classpath.  Other alternative template engines will still require it._
+
 Once you have the JAR on the script's classpath, you can register the engine. There are several ways to do this depending on what you want to do. The above example uses `registerDefaultEngine()` to make the Handlebars template engine the default, which means that any files handled by `processTemplates` will be treated as Handlbars templates rather than Groovy ones.
 
 What if you want to use different engines for different templates? Or perhaps you prefer to give the source templates a suffix that identifies them as such? In these cases, you can use `registerEngine()`:
 
 [source,groovy]
 ----
-@Grab(group="net.codebuilders", module="groovy-handlebars-engine", version="0.3.0-M1")
 import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
 
 registerEngine "hbs", new HandlebarsTemplateEngine()
@@ -788,7 +789,6 @@ If you do want to take this approach, then you can disable the default template 
 
 [source,groovy]
 ----
-@Grab(group="net.codebuilders", module="groovy-handlebars-engine", version="0.3.0-M1")
 import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
 
 registerEngine "hbs", new HandlebarsTemplateEngine()
