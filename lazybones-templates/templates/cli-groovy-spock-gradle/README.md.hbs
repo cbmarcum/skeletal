@@ -11,7 +11,7 @@ The template provides a sample command line math application that takes three ar
 2. Operand 1 (Integer)
 3. Operand 2 (Integer)
 
-The application outputs to `System.out` and a log file `logs/${project_name}.log`.
+The application outputs to `System.out` and a log file `logs/{{project_name}}.log`.
 
 ```
 <proj>
@@ -20,14 +20,14 @@ The application outputs to `System.out` and a log file `logs/${project_name}.log
 |   |-- src
 |   |   |-- main
 |   |   |   |-- groovy
-|   |   |   |   `-- ${package_path}
-|   |   |   |       `-- ${project_class_name}.groovy
+|   |   |   |   `-- {{package_path}}
+|   |   |   |       `-- {{project_class_name}}.groovy
 |   |   |   `-- resources
 |   |   |       `-- logback.xml
 |   |   `-- test
 |   |       |-- groovy
-|   |       |   `-- ${package_path}
-|   |       |       `-- ${project_class_name}Spec.groovy
+|   |       |   `-- {{package_path}}
+|   |       |       `-- {{project_class_name}}Spec.groovy
 |   |       `-- resources
 |   |           `-- logback-test.xml
 |   `-- build.gradle
@@ -41,7 +41,7 @@ The application outputs to `System.out` and a log file `logs/${project_name}.log
 
 ## Using the project:
 1. Add any dependencies to `build.gradle`.
-2. Add logic to `${project_class_name}.groovy`.
+2. Add logic to `{{project_class_name}}.groovy`.
 3. Logging is configured in `logback.xml`
 
 ## Run Tests
@@ -81,9 +81,9 @@ Run the application commands from the application root directory that contains `
 
 ### Display Help
 ```
-./bin/${project_name} --help
+./bin/{{project_name}} --help
 
-Usage: ${project_name} [-hvV] (-a | -s) <operand1> <operand2>
+Usage: {{project_name}} [-hvV] (-a | -s) <operand1> <operand2>
       <operand1>
       <operand2>
   -a, --add        Add values.
@@ -95,14 +95,14 @@ Usage: ${project_name} [-hvV] (-a | -s) <operand1> <operand2>
 
 ### Display Version
 ```
-./bin/${project_name} --version
+./bin/{{project_name}} --version
 
-${project_capitalized_name} ${project_version}
+{{project_capitalized_name}} {{project_version}}
 ```
 
 ### Subtract Sub-Command
 ```
-./bin/${project_name} --subtract 5 3
+./bin/{{project_name}} --subtract 5 3
 
 5 - 3 = 2
 ```    

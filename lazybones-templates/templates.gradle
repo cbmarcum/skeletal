@@ -13,4 +13,5 @@ lazybones {
     packageExclude "**/*.swp", "**/*.swo", "**/.gradle"
     templateOwner = "Skeletal Project"
     template "simple-java-spock-gradle" includes "simple-spock-test"
+    template "cli-groovy-spock-gradle" includes "simple-spock-test"
 }

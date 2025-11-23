@@ -12,8 +12,8 @@ plugins {
 }
 
 // group and version used for application
-group = "${project_group}"
-version = "${project_version}"
+group = "{{project_group}}"
+version = "{{project_version}}"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -47,14 +47,14 @@ dependencies {
 
 jar {
     // archive name before version
-    archiveBaseName = '${project_name}'
+    archiveBaseName = '{{project_name}}'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = '${project_package}.${project_class_name}'
+    mainClass = '{{project_package}}.{{project_class_name}}'
     // Define the application command name
-    applicationName = '${project_name}'
+    applicationName = '{{project_name}}'
 }
 
 tasks.named('test') {
