@@ -1,9 +1,13 @@
 import uk.co.cacoethes.util.NameType
 import org.apache.commons.io.FileUtils
+import uk.co.cacoethes.handlebars.HandlebarsTemplateEngine
+
+registerEngine "hbs", new HandlebarsTemplateEngine()
+clearDefaultEngine()
 
 Map props = [:]
 
-if (projectDir.name =~ /\-/) {
+if (projectDir.name =~ /-/) {
     props.project_class_name = transformText(projectDir.name, from: NameType.HYPHENATED, to: NameType.CAMEL_CASE)
 } else {
     props.project_class_name = transformText(projectDir.name, from: NameType.PROPERTY, to: NameType.CAMEL_CASE)
@@ -19,14 +23,8 @@ props.project_property_name = transformText(props.project_class_name, from: Name
 props.project_capitalized_name = props.project_name.capitalize()
 String packagePath = props.project_package.replace('.' as char, '/' as char)
 props.package_path = packagePath
-props.dollar='$'
 
-processTemplates('README.md', props)
-processTemplates('app/build.gradle', props)
-processTemplates('settings.gradle', props)
-processTemplates('app/src/main/groovy/*.groovy', props)
-processTemplates('app/src/main/resources/logback.xml', props)
-processTemplates('app/src/test/groovy/*.groovy', props)
+processTemplates("**/*", props)
 
 File mainSources = new File(projectDir, 'app/src/main/groovy')
 File testSources = new File(projectDir, 'app/src/test/groovy')
