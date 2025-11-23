@@ -1631,6 +1631,9 @@ registerDefaultEngine <span style="color:#080;font-weight:bold">new</span> Handl
 <p>The Handlebars engine JAR is in Maven Central that @Grab automatically searches. If you have the JAR hosted elsewhere, you&#8217;ll need to use <a href="https://docs.groovy-lang.org/latest/html/documentation/grape.html#Grape-SpecifyAdditionalRepositories">@GrabResolver</a>.</p>
 </div>
 <div class="paragraph">
+<p><em>As of Skeletal 0.19.0, Groovy Handlebars Engine is an included library, so @Grab is not required as it is already on the classpath.  Other alternative template engines will still require it.</em></p>
+</div>
+<div class="paragraph">
 <p>Once you have the JAR on the script&#8217;s classpath, you can register the engine. There are several ways to do this depending on what you want to do. The above example uses <code>registerDefaultEngine()</code> to make the Handlebars template engine the default, which means that any files handled by <code>processTemplates</code> will be treated as Handlbars templates rather than Groovy ones.</p>
 </div>
 <div class="paragraph">
@@ -1638,8 +1641,7 @@ registerDefaultEngine <span style="color:#080;font-weight:bold">new</span> Handl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#007">@Grab</span>(group=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">net.codebuilders</span><span style="color:#710">&quot;</span></span>, module=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">groovy-handlebars-engine</span><span style="color:#710">&quot;</span></span>, version=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.3.0-M1</span><span style="color:#710">&quot;</span></span>)
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.handlebars.HandlebarsTemplateEngine</span>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.handlebars.HandlebarsTemplateEngine</span>
 
 registerEngine <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">hbs</span><span style="color:#710">&quot;</span></span>, <span style="color:#080;font-weight:bold">new</span> HandlebarsTemplateEngine()
 
@@ -1707,8 +1709,7 @@ processTemplates <span style="background-color:hsla(0,100%,50%,0.05)"><span styl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#007">@Grab</span>(group=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">net.codebuilders</span><span style="color:#710">&quot;</span></span>, module=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">groovy-handlebars-engine</span><span style="color:#710">&quot;</span></span>, version=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">0.3.0-M1</span><span style="color:#710">&quot;</span></span>)
-<span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.handlebars.HandlebarsTemplateEngine</span>
+<pre class="CodeRay highlight"><code data-lang="groovy"><span style="color:#080;font-weight:bold">import</span> <span style="color:#B44;font-weight:bold">uk.co.cacoethes.handlebars.HandlebarsTemplateEngine</span>
 
 registerEngine <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">hbs</span><span style="color:#710">&quot;</span></span>, <span style="color:#080;font-weight:bold">new</span> HandlebarsTemplateEngine()
 clearDefaultEngine()
@@ -2031,7 +2032,7 @@ to any variables in the property map passed to <code>processTemplates()</code>.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-11-22 13:52:25 -0500
+Last updated 2025-11-23 13:22:57 -0500
 </div>
 </div>
 <script>
