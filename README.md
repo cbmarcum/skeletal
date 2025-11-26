@@ -69,6 +69,10 @@ that is included in the distribution zip. The Gradle application plugin generate
 a `skeletal` shell script and a `skeletal.bat` script that then runs the main 
 class with all required dependencies on the classpath.
 
+Linux and Unix users can set up the environment with [SDKMAN!](https://sdkman.io/usage/) to the settings in `.sdkmanrc`.
+
+    sdk env
+
 To build the distribution, from the skeletal project top level directory simply 
 run:
 
@@ -91,7 +95,7 @@ You can run it using the path to the application script
 
 #### Automated Tests
 We use [Spock](https://spockframework.org/) for tests (specifications). 
-There are approximatly 300 unit or integration tests currently ran during a build of the distribution.
+There are approximately 300 unit or integration tests currently ran during a build of the distribution.
 
 To run the tests alone 
 

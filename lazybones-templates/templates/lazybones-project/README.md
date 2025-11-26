@@ -12,8 +12,8 @@ URL or install them into your local Skeletal cache directory.
 
 You'll then be able to use Skeletal to create new projects from these templates.
 
-You can find out more about creating templates in the [Template Developers Guide][1] 
+You can find out more about creating templates in the [Template Developer's Guide][1] 
 and more about publishing templates in repositories in Skeletal project [README][2].
 
-[1]:https://github.com/cbmarcum/skeletal/wiki/Template-Developers-Guide
+[1]:https://cbmarcum.github.io/skeletal/template-developers-guide.html
 [2]:https://github.com/cbmarcum/skeletal/blob/master/README.md

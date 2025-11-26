@@ -22,15 +22,41 @@ repositories {
 }
 
 dependencies {
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:33.5.0-jre'
+
     // Use the latest Groovy version for Spock testing
-    testImplementation 'org.codehaus.groovy:groovy:3.0.10'
+    testImplementation 'org.apache.groovy:groovy:4.0.29'
 
     // Use the awesome Spock testing and specification framework even with Java
-    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.spockframework:spock-core:2.4-M7-groovy-4.0'
 
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.0.1-jre'
+    // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
+    testImplementation( "com.athaydes:spock-reports:2.5.1-groovy-4.0" ) {
+        transitive = false // this avoids affecting your version of Groovy/Spock
+    }
+
+    // spock-reports in groovy 4
+    testImplementation "org.apache.groovy:groovy-xml:4.0.29"
+    testImplementation "org.apache.groovy:groovy-json:4.0.29"
+    testImplementation "org.apache.groovy:groovy-templates:4.0.29"
+
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
+
+tasks.withType(GroovyCompile).configureEach {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
 }
 
 jar {
@@ -48,4 +74,7 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+
+    // spock reports
+    systemProperty 'com.athaydes.spockframework.report.showCodeBlocks', true
 }

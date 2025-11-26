@@ -2,28 +2,21 @@ pluginManagement {
     /* this resolution strategy is a temporary solution to an issue with
      * gradle looking for a jar at the location of the plugin marker pom
      * that has the dependency back to the plugin. Not required once
-     * the plugin is in the gradle plugin portal
+     * the plugin is in the gradle plugin portal.
+     * enable ONLY for testing builds from mavenLocal()
      */
-    /*
-    resolutionStrategy {
+
+    /*resolutionStrategy {
         eachPlugin {
             if (requested.id.namespace == 'net.codebuilders') {
                 useModule("net.codebuilders:skeletal-gradle:${lazybonesGradlePluginVersion}")
             }
         }
-    }
-    */
+    }*/
 
     repositories {
         // testing gradle plugin snapshots from local only
         // mavenLocal()
-
-        // testing releases from our artifactory repo not yet in plugins.gradle.org
-        /*
-        maven {
-            url 'https://codebuilders.jfrog.io/artifactory/cb-gradle-release'
-        }
-         */
 
         gradlePluginPortal()
     }

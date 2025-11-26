@@ -1,5 +1,5 @@
 plugins {
-    id "net.codebuilders.lazybones-templates" version "1.6.2"
+    id "net.codebuilders.lazybones-templates" version "2.1.0"
 }
 
 // template specific properties use this format

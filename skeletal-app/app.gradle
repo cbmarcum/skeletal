@@ -52,6 +52,7 @@ dependencies {
     implementation "org.apache.groovy:groovy:${groovyVersion}"
 
     implementation "commons-io:commons-io:2.7"
+    implementation "org.apache.groovy:groovy-xml:${groovyVersion}"
     implementation "org.apache.groovy:groovy-json:${groovyVersion}"
     implementation "org.apache.groovy:groovy-templates:${groovyVersion}"
     implementation "org.apache.commons:commons-compress:1.5"
@@ -86,7 +87,7 @@ dependencies {
             "co.freeside:betamax:1.1.2",
             "org.littleshoot:littleproxy:1.1.0-beta1"
 
-    integTestImplementation 'org.spockframework:spock-core:2.4-M6-groovy-4.0'
+    integTestImplementation 'org.spockframework:spock-core:2.4-M7-groovy-4.0'
 
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
     integTestImplementation("com.athaydes:spock-reports:2.5.1-groovy-4.0") {
@@ -94,7 +95,12 @@ dependencies {
     }
     // if you don't already have slf4j-api and an implementation of it in the classpath, add this!
     integTestImplementation 'org.slf4j:slf4j-api:2.0.17'
-    integTestRuntimeClasspath 'org.slf4j:slf4j-simple:2.0.17'
+    integTestImplementation 'org.slf4j:slf4j-simple:2.0.17'
+
+    // spock-reports in groovy 4
+    integTestImplementation "org.apache.groovy:groovy-xml:${groovyVersion}"
+    integTestImplementation "org.apache.groovy:groovy-json:${groovyVersion}"
+    integTestImplementation "org.apache.groovy:groovy-templates:${groovyVersion}"
 
 }
 
