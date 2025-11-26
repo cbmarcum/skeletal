@@ -7,6 +7,5 @@ build/
 *.iml
 .idea
 out
-/.sdkmanrc
 /trace.log
 .DS_Store

@@ -52,6 +52,7 @@ dependencies {
     implementation "org.apache.groovy:groovy:${groovyVersion}"
 
     implementation "commons-io:commons-io:2.7"
+    implementation "org.apache.groovy:groovy-xml:${groovyVersion}"
     implementation "org.apache.groovy:groovy-json:${groovyVersion}"
     implementation "org.apache.groovy:groovy-templates:${groovyVersion}"
     implementation "org.apache.commons:commons-compress:1.5"
@@ -95,6 +96,11 @@ dependencies {
     // if you don't already have slf4j-api and an implementation of it in the classpath, add this!
     integTestImplementation 'org.slf4j:slf4j-api:2.0.17'
     integTestImplementation 'org.slf4j:slf4j-simple:2.0.17'
+
+    // spock-reports in groovy 4
+    integTestImplementation "org.apache.groovy:groovy-xml:${groovyVersion}"
+    integTestImplementation "org.apache.groovy:groovy-json:${groovyVersion}"
+    integTestImplementation "org.apache.groovy:groovy-templates:${groovyVersion}"
 
 }
 
