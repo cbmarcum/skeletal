@@ -10,43 +10,47 @@ import spock.lang.Specification
 class {{project_class_name}}Spec extends Specification {
 
     def "both operators output mutually exclusive error"() {
-        setup:
+        given: "a new application"
         {{project_class_name}} app = new {{project_class_name}}()
         CommandLine cmd = new CommandLine(app)
 
-        when:
+        when: "setting the error output"
         StringWriter swErr = new StringWriter()
         cmd.setErr(new PrintWriter(swErr))
 
+        and: "executing the command with both add and subtract operator options"
         // black box testing
         int exitCode = cmd.execute("--add", "--subtract", "1", "2")
 
-        then:
+        then: "the mutually exclusive error is output"
         exitCode == 2
         swErr.toString().startsWith("Error: --add, --subtract are mutually exclusive (specify only one)")
         }
 
-    def "one operand outputs mutually exclusive error"() {
-        setup:
+    def "one operand outputs missing parameter error"() {
+        given: "a new application"
         {{project_class_name}} app = new {{project_class_name}}()
         CommandLine cmd = new CommandLine(app)
 
-        when:
+        when: "setting the error output"
         StringWriter swErr = new StringWriter()
         cmd.setErr(new PrintWriter(swErr))
 
+        and: "executing the command with one operand"
         // black box testing
         int exitCode = cmd.execute("--add", "1")
 
-        then:
+        then: "the missing parameter error is output"
         exitCode == 2
         swErr.toString().startsWith("Missing required parameter: '<operand2>'")
     }
 
-    def "app can add"(String a, String b, Integer c) {
-        setup:
+    def "app can add #a and #b and get #c"(String a, String b, Integer c) {
+        given: "a new application"
         {{project_class_name}} app = new {{project_class_name}}()
         CommandLine cmd = new CommandLine(app)
+
+        and: "executing add with two operands"
         cmd.execute("--add", a, b)
 
         expect:
@@ -60,10 +64,12 @@ class {{project_class_name}}Spec extends Specification {
         "0"  | "2"  | 2
     }
 
-    def "app can subtract"(String a, String b, Integer c) {
-        setup:
+    def "app can subtract #a minus #b and get #c"(String a, String b, Integer c) {
+        given: "a new application"
         {{project_class_name}} app = new {{project_class_name}}()
         CommandLine cmd = new CommandLine(app)
+
+        and: "executing subtract with two operands"
         cmd.execute("--subtract", a, b)
 
         expect:
