@@ -8,13 +8,24 @@ import spock.lang.Specification
 
 class ${project_class_name}Spec extends Specification {
     def "application has a greeting"() {
-        setup:
+        given: "a new application"
         def app = new ${project_class_name}()
 
-        when:
+        when: "getting a greeting"
         def result = app.greeting
 
-        then:
+        then: "there is a greeting"
         result != null
+    }
+
+    def "application has the correct greeting"() {
+        given: "a new application"
+        def app = new ${project_class_name}()
+
+        when: "getting a greeting"
+        def result = app.greeting
+
+        then: "the greeting is correct"
+        result == "Hello World!"
     }
 }

@@ -31,6 +31,9 @@ dependencies {
     // Use the awesome Spock testing and specification framework even with Java
     testImplementation 'org.spockframework:spock-core:2.4-M7-groovy-4.0'
 
+    // provides slf4j-api-2.x
+    testImplementation 'ch.qos.logback:logback-classic:1.5.21'
+
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
     testImplementation( "com.athaydes:spock-reports:2.5.1-groovy-4.0" ) {
         transitive = false // this avoids affecting your version of Groovy/Spock
