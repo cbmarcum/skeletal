@@ -38,11 +38,11 @@ cache `$HOME/./skeletal/templates` but you can install them directly with the
 .gradle installTemplate* task
 [source,bash]
 ----
-./gradlew installTemplateSimpleJavaSpockGradle
+./gradlew installTemplateJavaGradle
 ----
 
 == Creating a Test Project
-Use the installed `simple-java-spock-gradle` version `0.1.0` template to create 
+Use the installed `java-gradle` version `0.1.0` template to create
 a `my-java-app` project with group `net.codebuilders`, archiveId `java-app`, and 
 version `1.0-SNAPSHOT`. We used the script binding variable `artifactId` for 
 the project name in `lazybones.groovy` and used that for the archive name and 
@@ -51,7 +51,7 @@ application command in the template. From a directory to create a test project i
 .create command
 [source,bash]
 ----
-skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT
+skeletal create java-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT
 ----
 
 Note that you have to specify the version of the template to install, otherwise

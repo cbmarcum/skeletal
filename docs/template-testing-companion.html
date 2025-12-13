@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="application-name" content="Skeletal">
 <meta name="author" content="Carl Marcum">
 <title>Template Testing Companion</title>
@@ -142,7 +142,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -164,6 +164,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -329,7 +330,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -435,7 +436,118 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
+<style>
+/*! Asciidoctor Tabs | Copyright (c) 2018-present Dan Allen | MIT License */
+.tabs {
+    margin-bottom: 1.25em;
+}
+
+.tablist > ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tablist > ul li {
+    align-items: center;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0.25em 1em;
+    position: relative;
+}
+
+.tablist > ul li:focus-visible {
+    outline: none;
+}
+
+.tablist.ulist,
+.tablist.ulist > ul li {
+    margin: 0;
+}
+
+.tablist.ulist > ul li + li {
+    margin-left: 0.25em;
+}
+
+.tabs .tablist li::after {
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+}
+
+.tabs.is-loading .tablist li:not(:first-child),
+.tabs:not(.is-loading) .tablist li:not(.is-selected) {
+    background-color: #f5f5f5;
+}
+
+.tabs.is-loading .tablist li:first-child::after,
+.tabs:not(.is-loading) .tablist li.is-selected::after {
+    background-color: #fff;
+}
+
+/*
+.tabs:not(.is-loading) .tablist li,
+.tabs:not(.is-loading) .tablist li::after {
+  transition: background-color 200ms ease-in-out;
+}
+*/
+
+.tablist > ul p {
+    line-height: inherit;
+    margin: 0;
+}
+
+.tabpanel {
+    background-color: #fff;
+    padding: 1.25em;
+}
+
+.tablist > ul li,
+.tabpanel {
+    border: 1px solid #dcdcdc;
+}
+
+.tablist > ul li {
+    border-bottom: 0;
+}
+
+.tabs.is-loading .tabpanel + .tabpanel,
+.tabs:not(.is-loading) .tabpanel.is-hidden {
+    display: none;
+}
+
+.tabpanel > :first-child {
+    margin-top: 0;
+}
+
+/* #content is a signature of the Asciidoctor standalone HTML output */
+#content .tabpanel > :last-child,
+#content .tabpanel > :last-child > :last-child,
+#content .tabpanel > :last-child > :last-child > li:last-child > :last-child {
+    margin-bottom: 0;
+}
+
+.tablecontainer {
+    overflow-x: auto;
+}
+
+#content .tablecontainer {
+    margin-bottom: 1.25em;
+}
+
+#content .tablecontainer > table.tableblock {
+    margin-bottom: 0;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -447,20 +559,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#quick-links">Quick Links</a></li>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#basic-steps">Basic Steps</a></li>
-<li><a href="#installing-a-template-in-cache">Installing a Template in Cache</a></li>
-<li><a href="#creating-a-test-project">Creating a Test Project</a></li>
-<li><a href="#running-tests">Running Tests</a></li>
-<li><a href="#building-and-running-the-distribution">Building and Running the Distribution</a></li>
-<li><a href="#cleaning-up">Cleaning Up</a></li>
+<li><a href="#_quick_links">Quick Links</a></li>
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_basic_steps">Basic Steps</a></li>
+<li><a href="#_installing_a_template_in_cache">Installing a Template in Cache</a></li>
+<li><a href="#_creating_a_test_project">Creating a Test Project</a></li>
+<li><a href="#_running_tests">Running Tests</a></li>
+<li><a href="#_building_and_running_the_distribution">Building and Running the Distribution</a></li>
+<li><a href="#_cleaning_up">Cleaning Up</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="quick-links"><a class="anchor" href="#quick-links"></a>Quick Links</h2>
+<h2 id="_quick_links">Quick Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -478,7 +590,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is a companion document to the <a href="https://cbmarcum.github.io/skeletal/template-developers-guide.html">Template Developer&#8217;s Guide</a> to help describe a template developer&#8217;s workflow
@@ -494,7 +606,7 @@ used multiple times throughout.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="basic-steps"><a class="anchor" href="#basic-steps"></a>Basic Steps</h2>
+<h2 id="_basic_steps">Basic Steps</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -521,7 +633,7 @@ used multiple times throughout.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing-a-template-in-cache"><a class="anchor" href="#installing-a-template-in-cache"></a>Installing a Template in Cache</h2>
+<h2 id="_installing_a_template_in_cache">Installing a Template in Cache</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When templates are first used from a repository they are copied to the Skeletal
@@ -531,16 +643,16 @@ cache <code>$HOME/./skeletal/templates</code> but you can install them directly 
 <div class="listingblock">
 <div class="title">gradle installTemplate* task</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./gradlew installTemplateSimpleJavaSpockGradle</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">./gradlew installTemplateJavaGradle</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-a-test-project"><a class="anchor" href="#creating-a-test-project"></a>Creating a Test Project</h2>
+<h2 id="_creating_a_test_project">Creating a Test Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Use the installed <code>simple-java-spock-gradle</code> version <code>0.1.0</code> template to create
+<p>Use the installed <code>java-gradle</code> version <code>0.1.0</code> template to create
 a <code>my-java-app</code> project with group <code>net.codebuilders</code>, archiveId <code>java-app</code>, and
 version <code>1.0-SNAPSHOT</code>. We used the script binding variable <code>artifactId</code> for
 the project name in <code>lazybones.groovy</code> and used that for the archive name and
@@ -549,7 +661,7 @@ application command in the template. From a directory to create a test project i
 <div class="listingblock">
 <div class="title">create command</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">skeletal create java-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Pversion=1.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -560,7 +672,7 @@ doesn&#8217;t exist, or use whatever the latest version is (<em>not your develop
 </div>
 </div>
 <div class="sect1">
-<h2 id="running-tests"><a class="anchor" href="#running-tests"></a>Running Tests</h2>
+<h2 id="_running_tests">Running Tests</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Gradle <code>check</code> task is a lifecycle task used to compile and run your unit and integration
@@ -573,7 +685,7 @@ If you only have unit tests this is the same as running <code>gradlew test</code
 <div class="listingblock">
 <div class="title">gradle check task</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd my-java-app/
+<pre class="CodeRay highlight"><code data-lang="bash">cd my-java-app/
 
 ./gradlew check</code></pre>
 </div>
@@ -584,7 +696,7 @@ If you only have unit tests this is the same as running <code>gradlew test</code
 </div>
 </div>
 <div class="sect1">
-<h2 id="building-and-running-the-distribution"><a class="anchor" href="#building-and-running-the-distribution"></a>Building and Running the Distribution</h2>
+<h2 id="_building_and_running_the_distribution">Building and Running the Distribution</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A distribution is your application and launch scripts packed in a <code>zip</code> or <code>tar</code>
@@ -597,7 +709,7 @@ build directory layout.</p>
 <div class="listingblock">
 <div class="title">gradle installDist task</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./gradlew installDist</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">./gradlew installDist</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -605,7 +717,7 @@ build directory layout.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd app/build/install/java-app</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">cd app/build/install/java-app</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -614,14 +726,14 @@ build directory layout.</p>
 <div class="listingblock">
 <div class="title">run application</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bin/java-app
+<pre class="CodeRay highlight"><code data-lang="bash">bin/java-app
 Hello World!</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cleaning-up"><a class="anchor" href="#cleaning-up"></a>Cleaning Up</h2>
+<h2 id="_cleaning_up">Cleaning Up</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To prepare for more development and testing you can delete the test application
@@ -632,15 +744,137 @@ and the template from the Skeletal cache.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-23 09:59:55 -0400
+Last updated 2025-12-13 10:59:51 -0500
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
 <script>
-if (!hljs.initHighlighting.called) {
-  hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
-}
+;(function () { /*! Asciidoctor Tabs | Copyright (c) 2018-present Dan Allen | MIT License */
+  'use strict'
+
+  var config = (document.currentScript || {}).dataset || {}
+  var forEach = Array.prototype.forEach
+
+  init(document.querySelectorAll('.tabs'))
+
+  function init (tabsBlocks) {
+    if (!tabsBlocks.length) return
+    forEach.call(tabsBlocks, function (tabs) {
+      var syncIds = tabs.classList.contains('is-sync') ? {} : undefined
+      var tablist = tabs.querySelector('.tablist ul')
+      tablist.setAttribute('role', 'tablist')
+      var start
+      forEach.call(tablist.querySelectorAll('li'), function (tab, idx) {
+        tab.tabIndex = -1
+        tab.setAttribute('role', tab.classList.add('tab') || 'tab')
+        var id, anchor, syncId
+        if (!(id = tab.id) && (anchor = tab.querySelector('a[id]'))) {
+          id = tab.id = anchor.parentNode.removeChild(anchor).id
+        }
+        var panel = id && tabs.querySelector('.tabpanel[aria-labelledby~="' + id + '"]')
+        if (!panel) return idx ? undefined : toggleSelected(tab, true) // invalid state
+        syncIds && (((syncId = tab.textContent.trim()) in syncIds) ? (syncId = undefined) : true) &&
+        (syncIds[(tab.dataset.syncId = syncId)] = tab)
+        idx || (syncIds && (start = { tab: tab, panel: panel })) ? toggleHidden(panel, true) : toggleSelected(tab, true)
+        tab.setAttribute('aria-controls', panel.id)
+        panel.setAttribute('role', 'tabpanel')
+        var onClick = syncId === undefined ? activateTab : activateTabSync
+        tab.addEventListener('click', onClick.bind({ tabs: tabs, tab: tab, panel: panel }))
+      })
+      if (!tabs.closest('.tabpanel')) {
+        forEach.call(tabs.querySelectorAll('.tabpanel table.tableblock'), function (table) {
+          var container = Object.assign(document.createElement('div'), { className: 'tablecontainer' })
+          table.parentNode.insertBefore(container, table).appendChild(table)
+        })
+      }
+      if (start) {
+        var syncGroupId
+        for (var i = 0, lst = tabs.classList, len = lst.length, className; i !== len; i++) {
+          if (!(className = lst.item(i)).startsWith('data-sync-group-id=')) continue
+          tabs.dataset.syncGroupId = syncGroupId = lst.remove(className) || className.slice(19).replace(/\u00a0/g, ' ')
+          break
+        }
+        if (syncGroupId === undefined) tabs.dataset.syncGroupId = syncGroupId = Object.keys(syncIds).sort().join('|')
+        var preferredSyncId = 'syncStorageKey' in config &&
+          window[(config.syncStorageScope || 'local') + 'Storage'].getItem(config.syncStorageKey + '-' + syncGroupId)
+        var tab = preferredSyncId && syncIds[preferredSyncId]
+        tab && Object.assign(start, { tab: tab, panel: document.getElementById(tab.getAttribute('aria-controls')) })
+        toggleSelected(start.tab, true) || toggleHidden(start.panel, false)
+      }
+    })
+    onHashChange()
+    toggleClassOnEach(tabsBlocks, 'is-loading', 'remove')
+    window.setTimeout(toggleClassOnEach.bind(null, tabsBlocks, 'is-loaded', 'add'), 0)
+    window.addEventListener('hashchange', onHashChange)
+  }
+
+  function activateTab (e) {
+    var tab = this.tab
+    var tabs = this.tabs || (this.tabs = tab.closest('.tabs'))
+    var panel = this.panel || (this.panel = document.getElementById(tab.getAttribute('aria-controls')))
+    querySelectorWithSiblings(tabs, '.tablist .tab', 'tab').forEach(function (el) {
+      toggleSelected(el, el === tab)
+    })
+    querySelectorWithSiblings(tabs, '.tabpanel', 'tabpanel').forEach(function (el) {
+      toggleHidden(el, el !== panel)
+    })
+    if (!this.isSync && 'syncStorageKey' in config && 'syncGroupId' in tabs.dataset) {
+      var storageKey = config.syncStorageKey + '-' + tabs.dataset.syncGroupId
+      window[(config.syncStorageScope || 'local') + 'Storage'].setItem(storageKey, tab.dataset.syncId)
+    }
+    if (!e) return
+    var loc = window.location
+    var hashIdx = loc.hash ? loc.href.indexOf('#') : -1
+    if (~hashIdx) window.history.replaceState(null, '', loc.href.slice(0, hashIdx))
+    e.preventDefault()
+  }
+
+  function activateTabSync (e) {
+    activateTab.call(this, e)
+    var thisTabs = this.tabs
+    var thisTab = this.tab
+    var initialY = thisTabs.getBoundingClientRect().y
+    forEach.call(document.querySelectorAll('.tabs'), function (tabs) {
+      if (tabs === thisTabs || tabs.dataset.syncGroupId !== thisTabs.dataset.syncGroupId) return
+      querySelectorWithSiblings(tabs, '.tablist .tab', 'tab').forEach(function (tab) {
+        if (tab.dataset.syncId === thisTab.dataset.syncId) activateTab.call({ tabs: tabs, tab: tab, isSync: true })
+      })
+    })
+    var shiftedBy = thisTabs.getBoundingClientRect().y - initialY
+    if (shiftedBy && (shiftedBy = Math.round(shiftedBy))) window.scrollBy({ top: shiftedBy, behavior: 'instant' })
+  }
+
+  function querySelectorWithSiblings (scope, selector, siblingClass) {
+    var el = scope.querySelector(selector)
+    if (!el) return []
+    var result = [el]
+    while ((el = el.nextElementSibling) && el.classList.contains(siblingClass)) result.push(el)
+    return result
+  }
+
+  function toggleClassOnEach (elements, className, method) {
+    forEach.call(elements, function (el) {
+      el.classList[method](className)
+    })
+  }
+
+  function toggleHidden (el, state) {
+    el.classList[(el.hidden = state) ? 'add' : 'remove']('is-hidden')
+  }
+
+  function toggleSelected (el, state) {
+    el.setAttribute('aria-selected', '' + state)
+    el.classList[state ? 'add' : 'remove']('is-selected')
+    el.tabIndex = state ? 0 : -1
+  }
+
+  function onHashChange () {
+    var id = window.location.hash.slice(1)
+    if (!id) return
+    var tab = document.getElementById(~id.indexOf('%') ? decodeURIComponent(id) : id)
+    if (!(tab && tab.classList.contains('tab'))) return
+    'syncId' in tab.dataset ? activateTabSync.call({ tab: tab }) : activateTab.call({ tab: tab })
+  }
+})()
 </script>
 </body>
 </html>

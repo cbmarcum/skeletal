@@ -83,7 +83,7 @@ tests and a https://gradle.org/[Gradle] build. We are using a template naming
 convention of `app type-language-test type-build tool` to differentiate
 between templates, but you can use whatever convention that best suites your needs.
 
-Create a new directory `templates/simple-java-spock-gradle`.
+Create a new directory `templates/java-gradle`.
 
 from a shell in this directory:
 
@@ -100,7 +100,7 @@ gradle init
 - Select build script DSL: `Groovy`
 - Generate build using new APIs and behavior: `no`
 - Select test framework: `Spock`
-- Project name: `simple-java-spock-gradle`
+- Project name: `java-gradle`
 - Source package: `org.example`
 
 .Generated project structure
@@ -139,8 +139,8 @@ Gradle multi-project build layout with:
 <5> app sub-project build file
 
 
-In `simple-java-spock-gradle` create these files. See below for information on
-their contents and also reference our sample in https://github.com/cbmarcum/skeletal/tree/main/lazybones-templates/templates/simple-java-spock-gradle[lazybones-templates/templates/simple-java-spock-gradle]
+In `java-gradle` create these files. See below for information on
+their contents and also reference our sample in https://github.com/cbmarcum/skeletal/tree/main/lazybones-templates/templates/java-gradle[lazybones-templates/templates/java-gradle]
 since they may be more complete than the basic content shown here.
 
 - _README.md_ - a text file that contains information about the template.
@@ -260,7 +260,7 @@ without hunting through the directories.
 tree -a --dirsfirst --charset nwildner
 ----
 
-You can see the full `README.md` in https://github.com/cbmarcum/skeletal/blob/main/lazybones-templates/templates/simple-java-spock-gradle/README.md[simple-java-spock-gradle/README.md].
+You can see the full `README.md` in https://github.com/cbmarcum/skeletal/blob/main/lazybones-templates/templates/java-gradle/README.md[java-gradle/README.md].
 
 We could simply leave the template as it is, but wouldn't it be great if the
 user could set the group ID and version for the project at creation time? That
@@ -350,7 +350,7 @@ From a directory to create the test project in, create the test project:
 .create command using parameters
 [source,bash]
 ----
-skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT
+skeletal create java-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT
 ----
 
 If you provide them all, you get non-interactive creation of projects from templates.
@@ -592,9 +592,9 @@ directory.
 
 If you want to execute a task for a particular template, the `<Name>` in
 the above tasks is derived from the name of the template, which comes from
-the directory name. In our case, the template name is `simple-java-spock-gradle`.
+the directory name. In our case, the template name is `java-gradle`.
 To use this name in the Gradle tasks, we simply camel-case it:
-`SimpleJavaSpockGradle`. Of course, this means your directories should use
+`JavaGradle`. Of course, this means your directories should use
 hyphenated notation rather than camel-case.
 
 If the rules for converting between camel-case and hyphenated forms don't suit
@@ -621,13 +621,13 @@ This owner is used for all templates published from this lazybones project.
 
 To publish the template and create the manifest file:
 ----
-./gradlew publishTemplateSimpleJavaSpockGradle
+./gradlew publishTemplateJavaGradle
 ----
 This will create the zip archive and a `skeletal-manifest.txt` file. This manifest
 is a simple CSV formatted text file with an entry for each template published.
 ----
 name,version,owner,description
-simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template
+java-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template
 ----
 
 See the https://github.com/cbmarcum/skeletal-gradle-plugin[Skeletal Gradle Plugin] for instructions on applying the plugin to your Gradle build, task usage, and advanced configuration.
@@ -656,7 +656,7 @@ These exclusions apply to all templates. If you want template-specific exclusion
 [source,groovy]
 ----
 lazybones {
-    template("simple-java-spock-gradle") {     // Template (directory) name
+    template("java-gradle") {     // Template (directory) name
         packageExclude "**/*.swp", ".settings"
     }
 }
@@ -810,18 +810,18 @@ template zip.
 - Subtemplates _only_ take effect when the user runs the `skeletal generate` command.
 
 Let's say you want to add a subtemplate for generating Spock test classes in a
-project created from the `simple-java-spock-gradle` template we introduced
+project created from the `java-gradle` template we introduced
 earlier. Your starting point is to create a new directory for the subtemplate:
 
 ----
-templates/subtmpl-simple-spock-test
+templates/subtmpl-spock-test
 ----
 
-Note that although the subtemplate will be going inside the `simple-java-spock-gradle`
-template, its directory is at the same level as `templates/simple-java-spock-gradle`.
+Note that although the subtemplate will be going inside the `java-gradle`
+template, its directory is at the same level as `templates/java-gradle`.
 The key is to give the directory name as 'subtmpl-' prefix, as this is what
 tells the build that it's a subtemplate, resulting in
-`subtmpl-simple-spock-test` being excluded from the `*AllTemplates` tasks.
+`subtmpl-spock-test` being excluded from the `*AllTemplates` tasks.
 
 The contents of a subtemplate source directory look a little like a normal
 project template, except you are unlikely to include as many files and the
@@ -891,7 +891,7 @@ println "Created new Spock Test ${FilenameUtils.normalize(destFile.path)}"
 values of two `ask()` calls. This is standard post-install script behavior.
 <2> The interesting properties, `parentPackage` and `parentClassName`, are mapped from
 something new: the `parentParams` map. This contains any named parameters used
-by the *parent project template*, i.e. simple-java-spock-gradle in this case.
+by the *parent project template*, i.e. java-gradle in this case.
 Because of this, `parentParams` only exists for subtemplates.
 <3> Only `parentClassName` is used in the template so it is in the `prop` map where
 `parentPackage` is a property only used within the script.
@@ -901,7 +901,7 @@ subtemplates are not unpacked directly in the project directory. Instead,
 Lazybones unpacks them into the project's .lazybones directory. `templateDir`
 points to the location of the unpacked subtemplate, whereas `projectDir` still
 points to the root directory of the project created from
-`simple-java-spock-gradle`. So your subtemplate post-install script will
+`java-gradle`. So your subtemplate post-install script will
 typically want to copy or move files from `templateDir` to `projectDir`. The
 Commons IO classes that all post-install scripts have access to are ideal for
 this.
@@ -915,7 +915,7 @@ So open up the build file and add this line to the `lazybones` block:
 ----
 lazybones {
     ...
-    template "simple-java-spock-gradle" includes "simple-spock-test"
+    template "java-gradle" includes "spock-test"
 }
 ----
 
@@ -930,12 +930,12 @@ If you want to include multiple subtemplates, just pass extra arguments to `incl
 ----
 lazybones {
     ...
-    template "simple-java-spock-gradle" includes "simple-spock-test", "controller", "repository"
+    template "java-gradle" includes "spock-test", "controller", "repository"
 }
 ----
 
 There is one final option available to template authors. What if you want to
-package the simple-spock-test, controller, and repository template files into a single
+package the spock-test, controller, and repository template files into a single
 subtemplate package? How would the user be able to specify which type of class
 they want to generate? The answer is through template qualifiers.
 

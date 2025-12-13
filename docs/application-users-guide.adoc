@@ -151,7 +151,7 @@ skeletal list
 Available templates in https://skeletal.s3.us-east-2.amazonaws.com/default-templates
 
     lazybones-project
-    simple-java-spock-gradle
+    java-gradle
 ----
 
 === Template Information
@@ -176,17 +176,17 @@ Option      Description
 .info example
 
 ----
-skeletal info simple-java-spock-gradle
+skeletal info java-gradle
 ----
 ----
-Fetching package information for 'simple-java-spock-gradle' from repo
-Name:        simple-java-spock-gradle
+Fetching package information for 'java-gradle' from repo
+Name:        java-gradle
 Latest:      1.1
 Description: A simple Java Spock Gradle project template
 Owner:       Skeletal Project
 Versions:    1.1
 
-More information at https://skeletal.s3.us-east-2.amazonaws.com/default-templates/simple-java-spock-gradle-template-1.1.zip
+More information at https://skeletal.s3.us-east-2.amazonaws.com/default-templates/java-gradle-template-1.1.zip
 ----
 
 `info` only works if you're online and can reach the repository the template
@@ -226,7 +226,7 @@ directory you would run
 
 .create example
 ----
-skeletal create simple-java-spock-gradle 1.1 my-java-app
+skeletal create java-gradle 1.1 my-java-app
 ----
 
 The version is optional and if you leave it out, Skeletal will install the
@@ -297,7 +297,7 @@ pass the values on the command line:
 
 .create with parameters
 ----
-skeletal create simple-java-spock-gradle 1.1 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Ppackage=net.codebuilders.app -Pversion=1.0-SNAPSHOT -PclassName=MyJavaApp
+skeletal create java-gradle 1.1 my-java-app -Pgroup=net.codebuilders -ParchiveId=java-app -Ppackage=net.codebuilders.app -Pversion=1.0-SNAPSHOT -PclassName=MyJavaApp
 ----
 
 The `-P` option allows you to pass parameter values into the project templates

@@ -715,7 +715,7 @@ convention of <code>app type-language-test type-build tool</code> to differentia
 between templates, but you can use whatever convention that best suites your needs.</p>
 </div>
 <div class="paragraph">
-<p>Create a new directory <code>templates/simple-java-spock-gradle</code>.</p>
+<p>Create a new directory <code>templates/java-gradle</code>.</p>
 </div>
 <div class="paragraph">
 <p>from a shell in this directory:</p>
@@ -748,7 +748,7 @@ between templates, but you can use whatever convention that best suites your nee
 <p>Select test framework: <code>Spock</code></p>
 </li>
 <li>
-<p>Project name: <code>simple-java-spock-gradle</code></p>
+<p>Project name: <code>java-gradle</code></p>
 </li>
 <li>
 <p>Source package: <code>org.example</code></p>
@@ -812,8 +812,8 @@ between templates, but you can use whatever convention that best suites your nee
 </table>
 </div>
 <div class="paragraph">
-<p>In <code>simple-java-spock-gradle</code> create these files. See below for information on
-their contents and also reference our sample in <a href="https://github.com/cbmarcum/skeletal/tree/main/lazybones-templates/templates/simple-java-spock-gradle">lazybones-templates/templates/simple-java-spock-gradle</a>
+<p>In <code>java-gradle</code> create these files. See below for information on
+their contents and also reference our sample in <a href="https://github.com/cbmarcum/skeletal/tree/main/lazybones-templates/templates/java-gradle">lazybones-templates/templates/java-gradle</a>
 since they may be more complete than the basic content shown here.</p>
 </div>
 <div class="ulist">
@@ -979,7 +979,7 @@ without hunting through the directories.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can see the full <code>README.md</code> in <a href="https://github.com/cbmarcum/skeletal/blob/main/lazybones-templates/templates/simple-java-spock-gradle/README.md">simple-java-spock-gradle/README.md</a>.</p>
+<p>You can see the full <code>README.md</code> in <a href="https://github.com/cbmarcum/skeletal/blob/main/lazybones-templates/templates/java-gradle/README.md">java-gradle/README.md</a>.</p>
 </div>
 <div class="paragraph">
 <p>We could simply leave the template as it is, but wouldn&#8217;t it be great if the
@@ -1121,7 +1121,7 @@ be used instead of prompting the user for one.</p>
 <div class="listingblock">
 <div class="title">create command using parameters</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">skeletal create simple-java-spock-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">skeletal create java-gradle 0.1.0 my-java-app -Pgroup=net.codebuilders -Pversion=1.0-SNAPSHOT</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1452,9 +1452,9 @@ directory.</p>
 <div class="paragraph">
 <p>If you want to execute a task for a particular template, the <code>&lt;Name&gt;</code> in
 the above tasks is derived from the name of the template, which comes from
-the directory name. In our case, the template name is <code>simple-java-spock-gradle</code>.
+the directory name. In our case, the template name is <code>java-gradle</code>.
 To use this name in the Gradle tasks, we simply camel-case it:
-<code>SimpleJavaSpockGradle</code>. Of course, this means your directories should use
+<code>JavaGradle</code>. Of course, this means your directories should use
 hyphenated notation rather than camel-case.</p>
 </div>
 <div class="paragraph">
@@ -1489,7 +1489,7 @@ This owner is used for all templates published from this lazybones project.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>./gradlew publishTemplateSimpleJavaSpockGradle</pre>
+<pre>./gradlew publishTemplateJavaGradle</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1499,7 +1499,7 @@ is a simple CSV formatted text file with an entry for each template published.</
 <div class="listingblock">
 <div class="content">
 <pre>name,version,owner,description
-simple-java-spock-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template</pre>
+java-gradle-template,1.0,Skeletal Project,A simple Java Spock Gradle project template</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1532,7 +1532,7 @@ extra exclusions using <a href="https://ant.apache.org/manual/dirtasks.html#patt
 <div class="title">template specific excludes</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
-    template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span>) {     <span style="color:#777">// Template (directory) name</span>
+    template(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span>) {     <span style="color:#777">// Template (directory) name</span>
         packageExclude <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">**/*.swp</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">.settings</span><span style="color:#710">&quot;</span></span>
     }
 }</code></pre>
@@ -1745,20 +1745,20 @@ template zip.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s say you want to add a subtemplate for generating Spock test classes in a
-project created from the <code>simple-java-spock-gradle</code> template we introduced
+project created from the <code>java-gradle</code> template we introduced
 earlier. Your starting point is to create a new directory for the subtemplate:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>templates/subtmpl-simple-spock-test</pre>
+<pre>templates/subtmpl-spock-test</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that although the subtemplate will be going inside the <code>simple-java-spock-gradle</code>
-template, its directory is at the same level as <code>templates/simple-java-spock-gradle</code>.
+<p>Note that although the subtemplate will be going inside the <code>java-gradle</code>
+template, its directory is at the same level as <code>templates/java-gradle</code>.
 The key is to give the directory name as 'subtmpl-' prefix, as this is what
 tells the build that it&#8217;s a subtemplate, resulting in
-<code>subtmpl-simple-spock-test</code> being excluded from the <code>*AllTemplates</code> tasks.</p>
+<code>subtmpl-spock-test</code> being excluded from the <code>*AllTemplates</code> tasks.</p>
 </div>
 <div class="paragraph">
 <p>The contents of a subtemplate source directory look a little like a normal
@@ -1848,7 +1848,7 @@ values of two <code>ask()</code> calls. This is standard post-install script beh
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>The interesting properties, <code>parentPackage</code> and <code>parentClassName</code>, are mapped from
 something new: the <code>parentParams</code> map. This contains any named parameters used
-by the <strong>parent project template</strong>, i.e. simple-java-spock-gradle in this case.
+by the <strong>parent project template</strong>, i.e. java-gradle in this case.
 Because of this, <code>parentParams</code> only exists for subtemplates.</td>
 </tr>
 <tr>
@@ -1864,7 +1864,7 @@ subtemplates are not unpacked directly in the project directory. Instead,
 Lazybones unpacks them into the project&#8217;s .lazybones directory. <code>templateDir</code>
 points to the location of the unpacked subtemplate, whereas <code>projectDir</code> still
 points to the root directory of the project created from
-<code>simple-java-spock-gradle</code>. So your subtemplate post-install script will
+<code>java-gradle</code>. So your subtemplate post-install script will
 typically want to copy or move files from <code>templateDir</code> to <code>projectDir</code>. The
 Commons IO classes that all post-install scripts have access to are ideal for
 this.</td>
@@ -1881,7 +1881,7 @@ So open up the build file and add this line to the <code>lazybones</code> block:
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-test</span><span style="color:#710">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
@@ -1898,13 +1898,13 @@ included in it, ready for use with Lazybones' <code>generate</code> command.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-java-spock-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">simple-spock-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>There is one final option available to template authors. What if you want to
-package the simple-spock-test, controller, and repository template files into a single
+package the spock-test, controller, and repository template files into a single
 subtemplate package? How would the user be able to specify which type of class
 they want to generate? The answer is through template qualifiers.</p>
 </div>
@@ -2032,7 +2032,7 @@ to any variables in the property map passed to <code>processTemplates()</code>.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-11-23 13:22:57 -0500
+Last updated 2025-12-13 11:00:50 -0500
 </div>
 </div>
 <script>
