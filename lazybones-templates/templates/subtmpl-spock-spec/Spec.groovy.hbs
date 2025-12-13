@@ -21,7 +21,7 @@ class {{cls}} extends Specification {
 
     def "application has the correct greeting"() {
         given: "a new application"
-        def app = new {{project_class_name}}()
+        def app = new {{parentClassName}}()
 
         when: "getting the greeting"
         def result = app.greeting
