@@ -12,6 +12,7 @@ plugins {
 lazybones {
     packageExclude "**/*.swp", "**/*.swo", "**/.gradle"
     templateOwner = "Skeletal Project"
-    template "java-gradle" includes "spock-test"
-    template "picocli-groovy-gradle" includes "spock-test"
+    template "java-gradle" includes "spock-spec"
+    template "picocli-groovy-gradle" includes "spock-spec"
+    template "geb-gradle" includes "geb-spec", "geb-test"
 }

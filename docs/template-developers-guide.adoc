@@ -814,14 +814,14 @@ project created from the `java-gradle` template we introduced
 earlier. Your starting point is to create a new directory for the subtemplate:
 
 ----
-templates/subtmpl-spock-test
+templates/subtmpl-spock-spec
 ----
 
 Note that although the subtemplate will be going inside the `java-gradle`
 template, its directory is at the same level as `templates/java-gradle`.
 The key is to give the directory name as 'subtmpl-' prefix, as this is what
 tells the build that it's a subtemplate, resulting in
-`subtmpl-spock-test` being excluded from the `*AllTemplates` tasks.
+`subtmpl-spock-spec` being excluded from the `*AllTemplates` tasks.
 
 The contents of a subtemplate source directory look a little like a normal
 project template, except you are unlikely to include as many files and the
@@ -915,7 +915,7 @@ So open up the build file and add this line to the `lazybones` block:
 ----
 lazybones {
     ...
-    template "java-gradle" includes "spock-test"
+    template "java-gradle" includes "spock-spec"
 }
 ----
 
@@ -930,7 +930,7 @@ If you want to include multiple subtemplates, just pass extra arguments to `incl
 ----
 lazybones {
     ...
-    template "java-gradle" includes "spock-test", "controller", "repository"
+    template "java-gradle" includes "spock-spec", "controller", "repository"
 }
 ----
 

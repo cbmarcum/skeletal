@@ -1,0 +1,111 @@
+# Groovy Geb Gradle Application Project
+
+You have just created a skeletal Apache Geb application.
+It provides a standard project structure, A sample Geb main application, both Spock
+and JUnit 5 sample Geb test specifications, and uses the Gradle build tool.
+
+## Project Structure
+
+```
+<proj>
+|
+|-- app
+|   |-- src
+|   |   |-- main
+|   |   |   |-- groovy
+|   |   |   |   `-- org
+|   |   |   |       `-- example
+|   |   |   |           |-- modules
+|   |   |   |           |   `-- ManualsMenuModule.groovy
+|   |   |   |           |-- pages
+|   |   |   |           |   |-- GebHomePage.groovy
+|   |   |   |           |   `-- TheBookOfGebPage.groovy
+|   |   |   |           `-- App.groovy
+|   |   |   `-- resources
+|   |   |       `-- GebConfig.groovy
+|   |   `-- test
+|   |       |-- groovy
+|   |       |   `-- org
+|   |       |       `-- example
+|   |       |           |-- GebHomeSpec.groovy
+|   |       |           `-- GebHomeTest.groovy
+|   |       `-- resources
+|   |           `-- GebConfig.groovy
+|   `-- build.gradle
+|-- gradle
+|   |-- wrapper
+|   |   |-- gradle-wrapper.jar
+|   |   `-- gradle-wrapper.properties
+|   `-- libs.versions.toml
+|-- .gitattributes
+|-- .gitignore
+|-- gradle.properties
+|-- gradlew
+|-- gradlew.bat
+|-- lazybones.groovy
+|-- README.md
+`-- settings.gradle
+
+```
+
+## Using the Project:
+
+1. Add any dependencies to `build.gradle`.
+2. Add logic to `{{project_class_name}}.groovy`.
+
+## Run Tests
+
+You can run tests with:
+```
+./gradlew check
+```
+This will run tests with all configured browsers.
+
+To run tests with a specic browser:
+```
+./gradlew chromeHeadlessTest
+```
+See `test/resources/GebConfig.groovy` for more browser options.
+
+Gradle HTML report is located in app/build/reports/tests.
+
+Run the sample application with Gradle: 
+```
+./gradlew :app:run --args="--add 2 3"
+```
+
+## Building the Application
+
+### Packaged Distribution
+
+To package the application for a distribution to be unpacked later:
+```
+./gradlew assembleDist
+````
+ 
+The distribution archives are found in `app/build/distributions`
+
+### Unpacked Application
+You can assemble an "installed" unpacked application with:
+```
+./gradlew installDist
+```
+
+The application is found `app/build/install`
+
+## Running the Application
+
+Run the application commands from the application root directory that contains `bin` and `lib` :
+```
+./bin/${project_name}
+```
+
+
+## Additional Information
+
+- [Skeletal Project](https://github.com/cbmarcum/skeletal)
+- [Apache Groovy](https://groovy.apache.org/)
+- [Apache Geb](https://groovy.apache.org/geb/)
+- [Spock Framework](https://spockframework.org/)
+- [JUnit](https://junit.org/)
+- [Gradle Build Tool](https://gradle.org/)

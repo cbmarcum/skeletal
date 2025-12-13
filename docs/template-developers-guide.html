@@ -1750,7 +1750,7 @@ earlier. Your starting point is to create a new directory for the subtemplate:</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>templates/subtmpl-spock-test</pre>
+<pre>templates/subtmpl-spock-spec</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1758,7 +1758,7 @@ earlier. Your starting point is to create a new directory for the subtemplate:</
 template, its directory is at the same level as <code>templates/java-gradle</code>.
 The key is to give the directory name as 'subtmpl-' prefix, as this is what
 tells the build that it&#8217;s a subtemplate, resulting in
-<code>subtmpl-spock-test</code> being excluded from the <code>*AllTemplates</code> tasks.</p>
+<code>subtmpl-spock-spec</code> being excluded from the <code>*AllTemplates</code> tasks.</p>
 </div>
 <div class="paragraph">
 <p>The contents of a subtemplate source directory look a little like a normal
@@ -1881,7 +1881,7 @@ So open up the build file and add this line to the <code>lazybones</code> block:
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-test</span><span style="color:#710">&quot;</span></span>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-spec</span><span style="color:#710">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
@@ -1898,7 +1898,7 @@ included in it, ready for use with Lazybones' <code>generate</code> command.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">lazybones {
     ...
-    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-test</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
+    template <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java-gradle</span><span style="color:#710">&quot;</span></span> includes <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">spock-spec</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">controller</span><span style="color:#710">&quot;</span></span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">repository</span><span style="color:#710">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
@@ -2032,7 +2032,7 @@ to any variables in the property map passed to <code>processTemplates()</code>.<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-13 11:00:50 -0500
+Last updated 2025-12-13 14:38:55 -0500
 </div>
 </div>
 <script>
