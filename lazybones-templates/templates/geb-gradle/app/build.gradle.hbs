@@ -44,6 +44,7 @@ dependencies {
     // Selenium Drivers
     testImplementation libs.selenium.chrome.driver
     testImplementation libs.selenium.firefox.driver
+    testImplementation libs.selenium.devtools.v143
 
     // Spock Reports
     // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
@@ -52,7 +53,10 @@ dependencies {
     }
     testImplementation libs.groovy.xml
     testImplementation libs.groovy.json
-    testImplementation libs.groovy-templates
+    testImplementation libs.groovy.templates
+    // for No SLF4J providers were found (if not otherwise provided)
+    testImplementation libs.sfl4j.api
+    testRuntimeOnly libs.sfl4j.simple
 }
 
 java {
@@ -82,6 +86,8 @@ drivers.eachWithIndex { driver, index ->
 
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
+        // spock reports
+        systemProperty 'com.athaydes.spockframework.report.outputDir', "build/spock-reports/${driver}Test"
 
         if (index > 0) {
             mustRunAfter "${drivers[index-1]}Test"

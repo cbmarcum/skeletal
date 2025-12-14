@@ -5,10 +5,11 @@
 [versions]
 groovy = "4.0.29"
 geb = "8.0.1"
-selenium = "4.35.0"
+selenium = "4.39.0"
 junit-bom = "5.12.0"
 junit-platform = "1.12.0"  # matches the bom
 spock-reports = "2.5.1-groovy-4.0"
+sfl4j = "2.0.17"
 
 [ libraries]
 # Core
@@ -27,12 +28,15 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 # Selenium Drivers
 selenium-chrome-driver = { module = "org.seleniumhq.selenium:selenium-chrome-driver", version.ref = "selenium" }
 selenium-firefox-driver = { module = "org.seleniumhq.selenium:selenium-firefox-driver", version.ref = "selenium" }
+selenium-devtools-v143 = { module = "org.seleniumhq.selenium:selenium-devtools-v143", version.ref = "selenium" }
 
 # Spock Reports
 spock-reports = { module = "com.athaydes:spock-reports", version.ref = "spock-reports" }
 groovy-xml = { module = "org.apache.groovy:groovy-xml", version.ref = "groovy" }
 groovy-json = { module = "org.apache.groovy:groovy-json", version.ref = "groovy" }
 groovy-templates = { module = "org.apache.groovy:groovy-templates", version.ref = "groovy" }
+sfl4j-api = { module = "org.slf4j:slf4j-api", version.ref = "sfl4j" }
+sfl4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "sfl4j" }
 
 [plugins]
 # (None needed here — we're using the classic id syntax for groovy plugin)
