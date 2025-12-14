@@ -6,7 +6,7 @@ It provides a standard project structure for source code and tests. It uses Spoc
 The project starts as simple Hello World application.
 
 ```
-<proj>
+${project_dir_name}
 |
 |-- app
 |   |-- src

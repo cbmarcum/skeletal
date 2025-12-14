@@ -12,6 +12,7 @@ if (projectDir.name =~ /-/) {
 } else {
     props.project_class_name = transformText(projectDir.name, from: NameType.PROPERTY, to: NameType.CAMEL_CASE)
 }
+props.project_dir_name = projectDir.name
 props.project_name = transformText(props.project_class_name, from: NameType.CAMEL_CASE, to: NameType.HYPHENATED)
 props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
 props.project_name = ask("Define value for 'artifactId' [" + props.project_name + "]: ", props.project_name , "artifactId")
