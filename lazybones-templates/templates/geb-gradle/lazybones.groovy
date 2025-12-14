@@ -12,6 +12,7 @@ if (projectDir.name =~ /-/) {
 } else {
     props.project_class_name = transformText(projectDir.name, from: NameType.PROPERTY, to: NameType.CAMEL_CASE)
 }
+props.project_dir_name = projectDir.name
 props.project_name = transformText(props.project_class_name, from: NameType.CAMEL_CASE, to: NameType.HYPHENATED)
 props.project_group = ask("Define value for 'group' [org.example]: ", "org.example", "group")
 props.project_name = ask("Define value for 'artifactId' [" + props.project_name + "]: ", props.project_name , "artifactId")
@@ -51,3 +52,14 @@ testSources.eachFile { File file ->
 
 renameFile(new File(mainSourcesPath, 'App.groovy'), mainSourcesPath.absolutePath + '/' + props.project_class_name + ".groovy")
 renameFile(new File(testSourcesPath, 'AppSpec.groovy'), testSourcesPath.absolutePath + '/' + props.project_class_name + "Spec" + ".groovy")
+
+// move modules and pages dirs
+File modulesDir = new File(mainSources, 'modules')
+if (modulesDir.exists()) {
+    FileUtils.moveDirectory(modulesDir, new File(mainSourcesPath, 'modules'))
+}
+
+File pagesDir = new File(mainSources, 'pages')
+if (pagesDir.exists()) {
+    FileUtils.moveDirectory(pagesDir, new File(mainSourcesPath, 'pages'))
+}

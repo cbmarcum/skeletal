@@ -7,28 +7,26 @@ and JUnit 5 sample Geb test specifications, and uses the Gradle build tool.
 ## Project Structure
 
 ```
-<proj>
+{{project_dir_name}}
 |
 |-- app
 |   |-- src
 |   |   |-- main
 |   |   |   |-- groovy
-|   |   |   |   `-- org
-|   |   |   |       `-- example
-|   |   |   |           |-- modules
-|   |   |   |           |   `-- ManualsMenuModule.groovy
-|   |   |   |           |-- pages
-|   |   |   |           |   |-- GebHomePage.groovy
-|   |   |   |           |   `-- TheBookOfGebPage.groovy
-|   |   |   |           `-- App.groovy
+|   |   |   |   `-- {{package_path}}
+|   |   |   |       |-- modules
+|   |   |   |       |   `-- ManualsMenuModule.groovy
+|   |   |   |       |-- pages
+|   |   |   |       |   |-- GebHomePage.groovy
+|   |   |   |       |   `-- TheBookOfGebPage.groovy
+|   |   |   |       `-- App.groovy
 |   |   |   `-- resources
 |   |   |       `-- GebConfig.groovy
 |   |   `-- test
 |   |       |-- groovy
-|   |       |   `-- org
-|   |       |       `-- example
-|   |       |           |-- GebHomeSpec.groovy
-|   |       |           `-- GebHomeTest.groovy
+|   |       |   `-- {{package_path}}
+|   |       |       |-- GebHomeSpec.groovy
+|   |       |       `-- GebHomeTest.groovy
 |   |       `-- resources
 |   |           `-- GebConfig.groovy
 |   `-- build.gradle
@@ -61,7 +59,7 @@ You can run tests with:
 ```
 This will run tests with all configured browsers.
 
-To run tests with a specic browser:
+To run tests with a specific browser:
 ```
 ./gradlew chromeHeadlessTest
 ```
@@ -71,7 +69,7 @@ Gradle HTML report is located in app/build/reports/tests.
 
 Run the sample application with Gradle: 
 ```
-./gradlew :app:run --args="--add 2 3"
+./gradlew :app:run
 ```
 
 ## Building the Application
@@ -97,7 +95,7 @@ The application is found `app/build/install`
 
 Run the application commands from the application root directory that contains `bin` and `lib` :
 ```
-./bin/${project_name}
+./bin/{{project_name}}
 ```
 
 
