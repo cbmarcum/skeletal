@@ -4,6 +4,12 @@ You have just created a skeletal Apache Geb application.
 It provides a standard project structure, A sample Geb main application, both Spock
 and JUnit 5 sample Geb test specifications, and uses the Gradle build tool.
 
+The main application is an example of using Geb for web scraping with Firefox.
+
+The tests are configured to use Firefox, Chrome, headless Chrome, or all 3 browsers.
+
+Spock Reports is used to generate a configurable HTML report of the Spock test results.
+
 ## Project Structure
 
 ```
@@ -61,11 +67,11 @@ This will run tests with all configured browsers.
 
 To run tests with a specific browser:
 ```
-./gradlew chromeHeadlessTest
+./gradlew firefoxTest
 ```
 See `test/resources/GebConfig.groovy` for more browser options.
 
-Gradle HTML report is located in app/build/reports/tests.
+Gradle HTML report is located in `app/build/reports/tests` and Spock Reports HTML report is located in `app/build/spock-reports`.
 
 Run the sample application with Gradle: 
 ```
@@ -107,3 +113,4 @@ Run the application commands from the application root directory that contains `
 - [Spock Framework](https://spockframework.org/)
 - [JUnit](https://junit.org/)
 - [Gradle Build Tool](https://gradle.org/)
+- [Spock Reports](https://github.com/renatoathaydes/spock-reports)
